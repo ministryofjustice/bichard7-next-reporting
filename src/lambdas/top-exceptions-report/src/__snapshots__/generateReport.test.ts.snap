@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should generate the correct report 1`] = `
+"Force	Exception	Error Text	Count
+National	HO100310	Multiple Court Offences with different Results match a PNC Offence	6
+National	HO200212	Offence has no valid PNC results	1
+National	HO100304	Court offences do not match with what is on the PNC	1
+South Yorkshire Police	HO100310	Multiple Court Offences with different Results match a PNC Offence	2"
+`;
