@@ -1,0 +1,3 @@
+src/@bichard/types
+src/@bichard/dynamo-gateway
+src/lambdas/top-exceptions-report
