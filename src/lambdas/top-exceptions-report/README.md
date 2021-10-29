@@ -1,3 +1,3 @@
-# Store in S3
+# Top Exceptions Report
 
-A lambda that stores a given message in a file in an S3 bucket.
+A lambda that generates the top exceptions report and stores in S3.

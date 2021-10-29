@@ -1,26 +1,22 @@
+import { findForceName } from "@bichard/forces"
 import type { AuditLog, KeyValuePair } from "@bichard/types"
 import getErrorName from "./errorNames/getErrorName"
-import getOrganisationUnitName from "./organisationUnits/getOrganisationUnitName"
 
 type ForceExceptions = KeyValuePair<string, number>
 type ForcesExceptions = KeyValuePair<string, ForceExceptions>
 
 const getAttributesWithErrors = (messages: AuditLog[]): KeyValuePair<string, unknown>[] => {
   return messages
-    .map((x) => x.events)
-    .reduce((allEvents, messageEvents) => allEvents.concat(messageEvents), [])
+    .filter((x) => x.topExceptionsReport?.events)
+    .map((x) => x.topExceptionsReport.events)
+    .reduce((allEvents, topExceptionsReportEvents) => allEvents.concat(topExceptionsReportEvents), [])
     .map((event) => event.attributes)
-    .filter(
-      (attributes) =>
-        attributes["Message Type"] === "SPIResults" &&
-        Object.keys(attributes).some((attributeName) => attributeName.match(/Error.*Details/))
-    )
 }
 
 const calculateForcesExceptions = (allAttributes: KeyValuePair<string, unknown>[]): ForcesExceptions => {
   return allAttributes.reduce((forces, attributes) => {
     const forceOwner = attributes["Force Owner"] as string
-    const forceName = getOrganisationUnitName(forceOwner) ?? "National"
+    const forceName = findForceName(forceOwner) ?? "National"
     const forceExceptions = (forces[forceName] || {}) as ForceExceptions
 
     Object.keys(attributes)

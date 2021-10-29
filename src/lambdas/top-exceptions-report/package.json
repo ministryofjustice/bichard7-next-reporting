@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@bichard/dynamo-gateway": "file:../../@bichard/dynamo-gateway",
+    "@bichard/forces": "file:../../@bichard/forces",
     "@bichard/types": "file:../../@bichard/types",
     "aws-sdk": "^2.870.0"
   },
