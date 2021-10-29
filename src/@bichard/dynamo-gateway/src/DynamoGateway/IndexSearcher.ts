@@ -117,7 +117,7 @@ export default class IndexSearcher<TResult> {
       pagination
     }
 
-    if(this.rangeKey && this.rangeKeyBetween) {
+    if (this.rangeKey && this.rangeKeyBetween) {
       options.rangeKeyName = this.rangeKey
       options.rangeKeyBetween = this.rangeKeyValues
     }
