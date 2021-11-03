@@ -1,4 +1,4 @@
-import { AuditLog } from "@bichard/types"
+import type { AuditLog } from "@bichard/types"
 import generateReport from "./generateReport"
 
 const messages = [
