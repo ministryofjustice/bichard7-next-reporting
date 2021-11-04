@@ -1,6 +1,17 @@
-import forces from "./forces.json"
+import forces from "./forces"
 
-type Forces = { [key: string]: { Name: string } }
+type Forces = { [key: string]: string }
+
+const parsedForces: Forces = (forces as string)
+  .trim()
+  .split("\n")
+  .reduce((allForces, line) => {
+    const lineParts = line.split("\t")
+    const code = lineParts[0].trim()
+    // eslint-disable-next-line no-param-reassign
+    allForces[code] = lineParts[1].trim()
+    return allForces
+  }, {} as Forces)
 
 export default (forceOwner?: string): string | undefined => {
   if (!forceOwner || forceOwner.length < 4) {
@@ -14,5 +25,5 @@ export default (forceOwner?: string): string | undefined => {
     forceCode = "01"
   }
 
-  return (forces as Forces)[forceCode]?.Name
+  return parsedForces[forceCode]
 }

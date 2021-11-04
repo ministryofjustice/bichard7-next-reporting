@@ -3,6 +3,6 @@
 exports[`should generate the correct report 1`] = `
 "Force	Automated	Resubmitted	Automated including Resubmissions
 Essex	0.68182	2.00000	0.77273
-London Metropolitan Police	0.33333	0.00000	0.33333
+London MET	0.33333	0.00000	0.33333
 National Average	0.64000	2.00000	0.72000"
 `;
