@@ -7,7 +7,7 @@ export default (forceOwner?: string): string | undefined => {
     return undefined
   }
 
-  let forceCode = forceOwner.substr(2, 2)
+  let forceCode = forceOwner.substr(0, 2)
 
   // Consolidating MET force
   if (forceCode === "02") {

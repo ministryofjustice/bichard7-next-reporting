@@ -25,7 +25,7 @@ const messages = [
           timestamp: "2021-10-29T10:34:08.531Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD0303908",
@@ -56,7 +56,7 @@ const messages = [
           ASN: "1201ZD0100000448755K",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -177,7 +177,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:33:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01ZD5100008",
     messageXml:
@@ -234,7 +234,7 @@ const messages = [
           ASN: "1201ZD0100000448751F",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -321,7 +321,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 7,
     receivedDate: "2021-10-29T10:32:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD5100008",
     messageXml:
@@ -363,7 +363,7 @@ const messages = [
           ASN: "1201ZD0100000448753H",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -428,7 +428,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 4,
     receivedDate: "2021-10-29T10:32:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01VK0303008",
     messageXml:
@@ -458,7 +458,7 @@ const messages = [
           ASN: "1201ZD0100000448750E",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -734,7 +734,7 @@ const messages = [
           timestamp: "2021-10-29T10:31:38.052Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD0300108",
@@ -765,7 +765,7 @@ const messages = [
           ASN: "1201ZD0100000448749D",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -828,7 +828,7 @@ const messages = [
           timestamp: "2021-10-29T10:31:12.396Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Processing",
     caseId: "01ZD4444411",
@@ -890,7 +890,7 @@ const messages = [
           PTIURN: "01ZD4444411",
           "Date Of Hearing": "2011-09-26",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "RT88191||003||1015,3008",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "TH68151||002||1002",
@@ -1034,7 +1034,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:30:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD0303898",
     messageXml:
@@ -1072,7 +1072,7 @@ const messages = [
           PTIURN: "01ZD0303898",
           "Date Of Hearing": "2011-09-26",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "TH68010||003||4027,1000,4049,1000",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "TH68151||002||4027,1000,4049,1000",
@@ -1134,7 +1134,7 @@ const messages = [
           timestamp: "2021-10-29T10:30:14.347Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Processing",
     caseId: "01ZD0300108",
@@ -1198,7 +1198,7 @@ const messages = [
           ASN: "1201ZD0100000445749T",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -1232,7 +1232,7 @@ const messages = [
           timestamp: "2021-10-29T10:31:01.095Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD1600008",
@@ -1295,7 +1295,7 @@ const messages = [
           "Date Of Hearing": "2011-10-26",
           "Offence 4 Details": "CJ03522|| ||1507",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "CJ03507|| ||3501",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "TH68012||001||1002",
@@ -1348,7 +1348,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:30:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01ZD0300108",
     messageXml:
@@ -1405,7 +1405,7 @@ const messages = [
           ASN: "1201ZD0100000445748R",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -1451,7 +1451,7 @@ const messages = [
           timestamp: "2021-10-29T10:29:41.234Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Processing",
     caseId: "01ZD0300108",
@@ -1515,7 +1515,7 @@ const messages = [
           ASN: "1201ZD0100000445747Q",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -1549,7 +1549,7 @@ const messages = [
           timestamp: "2021-10-29T10:29:54.346Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD0300108",
@@ -1608,7 +1608,7 @@ const messages = [
           ASN: "1201ZD0100000445746P",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -1904,7 +1904,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 4,
     receivedDate: "2021-10-29T10:29:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD0307708",
     messageXml:
@@ -1935,7 +1935,7 @@ const messages = [
           ASN: "1201ZD0100000445732Z",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -1972,7 +1972,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:29:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD5100008",
     messageXml:
@@ -2003,7 +2003,7 @@ const messages = [
           ASN: "1201ZD0100000448653Z",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -2057,7 +2057,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 6,
     receivedDate: "2021-10-29T10:28:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD0300108",
     messageXml:
@@ -2121,7 +2121,7 @@ const messages = [
           PTIURN: "01ZD0300108",
           "Date Of Hearing": "2011-09-26",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "TH68010|| ||1015",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "TH68151||002||4047",
@@ -2152,7 +2152,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 4,
     receivedDate: "2021-10-29T10:28:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD0300108",
     messageXml:
@@ -2190,7 +2190,7 @@ const messages = [
           PTIURN: "01ZD0300108",
           "Date Of Hearing": "2011-09-26",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "TH68010|| ||1015",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "TH68151||002||1015",
@@ -2629,7 +2629,7 @@ const messages = [
           timestamp: "2021-10-29T10:27:16.362Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD0300208",
@@ -2699,7 +2699,7 @@ const messages = [
           ASN: "1101ZD0100000445117G",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -3042,7 +3042,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 4,
     receivedDate: "2021-10-29T10:26:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD0300208",
     messageXml:
@@ -3088,7 +3088,7 @@ const messages = [
           ASN: "1101ZD0100000445111A",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -3114,7 +3114,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 3,
     receivedDate: "2021-10-29T10:26:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01ZD0300208",
     messageXml:
@@ -3145,7 +3145,7 @@ const messages = [
           ASN: "1101ZD0100000445115E",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -3190,7 +3190,7 @@ const messages = [
           timestamp: "2021-10-29T10:25:23.857Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD0300208",
@@ -3274,7 +3274,7 @@ const messages = [
           ASN: "1201ZD0100000445110Y",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -3406,7 +3406,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:25:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD0300208",
     messageXml:
@@ -3470,7 +3470,7 @@ const messages = [
           ASN: "1201ZD0100000445110Y",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -3485,7 +3485,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:24:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01ZD0300108",
     messageXml:
@@ -3515,7 +3515,7 @@ const messages = [
           ASN: "1201ZD0100000445098K",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -3587,7 +3587,7 @@ const messages = [
           timestamp: "2021-10-29T10:24:47.805Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD0300108",
@@ -3619,7 +3619,7 @@ const messages = [
           ASN: "1201ZD0100000445098K",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -3713,7 +3713,7 @@ const messages = [
           timestamp: "2021-10-29T10:24:17.157Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01VK0300208",
@@ -3761,7 +3761,7 @@ const messages = [
           ASN: "1101ZD0100000440776N",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -3831,7 +3831,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 8,
     receivedDate: "2021-10-29T10:24:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01ZD0307708",
     messageXml:
@@ -3861,7 +3861,7 @@ const messages = [
           ASN: "1201ZD0100000445101N",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -4368,7 +4368,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 7,
     receivedDate: "2021-10-29T10:23:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD0300108",
     messageXml:
@@ -4417,7 +4417,7 @@ const messages = [
           PTIURN: "01ZD0300108",
           "Date Of Hearing": "2011-09-26",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "PL96004||003||1115,3105",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "PL96002||002||1115,3105",
@@ -4549,7 +4549,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:23:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD1600008",
     messageXml:
@@ -4580,7 +4580,7 @@ const messages = [
           ASN: "1101ZD0100000440769F",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -4896,7 +4896,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:21:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD5100008",
     messageXml:
@@ -4938,7 +4938,7 @@ const messages = [
           ASN: "1101ZD0100000415368W",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -5265,7 +5265,7 @@ const messages = [
           timestamp: "2021-10-29T10:21:08.037Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD5100008",
@@ -5313,7 +5313,7 @@ const messages = [
           ASN: "1101ZD0100000415365T",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -5421,7 +5421,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 6,
     receivedDate: "2021-10-29T10:20:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD5100008",
     messageXml:
@@ -5462,7 +5462,7 @@ const messages = [
           ASN: "1101ZD0100000415364R",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -5706,7 +5706,7 @@ const messages = [
           timestamp: "2021-10-29T10:19:11.425Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD5100008",
@@ -5764,7 +5764,7 @@ const messages = [
           ASN: "1101ZD0100000415370Y",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -5779,7 +5779,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 6,
     receivedDate: "2021-10-29T10:19:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD1600008",
     messageXml:
@@ -5809,7 +5809,7 @@ const messages = [
           ASN: "1101ZD0100000448701C",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -6025,7 +6025,7 @@ const messages = [
           timestamp: "2021-10-29T10:18:37.067Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD0300208",
@@ -6100,7 +6100,7 @@ const messages = [
           ASN: "1101ZD0100000410871H",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -6175,7 +6175,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:18:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01ZD0300208",
     messageXml:
@@ -6231,7 +6231,7 @@ const messages = [
           ASN: "1101ZD0100000410871H",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -6448,7 +6448,7 @@ const messages = [
           timestamp: "2021-10-29T10:18:16.458Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD0300208",
@@ -6488,7 +6488,7 @@ const messages = [
           "Date Of Hearing": "2011-10-01",
           "Offence 4 Details": "TH68006||004||1002,1015",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 5 Details": "TH68006||005||1015,1002",
           "Offence 3 Details": "TH68010||003||1002,1015",
           "Offence 6 Details": "TH68006||006||1002,1015",
@@ -6574,7 +6574,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 6,
     receivedDate: "2021-10-29T10:17:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01ZD0300208",
     messageXml:
@@ -6605,7 +6605,7 @@ const messages = [
           ASN: "1101ZD0100000410925R",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -6694,7 +6694,7 @@ const messages = [
           timestamp: "2021-10-29T10:17:34.965Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01VK0300208",
@@ -6722,7 +6722,7 @@ const messages = [
           PTIURN: "01VK0300208",
           "Date Of Hearing": "2009-10-09",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "TH68001||001||4506",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "OF61016||002||2004",
@@ -7091,7 +7091,7 @@ const messages = [
           timestamp: "2021-10-29T10:17:49.580Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Processing",
     caseId: "01ZD0302608",
@@ -7135,7 +7135,7 @@ const messages = [
           PTIURN: "01ZD0302608",
           "Date Of Hearing": "2011-09-26",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "TH68006||002||1015",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "TH68006||001||1015",
@@ -7234,7 +7234,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 4,
     receivedDate: "2021-10-29T10:16:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01VK0300208",
     messageXml:
@@ -7276,7 +7276,7 @@ const messages = [
           PTIURN: "01VK0300208",
           "Date Of Hearing": "2009-10-20",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "TH68145|| ||4506",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "TH68151|| ||4506",
@@ -7307,7 +7307,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 4,
     receivedDate: "2021-10-29T10:16:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01VK0300208",
     messageXml:
@@ -7338,7 +7338,7 @@ const messages = [
           ASN: "1200000000000000010X",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -7380,7 +7380,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 5,
     receivedDate: "2021-10-29T10:16:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Completed",
     caseId: "01VK0300208",
     messageXml:
@@ -7450,7 +7450,7 @@ const messages = [
           "Date Of Hearing": "2009-10-10",
           "Offence 4 Details": "CT03514|| ||1015",
           "Message Type": "SPIResults",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 3 Details": "TH68001||001||1002",
           "Time Of Hearing": "10:00",
           "Offence 2 Details": "PC53001||002||1002",
@@ -7470,7 +7470,7 @@ const messages = [
     topExceptionsReport: { events: [] },
     version: 4,
     receivedDate: "2021-10-29T10:16:00.000Z",
-    automationReport: { events: [], forceOwner: "0001CT" },
+    automationReport: { events: [], forceOwner: "42CY00" },
     status: "Processing",
     caseId: "01VK0300208",
     messageXml:
@@ -7512,7 +7512,7 @@ const messages = [
           ASN: "1200000000000000009W",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -7579,7 +7579,7 @@ const messages = [
           timestamp: "2021-10-29T10:15:30.114Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD0300208",
@@ -7622,7 +7622,7 @@ const messages = [
           ASN: "1101ZD0100000411417B",
           "Message Type": "SPIResults",
           "PSA Code": "2576",
-          "Force Owner": "0001CT"
+          "Force Owner": "42CY00"
         },
         eventType: "Input message received",
         category: "information",
@@ -7943,7 +7943,7 @@ const messages = [
           timestamp: "2021-10-29T10:15:17.182Z"
         }
       ],
-      forceOwner: "0001CT"
+      forceOwner: "42CY00"
     },
     status: "Completed",
     caseId: "01ZD4444507",
@@ -8010,7 +8010,7 @@ const messages = [
           "Offence 1 Details": "TH68020||001||1002,1015",
           "Offence 56 Details": "TH68020||056||1015,1002",
           "Offence 43 Details": "TH68020||043||1002,1015",
-          "Force Owner": "0001CT",
+          "Force Owner": "42CY00",
           "Offence 11 Details": "TH68020||011||1002,1015",
           "Offence 88 Details": "TH68020||088||1015,1002",
           "Offence 30 Details": "TH68020||030||1015,1002",

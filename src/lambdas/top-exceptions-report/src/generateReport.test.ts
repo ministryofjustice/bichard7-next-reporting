@@ -549,7 +549,7 @@ const messages = [
           "Exception Type": "HO100310",
           "Number Of Errors": "2",
           ASN: "1101ZD0100000410801G",
-          "Force Owner": "0014FS",
+          "Force Owner": "01VK00",
           "Message Type": "SPIResults",
           "Error 2 Details": "HO100310||ds:OffenceReasonSequence",
           "Error 1 Details": "HO100310||ds:OffenceReasonSequence"
@@ -668,7 +668,7 @@ const messages = [
             "Exception Type": "HO100310",
             "Number Of Errors": "2",
             ASN: "1101ZD0100000410801G",
-            "Force Owner": "0014FS",
+            "Force Owner": "01VK00",
             "Message Type": "SPIResults",
             "Error 2 Details": "HO100310||ds:OffenceReasonSequence",
             "Error 1 Details": "HO100310||ds:OffenceReasonSequence"
