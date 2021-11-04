@@ -1,5 +1,5 @@
 {
-  "name": "top-exceptions-report",
+  "name": "automation-report",
   "version": "1.0.0",
   "description": "Lambda function to generate top exceptions report",
   "main": "index.js",
