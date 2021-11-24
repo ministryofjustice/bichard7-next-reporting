@@ -1,3 +1,4 @@
+import { isError } from "@bichard/types/dist/Result"
 import generateReport from "./generateReport"
 
 interface MpsReportResult {
@@ -8,6 +9,12 @@ interface MpsReportResult {
 export default async (): Promise<MpsReportResult> => {
   const report = await generateReport()
 
+  if (isError(report)) {
+    return {
+      error: report.message
+    }
+  }
+  
   return Promise.resolve({
     report
   })
