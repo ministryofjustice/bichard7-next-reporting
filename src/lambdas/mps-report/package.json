@@ -1,7 +1,7 @@
 {
   "name": "mps-report",
   "version": "1.0.0",
-  "description": "Lambda function to generate top exceptions report",
+  "description": "Lambda function to generate MPS report",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf build",
@@ -15,8 +15,6 @@
     "test:e2e": "npm run setup:env && ../../../scripts/test.sh e2e"
   },
   "dependencies": {
-    "@bichard/dynamo-gateway": "file:../../@bichard/dynamo-gateway",
-    "@bichard/forces": "file:../../@bichard/forces",
     "@bichard/postgres-gateway": "file:../../@bichard/postgres-gateway",
     "@bichard/types": "file:../../@bichard/types",
     "aws-sdk": "^2.870.0",
