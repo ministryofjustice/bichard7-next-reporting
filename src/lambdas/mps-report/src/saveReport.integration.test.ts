@@ -30,6 +30,6 @@ describe("GenerateReport", () => {
             return;
         }
         expect(result.length).toBe(1)
-        expect(new TextDecoder().decode(result[0].report)).toBe(reportToSave)
+        expect(new TextDecoder().decode(result[0].report)).toMatchSnapshot()
     })
 })
