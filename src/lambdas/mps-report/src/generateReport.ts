@@ -11,6 +11,38 @@ import getResultQualifierCodes from "./getResultQualifierCodes"
 import getDurationAndAmount from "./getDurationAndAmount"
 import OffenceDetails, { isMultiple } from "./types/OffenceDetails"
 import OffenceResult from "./types/OffenceResult"
+import HearingOutcomeCase from "./types/HearingOutcomeCase"
+
+interface ReportRowResultQuery {
+    court_date: string
+    court_code: string
+    force_code: string
+    is_urgent: string
+    defendant_name: string
+    triggers: string
+    error_report: string
+}
+
+function UpdateCommonHeaders(row: ReportRowResultQuery, hearingOutcomeCase: HearingOutcomeCase, offence:OffenceDetails) {
+    let newRow = []
+
+    newRow.push(row.court_date) // Hearing Date
+    newRow.push(row.court_code) // Court
+    newRow.push(row.force_code) // Force
+    newRow.push(row.is_urgent) // Urgent
+    newRow.push(row.defendant_name) // Defendant
+    newRow.push(getText(hearingOutcomeCase.HearingDefendant.DefendantDetail?.BirthDate)) // DoB
+    newRow.push(getText(hearingOutcomeCase.HearingDefendant.ArrestSummonsNumber)) // ASN
+    newRow.push(getText(hearingOutcomeCase.PTIURN)) // URN
+    newRow.push(row.triggers) // Triggers
+    newRow.push(row.error_report) // Errors
+
+    newRow.push(getOffenceCode(offence.CriminalProsecutionReference)) // Offence Code
+    newRow.push(getText(offence.ActualOffenceStartDate.StartDate)) // Offence Start Date
+    newRow.push(getText(offence.LocationOfOffence)) // Offence Location
+
+    return newRow
+}
 
 export default async () => {
   const gateway = new PostgresGateway(config.database)
@@ -25,30 +57,11 @@ export default async () => {
     let annotatedMsg: string = rows[i].annotated_msg.replace(/br7:/g, "").replace(/ds:/g, "")
     let annotatedMsgObject = xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome
     const offences = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.Offence
+    const hearingOutcomeCase = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case
 
     if (isMultiple<OffenceDetails>(offences)) {
       for (let o = 0; o < offences.length; o = o + 1) {
-        let newRow = []
-        newRow.push(rows[i].court_date) // Hearing Date
-        newRow.push(rows[i].court_code) // Court
-        newRow.push(rows[i].force_code) // Force
-        newRow.push(rows[i].is_urgent) // Urgent
-        newRow.push(rows[i].defendant_name) // Defendant
-        newRow.push(
-          getText(
-            annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.DefendantDetail?.BirthDate
-          )
-        ) // DoB
-        newRow.push(
-          getText(annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.ArrestSummonsNumber)
-        ) // ASN
-        newRow.push(getText(annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.PTIURN)) // URN
-        newRow.push(rows[i].triggers) // Triggers
-        newRow.push(rows[i].error_report) // Errors
-
-        newRow.push(getOffenceCode(offences[o].CriminalProsecutionReference)) // Offence Code
-        newRow.push(getText(offences[o].ActualOffenceStartDate.StartDate)) // Offence Start Date
-        newRow.push(getText(offences[o].LocationOfOffence)) // Offence Location
+        let newRow = UpdateCommonHeaders(rows[i], hearingOutcomeCase, offences[o])
 
         const results = offences[o].Result
         if (isMultiple<OffenceResult>(results)) {
@@ -86,27 +99,7 @@ export default async () => {
         result.push(newRow.join(","))
       }
     } else {
-      let newRow = []
-      newRow.push(rows[i].court_date) // Hearing Date
-      newRow.push(rows[i].court_code) // Court
-      newRow.push(rows[i].force_code) // Force
-      newRow.push(rows[i].is_urgent) // Urgent
-      newRow.push(rows[i].defendant_name) // Defendant
-      newRow.push(
-        getText(
-          annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.DefendantDetail?.BirthDate
-        )
-      ) // DoB
-      newRow.push(
-        getText(annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.ArrestSummonsNumber)
-      ) // ASN
-      newRow.push(getText(annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.PTIURN)) // URN
-      newRow.push(rows[i].triggers) // Triggers
-      newRow.push(rows[i].error_report) // Errors
-
-      newRow.push(getOffenceCode(offences.CriminalProsecutionReference)) // Offence Code
-      newRow.push(getText(offences.ActualOffenceStartDate.StartDate)) // Offence Start Date
-      newRow.push(getText(offences.LocationOfOffence)) // Offence Location
+      let newRow = UpdateCommonHeaders(rows[i], hearingOutcomeCase, offences)
 
       const results = offences.Result
       if (isMultiple<OffenceResult>(results)) {

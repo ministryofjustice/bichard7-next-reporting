@@ -14,7 +14,7 @@ describe("GenerateReport", () => {
     beforeEach(async ()=> {
         await gateway.getResult(`DELETE FROM br7own.error_list`)
         await gateway.getResult(`INSERT INTO br7own.error_list 
-        VALUES(default, 'msgid14', 0, 1, 1, 0, 0, 0, 'System', null, 42, '1101ZD0100000448754K', 'B01EF01', '', 'UPD-MSG', '', current_timestamp, 'error-reason', 'trg-reason', 0, 0, current_date, 'ptiurn', 'court-name', null, current_timestamp, 'err-resolved-by', 'trg-resolved-by', null, null, 'defendant', '01ZD', null, 'court-ref', null, null, null, default, default)`)
+        VALUES(default, 'msgid1', 0, 1, 1, 0, 0, 0, 'System', null, 42, '1101ZD0100000448754K', 'B01EF01', '', 'UPD-MSG', '', current_timestamp, 'error-reason', 'trg-reason', 0, 0, current_date, 'ptiurn', 'court-name', null, current_timestamp, 'err-resolved-by', 'trg-resolved-by', null, null, 'defendant', '01ZD', null, 'court-ref', null, null, null, default, default)`)
     })
 
     it("should be able to retrieve an error from the DB", async () => {
