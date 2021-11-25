@@ -6,4 +6,3 @@ export default interface DatabaseConfig {
     port: number
     ssl: boolean
   }
-  
