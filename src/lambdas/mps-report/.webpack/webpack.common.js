@@ -1,4 +1,5 @@
 const path = require("path")
+const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 
 module.exports = {
@@ -7,7 +8,12 @@ module.exports = {
   },
   resolve: {
     modules: [path.resolve("./node_modules"), path.resolve(".")],
-    extensions: [".js", ".json", ".ts"]
+    extensions: [".js", ".json", ".ts"],
+    alias: {
+      // keep this is as there is a clash between Babel and Postgres:
+      // https://stackoverflow.com/questions/41522744/webpack-import-error-with-node-postgres-pg-client
+      'pg-native': '../../../../src/lib/dummyPgNative.js'
+    }
   },
   output: {
     libraryTarget: "commonjs",
