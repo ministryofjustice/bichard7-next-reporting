@@ -23,24 +23,21 @@ interface ReportRowResultQuery {
 }
 
 function UpdateCommonHeaders(row: ReportRowResultQuery, hearingOutcomeCase: HearingOutcomeCase, offence:OffenceDetails) {
-    let newRow = []
-
-    newRow.push(row.court_date) // Hearing Date
-    newRow.push(row.court_code) // Court
-    newRow.push(row.force_code) // Force
-    newRow.push(row.is_urgent) // Urgent
-    newRow.push(row.defendant_name) // Defendant
-    newRow.push(getText(hearingOutcomeCase.HearingDefendant.DefendantDetail?.BirthDate)) // DoB
-    newRow.push(getText(hearingOutcomeCase.HearingDefendant.ArrestSummonsNumber)) // ASN
-    newRow.push(getText(hearingOutcomeCase.PTIURN)) // URN
-    newRow.push(row.triggers) // Triggers
-    newRow.push(row.error_report) // Errors
-
-    newRow.push(getOffenceCode(offence.CriminalProsecutionReference)) // Offence Code
-    newRow.push(getText(offence.ActualOffenceStartDate.StartDate)) // Offence Start Date
-    newRow.push(getText(offence.LocationOfOffence)) // Offence Location
-
-    return newRow
+  return [
+    row.court_date, // Hearing Date
+    row.court_code, // Court
+    row.force_code, // Force
+    row.is_urgent, // Urgent
+    row.defendant_name, // Defendant
+    getText(hearingOutcomeCase.HearingDefendant.DefendantDetail?.BirthDate), // DoB
+    getText(hearingOutcomeCase.HearingDefendant.ArrestSummonsNumber), // ASN
+    getText(hearingOutcomeCase.PTIURN), // URN
+    row.triggers, // Triggers
+    row.error_report, // Errors
+    getOffenceCode(offence.CriminalProsecutionReference), // Offence Code
+    getText(offence.ActualOffenceStartDate.StartDate), // Offence Start Date
+    getText(offence.LocationOfOffence), // Offence Location
+  ]
 }
 
 export default async (gateway: PostgresGateway) => {
@@ -48,6 +45,7 @@ export default async (gateway: PostgresGateway) => {
   if (isError(rows)) {
     return rows
   }
+  
   let result = []
   result.push(headers.join(","))
   for (let i = 0; i < rows.length; i = i + 1) {
