@@ -3,7 +3,6 @@ import { PostgresGateway } from "@bichard/postgres-gateway"
 import config from "./lib/config"
 import { isError } from "@bichard/types"
 
-
 describe("GenerateReport", () => {
     let gateway: PostgresGateway
 
@@ -18,8 +17,6 @@ describe("GenerateReport", () => {
     })
 
     it("should be able to retrieve an error from the DB", async () => {
-        const gateway = new PostgresGateway(config.database)
-
         const result = await getCourtErrors(gateway)
         expect(result).not.toBe(undefined)
         if(isError(result)) {

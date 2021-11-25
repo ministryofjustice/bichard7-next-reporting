@@ -2,7 +2,6 @@ import getCourtErrors from "./getCourtErrors"
 import { headers } from "../config/mpsHeadingKeys"
 import getOffenceCode from "./getOffenceCode"
 import AnnotatedHearingOutcome from "./types/AnnotatedHearingOutcome"
-import config from "./lib/config"
 import { PostgresGateway } from "@bichard/postgres-gateway"
 import { isError } from "@bichard/types"
 import { xml2js } from "xml-js"
@@ -44,9 +43,7 @@ function UpdateCommonHeaders(row: ReportRowResultQuery, hearingOutcomeCase: Hear
     return newRow
 }
 
-export default async () => {
-  const gateway = new PostgresGateway(config.database)
-
+export default async (gateway: PostgresGateway) => {
   const rows = await getCourtErrors(gateway)
   if (isError(rows)) {
     return rows
