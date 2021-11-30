@@ -22,7 +22,7 @@ interface ReportRowResultQuery {
     error_report: string
 }
 
-function UpdateCommonHeaders(row: ReportRowResultQuery, hearingOutcomeCase: HearingOutcomeCase, offence:OffenceDetails) {
+function updateCommonHeaders(row: ReportRowResultQuery, hearingOutcomeCase: HearingOutcomeCase, offence:OffenceDetails) {
   return [
     row.court_date, // Hearing Date
     row.court_code, // Court
@@ -49,14 +49,14 @@ export default async (gateway: PostgresGateway) => {
   let result = []
   result.push(headers.join(","))
   for (let i = 0; i < rows.length; i = i + 1) {
-    let annotatedMsg: string = rows[i].annotated_msg.replace(/br7:/g, "").replace(/ds:/g, "")
-    let annotatedMsgObject = xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome
+    const annotatedMsg: string = rows[i].annotated_msg.replace(/br7:/g, "").replace(/ds:/g, "")
+    const annotatedMsgObject = xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome
     const offences = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.Offence
     const hearingOutcomeCase = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case
 
     if (isMultiple<OffenceDetails>(offences)) {
       for (let o = 0; o < offences.length; o = o + 1) {
-        let newRow = UpdateCommonHeaders(rows[i], hearingOutcomeCase, offences[o])
+        const newRow = updateCommonHeaders(rows[i], hearingOutcomeCase, offences[o])
 
         const results = offences[o].Result
         if (isMultiple<OffenceResult>(results)) {
@@ -94,7 +94,7 @@ export default async (gateway: PostgresGateway) => {
         result.push(newRow.join(","))
       }
     } else {
-      let newRow = UpdateCommonHeaders(rows[i], hearingOutcomeCase, offences)
+      const newRow = updateCommonHeaders(rows[i], hearingOutcomeCase, offences)
 
       const results = offences.Result
       if (isMultiple<OffenceResult>(results)) {

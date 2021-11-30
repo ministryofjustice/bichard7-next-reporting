@@ -24,7 +24,7 @@ describe("GenerateReport", () => {
             return;
         }
 
-        expect(result.length).toBe(1)
+        expect(result).toHaveLength(1)
         expect(result[0].asn).toBe('1101ZD0100000448754K')
         expect(result[0].triggers).toBe('')
         expect(result[0].force_code).toBe('01ZD')

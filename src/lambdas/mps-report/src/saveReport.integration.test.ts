@@ -29,7 +29,8 @@ describe("GenerateReport", () => {
             expect(isError(result)).toBeFalsy
             return;
         }
-        expect(result.length).toBe(1)
-        expect(new TextDecoder().decode(result[0].report)).toMatchSnapshot()
+        expect(result).toHaveLength(1)
+        const decodedReport = new TextDecoder().decode(result[0].report)
+        expect(decodedReport).toMatchSnapshot()
     })
 })
