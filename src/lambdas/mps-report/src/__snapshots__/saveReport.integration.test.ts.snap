@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenerateReport should save a report to the DB 1`] = `"Best,Report,In,The,World"`;
