@@ -25,7 +25,7 @@ LAMBDAS=$(ls src/lambdas)
 
 echo "Packaging each lambda..."
 for lambda in ${LAMBDAS}; do
-  NAME=$(echo "$lambda" | sed -r "s/(-)([a-z])/\U\2/g")
+  NAME=$(echo "$lambda")
 
   echo "Packaging $lambda as $NAME..."
   cd "src/lambdas/$lambda/build"
@@ -34,6 +34,6 @@ for lambda in ${LAMBDAS}; do
 
   # Upload to S3
   upload_to_s3 "$NAME.zip" "$NAME.zip"
-  
+
   cd -
 done
