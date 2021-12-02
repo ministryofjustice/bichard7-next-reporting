@@ -27,13 +27,15 @@ echo "Packaging each lambda..."
 for lambda in ${LAMBDAS}; do
   NAME=$(echo "$lambda" | sed -r "s/(-)([a-z])/\U\2/g")
 
-  echo "Packaging $lambda as $NAME..."
-  cd "src/lambdas/$lambda/build"
+  if [ "$lambda" == "mps-report"]; then
+    echo "Packaging $lambda as $NAME..."
+    cd "src/lambdas/$lambda/build"
 
-  zip "$NAME.zip" "$NAME.js"
+    zip "$NAME.zip" "$NAME.js"
 
-  # Upload to S3
-  upload_to_s3 "$NAME.zip" "$NAME.zip"
+    # Upload to S3
+    upload_to_s3 "$NAME.zip" "$NAME.zip"
+  fi
 
   cd -
 done
