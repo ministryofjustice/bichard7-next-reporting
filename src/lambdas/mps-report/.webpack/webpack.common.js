@@ -4,7 +4,7 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 
 module.exports = {
   entry: {
-    "mps-report": "./src/index.ts"
+    "mpsReport": "./src/index.ts"
   },
   resolve: {
     modules: [path.resolve("./node_modules"), path.resolve(".")],
