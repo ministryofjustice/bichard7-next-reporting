@@ -8,13 +8,15 @@ DO $$
             BEGIN
                 UPDATE br7own.work_allocation_report
                 SET
-                    report=$2,
-                    report_timestamp=NOW();
+                    report=cast($2 as bytea),
+                    report_timestamp=NOW()
+                WHERE
+                    area_code = $1;
             END;
         ELSE
             BEGIN
                 INSERT INTO br7own.work_allocation_report
-                VALUES($1, $2, NOW());
+                VALUES($1, cast($2 as bytea), NOW());
             END;
         end if;
     END

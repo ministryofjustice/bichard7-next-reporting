@@ -50,7 +50,7 @@ export default async (gateway: PostgresGateway) => {
   result.push(headers.join(","))
   for (let i = 0; i < rows.length; i = i + 1) {
     const annotatedMsg: string = rows[i].annotated_msg.replace(/br7:/g, "").replace(/ds:/g, "")
-    const annotatedMsgObject = xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome
+    const annotatedMsgObject = (xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome).AnnotatedPNCUpdateDataset.PNCUpdateDataset
     const offences = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.Offence
     const hearingOutcomeCase = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case
 
@@ -133,5 +133,5 @@ export default async (gateway: PostgresGateway) => {
     }
   }
 
-  return result.join("\n")
+  return result.join("\r\n")
 }
