@@ -11,7 +11,7 @@ interface MpsReportResult {
 
 export default async (): Promise<MpsReportResult> => {
   const gateway = new PostgresGateway(config.database)
-
+  console.log(" -!- Generating report ...")
   const report = await generateReport(gateway)
   if (isError(report)) {
     return {
@@ -19,6 +19,7 @@ export default async (): Promise<MpsReportResult> => {
     }
   }
 
+  console.log(" -!- Saving report ...")
   const saveResult = await saveReport(gateway, '01', report)
   if(isError(saveResult)){
     return {
