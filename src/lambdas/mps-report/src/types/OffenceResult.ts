@@ -1,4 +1,5 @@
 import ResultDuration from "./ResultDuration"
+import ResultQualifier from "./ResultQualifier"
 import XmlStringCell from "./XmlStringCell"
 
 export default interface OffenceResult {
@@ -6,5 +7,5 @@ export default interface OffenceResult {
   Duration: [ResultDuration] | ResultDuration
   AmountSpecifiedInResult: [XmlStringCell] | XmlStringCell
   ResultVariableText: XmlStringCell
-  ResultQualifierVariable: [Code: XmlStringCell]
+  ResultQualifierVariable: [ResultQualifier] | ResultQualifier
 }

@@ -1,6 +1,13 @@
 import { PostgresGateway } from "@bichard/postgres-gateway"
+var JSZip = require("jszip");
 
 export default async (gateway: PostgresGateway, areaCode: string, report: string) => {
+    var zip = new JSZip();
+
+    console.log(" -- Creating CSV file")
+    const todaysDate = (new Date()).toISOString().split(':')[0].replace('T','').replace(/-/g,'')
+    zip.file(`Area${areaCode}.${todaysDate}.csv`, report);
+
     const updateQuery = `
 DO $$
     BEGIN
@@ -22,7 +29,11 @@ DO $$
     END
 $$
     `
-    const result = await gateway.getResult(updateQuery, [areaCode, report])
+    console.log(" -- Zipping file")
+    const zippedReport = await zip.generateAsync({type : "nodebuffer"})
+
+    console.log(" -- Running query")
+    const result = await gateway.getResult(updateQuery, [areaCode, zippedReport])
 
     return result
 }
