@@ -95,7 +95,7 @@ export default async (gateway: PostgresGateway) => {
         newRow.push(rows[i].trigger_locked_by_id) // Trigger Locked By
         newRow.push(rows[i].error_locked_by_id) // Exception Locked By
 
-        result.push(newRow.join(","))
+        result.push(newRow.map((x) => `"${x}"`).join(","))
       }
     } else {
       const newRow = updateCommonHeaders(rows[i], hearingOutcomeCase, offences)
@@ -133,7 +133,7 @@ export default async (gateway: PostgresGateway) => {
       newRow.push(rows[i].trigger_locked_by_id) // Trigger Locked By
       newRow.push(rows[i].error_locked_by_id) // Exception Locked By
 
-      result.push(newRow.join(","))
+      result.push(newRow.map((x) => `"${x}"`).join(","))
     }
   }
 
