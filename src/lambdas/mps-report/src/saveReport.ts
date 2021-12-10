@@ -1,6 +1,13 @@
 import { PostgresGateway } from "@bichard/postgres-gateway"
+var JSZip = require("jszip");
 
 export default async (gateway: PostgresGateway, areaCode: string, report: string) => {
+    var zip = new JSZip();
+
+    console.log(" -- Creating CSV file")
+    const todaysDate = (new Date()).toISOString().split(':')[0].replace('T','').replace(/-/g,'')
+    zip.file(`Area${areaCode}.${todaysDate}.csv`, report);
+
     const updateQuery = `
 DO $$
     BEGIN
@@ -8,19 +15,25 @@ DO $$
             BEGIN
                 UPDATE br7own.work_allocation_report
                 SET
-                    report=$2,
-                    report_timestamp=NOW();
+                    report=cast($2 as bytea),
+                    report_timestamp=NOW()
+                WHERE
+                    area_code = $1;
             END;
         ELSE
             BEGIN
                 INSERT INTO br7own.work_allocation_report
-                VALUES($1, $2, NOW());
+                VALUES($1, cast($2 as bytea), NOW());
             END;
         end if;
     END
 $$
     `
-    const result = await gateway.getResult(updateQuery, [areaCode, report])
+    console.log(" -- Zipping file")
+    const zippedReport = await zip.generateAsync({type : "nodebuffer"})
+
+    console.log(" -- Running query")
+    const result = await gateway.getResult(updateQuery, [areaCode, zippedReport])
 
     return result
 }

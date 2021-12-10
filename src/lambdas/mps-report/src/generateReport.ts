@@ -11,6 +11,7 @@ import getDurationAndAmount from "./getDurationAndAmount"
 import OffenceDetails, { isMultiple } from "./types/OffenceDetails"
 import OffenceResult from "./types/OffenceResult"
 import HearingOutcomeCase from "./types/HearingOutcomeCase"
+import AnnotatedPNCUpdateDataset from "./types/AnnotatedPNCUpdateDataset"
 
 interface ReportRowResultQuery {
     court_date: string
@@ -50,7 +51,10 @@ export default async (gateway: PostgresGateway) => {
   result.push(headers.join(","))
   for (let i = 0; i < rows.length; i = i + 1) {
     const annotatedMsg: string = rows[i].annotated_msg.replace(/br7:/g, "").replace(/ds:/g, "")
-    const annotatedMsgObject = xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome
+    let annotatedMsgObject = (xml2js(annotatedMsg, { compact: true }) as AnnotatedPNCUpdateDataset)?.AnnotatedPNCUpdateDataset?.PNCUpdateDataset
+    if(!annotatedMsgObject) {
+      annotatedMsgObject = (xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome)
+    }
     const offences = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.Offence
     const hearingOutcomeCase = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case
 
@@ -91,7 +95,7 @@ export default async (gateway: PostgresGateway) => {
         newRow.push(rows[i].trigger_locked_by_id) // Trigger Locked By
         newRow.push(rows[i].error_locked_by_id) // Exception Locked By
 
-        result.push(newRow.join(","))
+        result.push(newRow.map((x) => `"${x}"`).join(","))
       }
     } else {
       const newRow = updateCommonHeaders(rows[i], hearingOutcomeCase, offences)
@@ -129,9 +133,9 @@ export default async (gateway: PostgresGateway) => {
       newRow.push(rows[i].trigger_locked_by_id) // Trigger Locked By
       newRow.push(rows[i].error_locked_by_id) // Exception Locked By
 
-      result.push(newRow.join(","))
+      result.push(newRow.map((x) => `"${x}"`).join(","))
     }
   }
 
-  return result.join("\n")
+  return result.join("\r\n")
 }
