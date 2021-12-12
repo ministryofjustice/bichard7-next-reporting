@@ -30,7 +30,13 @@ DO $$
 $$
     `
     console.log(" -- Zipping file")
-    const zippedReport = await zip.generateAsync({type : "nodebuffer"})
+    const zippedReport = await zip.generateAsync({
+        type : "nodebuffer",
+        compression: "DEFLATE",
+        compressionOptions: {
+            level: 5
+        }
+    })
 
     console.log(" -- Running query")
     const result = await gateway.getResult(updateQuery, [areaCode, zippedReport])

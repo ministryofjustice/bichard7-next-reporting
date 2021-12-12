@@ -20,21 +20,22 @@ interface ReportRowResultQuery {
     is_urgent: string
     defendant_name: string
     triggers: string
+    error_status: string
     error_report: string
 }
 
 function updateCommonHeaders(row: ReportRowResultQuery, hearingOutcomeCase: HearingOutcomeCase, offence:OffenceDetails) {
   return [
-    row.court_date, // Hearing Date
+    new Date(row.court_date).toISOString().split('T')[0], // Hearing Date
     row.court_code, // Court
-    row.force_code, // Force
-    row.is_urgent, // Urgent
+    '1', //row.force_code, // Hard coded Force
+    (parseInt(row.is_urgent) === 1) ? 'Y' : 'N' , // Urgent
     row.defendant_name, // Defendant
     getText(hearingOutcomeCase.HearingDefendant.DefendantDetail?.BirthDate), // DoB
     getText(hearingOutcomeCase.HearingDefendant.ArrestSummonsNumber), // ASN
     getText(hearingOutcomeCase.PTIURN), // URN
     row.triggers, // Triggers
-    row.error_report, // Errors
+    (parseInt(row.error_status) === 1) ? row.error_report.split(', ').map((x) => x.split('|')[0]).join(' ') : 'none', // Errors
     getOffenceCode(offence.CriminalProsecutionReference), // Offence Code
     getText(offence.ActualOffenceStartDate.StartDate), // Offence Start Date
     getText(offence.LocationOfOffence), // Offence Location
@@ -48,6 +49,8 @@ export default async (gateway: PostgresGateway) => {
   }
   
   let result = []
+  result.push(`MPS Data Extract,${new Date().toLocaleDateString()} ${new Date().toISOString().split('T')[1].split('.')[0]},,NOT PROTECTIVELY MARKED`)
+  result.push("")
   result.push(headers.join(","))
   for (let i = 0; i < rows.length; i = i + 1) {
     const annotatedMsg: string = rows[i].annotated_msg.replace(/br7:/g, "").replace(/ds:/g, "")
@@ -92,8 +95,8 @@ export default async (gateway: PostgresGateway) => {
             newRow.push("") // result qualifier
           }
         }
-        newRow.push(rows[i].trigger_locked_by_id) // Trigger Locked By
-        newRow.push(rows[i].error_locked_by_id) // Exception Locked By
+        newRow.push(rows[i].trigger_locked_by_id ? rows[i].trigger_locked_by_id : "") // Trigger Locked By
+        newRow.push(rows[i].error_locked_by_id ? rows[i].error_locked_by_id : "") // Exception Locked By
 
         result.push(newRow.map((x) => `"${x}"`).join(","))
       }
@@ -130,8 +133,8 @@ export default async (gateway: PostgresGateway) => {
           newRow.push("") // result qualifier
         }
       }
-      newRow.push(rows[i].trigger_locked_by_id) // Trigger Locked By
-      newRow.push(rows[i].error_locked_by_id) // Exception Locked By
+      newRow.push(rows[i].trigger_locked_by_id ? rows[i].trigger_locked_by_id : "") // Trigger Locked By
+      newRow.push(rows[i].error_locked_by_id ? rows[i].error_locked_by_id : "") // Exception Locked By
 
       result.push(newRow.map((x) => `"${x}"`).join(","))
     }
