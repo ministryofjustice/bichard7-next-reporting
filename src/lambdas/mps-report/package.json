@@ -19,6 +19,7 @@
     "@bichard/types": "file:../../@bichard/types",
     "adm-zip": "^0.5.9",
     "aws-sdk": "^2.870.0",
+    "csv-stringify": "^6.0.4",
     "dom-parser": "^0.1.6",
     "jszip": "^3.7.1",
     "pg-promise": "^10.11.1",

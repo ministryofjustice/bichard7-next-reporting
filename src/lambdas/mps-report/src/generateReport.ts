@@ -12,6 +12,7 @@ import OffenceDetails, { isMultiple } from "./types/OffenceDetails"
 import OffenceResult from "./types/OffenceResult"
 import HearingOutcomeCase from "./types/HearingOutcomeCase"
 import AnnotatedPNCUpdateDataset from "./types/AnnotatedPNCUpdateDataset"
+import { stringify } from 'csv-stringify/sync';
 
 interface ReportRowResultQuery {
     court_date: string
@@ -49,9 +50,9 @@ export default async (gateway: PostgresGateway) => {
   }
   
   let result = []
-  result.push(`MPS Data Extract,${new Date().toLocaleDateString()} ${new Date().toISOString().split('T')[1].split('.')[0]},,NOT PROTECTIVELY MARKED`)
-  result.push("")
-  result.push(headers.join(","))
+  result.push([`MPS Data Extract`,`${new Date().toLocaleDateString()} ${new Date().toISOString().split('T')[1].split('.')[0]}`,``,`NOT PROTECTIVELY MARKED`])
+  result.push([""])
+  result.push(headers)
   for (let i = 0; i < rows.length; i = i + 1) {
     const annotatedMsg: string = rows[i].annotated_msg.replace(/br7:/g, "").replace(/ds:/g, "")
     let annotatedMsgObject = (xml2js(annotatedMsg, { compact: true }) as AnnotatedPNCUpdateDataset)?.AnnotatedPNCUpdateDataset?.PNCUpdateDataset
@@ -98,7 +99,7 @@ export default async (gateway: PostgresGateway) => {
         newRow.push(rows[i].trigger_locked_by_id ? rows[i].trigger_locked_by_id : "") // Trigger Locked By
         newRow.push(rows[i].error_locked_by_id ? rows[i].error_locked_by_id : "") // Exception Locked By
 
-        result.push(newRow.map((x) => `"${x}"`).join(","))
+        result.push(newRow)
       }
     } else {
       const newRow = updateCommonHeaders(rows[i], hearingOutcomeCase, offences)
@@ -136,9 +137,9 @@ export default async (gateway: PostgresGateway) => {
       newRow.push(rows[i].trigger_locked_by_id ? rows[i].trigger_locked_by_id : "") // Trigger Locked By
       newRow.push(rows[i].error_locked_by_id ? rows[i].error_locked_by_id : "") // Exception Locked By
 
-      result.push(newRow.map((x) => `"${x}"`).join(","))
+      result.push(newRow)
     }
   }
 
-  return result.join("\r\n")
+  return stringify(result)
 }
