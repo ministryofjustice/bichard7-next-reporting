@@ -20,6 +20,7 @@ export default async (gateway: PostgresGateway) => {
     FROM BR7OWN.ERROR_LIST error
     WHERE (error.error_status = 1 or error.trigger_status = 1) 
     AND (error.org_for_police_filter like '01%' OR (error.error_locked_by_id = 'System' or error.trigger_locked_by_id = 'System')) 
+    AND court_date < DATE(NOW())
     ORDER BY court_date, asn DESC 
     FOR READ ONLY
   `
