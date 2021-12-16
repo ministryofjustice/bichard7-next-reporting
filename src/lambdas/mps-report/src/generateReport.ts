@@ -12,34 +12,43 @@ import OffenceDetails, { isMultiple } from "./types/OffenceDetails"
 import OffenceResult from "./types/OffenceResult"
 import HearingOutcomeCase from "./types/HearingOutcomeCase"
 import AnnotatedPNCUpdateDataset from "./types/AnnotatedPNCUpdateDataset"
-import { stringify } from 'csv-stringify/sync';
+import { stringify } from "csv-stringify/sync"
 
 interface ReportRowResultQuery {
-    court_date: string
-    court_code: string
-    force_code: string
-    is_urgent: string
-    defendant_name: string
-    triggers: string
-    error_status: string
-    error_report: string
+  court_date: string
+  court_code: string
+  force_code: string
+  is_urgent: string
+  defendant_name: string
+  triggers: string
+  error_status: string
+  error_report: string
 }
 
-function updateCommonHeaders(row: ReportRowResultQuery, hearingOutcomeCase: HearingOutcomeCase, offence:OffenceDetails) {
+function updateCommonHeaders(
+  row: ReportRowResultQuery,
+  hearingOutcomeCase: HearingOutcomeCase,
+  offence: OffenceDetails
+) {
   return [
-    new Date(row.court_date).toISOString().split('T')[0], // Hearing Date
+    new Date(row.court_date).toISOString().split("T")[0], // Hearing Date
     row.court_code, // Court
-    '1', //row.force_code, // Hard coded Force
-    (parseInt(row.is_urgent) === 1) ? 'Y' : 'N' , // Urgent
+    "1", //row.force_code, // Hard coded Force
+    parseInt(row.is_urgent) === 1 ? "Y" : "N", // Urgent
     row.defendant_name, // Defendant
     getText(hearingOutcomeCase.HearingDefendant.DefendantDetail?.BirthDate), // DoB
     getText(hearingOutcomeCase.HearingDefendant.ArrestSummonsNumber), // ASN
     getText(hearingOutcomeCase.PTIURN), // URN
     row.triggers, // Triggers
-    (parseInt(row.error_status) === 1) ? row.error_report.split(', ').map((x) => x.split('|')[0]).join(' ') : 'none', // Errors
+    parseInt(row.error_status) === 1
+      ? row.error_report
+          .split(", ")
+          .map((x) => x.split("|")[0])
+          .join(" ")
+      : "none", // Errors
     getOffenceCode(offence.CriminalProsecutionReference), // Offence Code
     getText(offence.ActualOffenceStartDate.StartDate), // Offence Start Date
-    getText(offence.LocationOfOffence), // Offence Location
+    getText(offence.LocationOfOffence) // Offence Location
   ]
 }
 
@@ -48,16 +57,22 @@ export default async (gateway: PostgresGateway) => {
   if (isError(rows)) {
     return rows
   }
-  
+
   let result = []
-  result.push([`MPS Data Extract`,`${new Date().toLocaleDateString()} ${new Date().toISOString().split('T')[1].split('.')[0]}`,``,`NOT PROTECTIVELY MARKED`])
+  result.push([
+    `MPS Data Extract`,
+    `${new Date().toLocaleDateString()} ${new Date().toISOString().split("T")[1].split(".")[0]}`,
+    ``,
+    `NOT PROTECTIVELY MARKED`
+  ])
   result.push([""])
   result.push(headers)
   for (let i = 0; i < rows.length; i = i + 1) {
     const annotatedMsg: string = rows[i].annotated_msg.replace(/br7:/g, "").replace(/ds:/g, "")
-    let annotatedMsgObject = (xml2js(annotatedMsg, { compact: true }) as AnnotatedPNCUpdateDataset)?.AnnotatedPNCUpdateDataset?.PNCUpdateDataset
-    if(!annotatedMsgObject) {
-      annotatedMsgObject = (xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome)
+    let annotatedMsgObject = (xml2js(annotatedMsg, { compact: true }) as AnnotatedPNCUpdateDataset)
+      ?.AnnotatedPNCUpdateDataset?.PNCUpdateDataset
+    if (!annotatedMsgObject) {
+      annotatedMsgObject = xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome
     }
     const offences = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.Offence
     const hearingOutcomeCase = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case
