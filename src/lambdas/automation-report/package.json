@@ -18,7 +18,9 @@
     "@bichard/dynamo-gateway": "file:../../@bichard/dynamo-gateway",
     "@bichard/forces": "file:../../@bichard/forces",
     "@bichard/types": "file:../../@bichard/types",
-    "aws-sdk": "^2.870.0"
+    "aws-sdk": "^2.870.0",
+    "csv-stringify": "^6.0.4",
+    "install": "^0.13.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.13.12",
