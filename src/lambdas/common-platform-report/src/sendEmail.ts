@@ -23,7 +23,10 @@ export default async (emailer: Emailer, range: TimeRange, records: ReportRecord[
     ]
   }
 
-  const result = await emailer.sendMail(options).catch((err: Error) => err)
+  const result = await emailer
+    .sendMail(options)
+    .then(() => console.log(`Email successfully sent`))
+    .catch((err: Error) => err)
 
   if (isError(result)) {
     console.error("Error sending email", result.message)

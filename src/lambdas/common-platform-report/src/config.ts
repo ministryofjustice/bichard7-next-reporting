@@ -21,7 +21,7 @@ const config: CommonPlatformReportConfig = {
   dynamo: createDynamoDbConfig(),
   fromAddress: process.env.FROM_ADDRESS ?? "no-reply@mail.bichard7.service.justice.gov.uk",
   timePeriodHours: parseInt(process.env.TIME_PERIOD_HOURS ?? "240", 10),
-  toAddresses: process.env.TO_ADDRESSES ?? "moj-bichard7@madetech.com"
+  toAddresses: process.env.TO_ADDRESSES ?? "moj-bichard7@madetech.cjsm.net"
 }
 
 export default config
