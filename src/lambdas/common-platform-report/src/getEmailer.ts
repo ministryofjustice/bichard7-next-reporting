@@ -8,6 +8,7 @@ export interface SmtpConfig {
   password: string
   port: number
   tls: boolean
+  debug: boolean
 }
 
 const getSmtpMailer = (config: SmtpConfig): Emailer =>
@@ -15,6 +16,8 @@ const getSmtpMailer = (config: SmtpConfig): Emailer =>
     host: config.host,
     port: config.port,
     secure: config.tls,
+    debug: config.debug,
+    logger: config.debug,
     auth: {
       user: config.user,
       pass: config.password

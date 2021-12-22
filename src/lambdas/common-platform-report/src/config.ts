@@ -15,7 +15,8 @@ const config: CommonPlatformReportConfig = {
     user: process.env.SMTP_USER ?? "bichard",
     password: process.env.SMTP_PASSWORD ?? "password",
     port: parseInt(process.env.SMTP_PORT ?? "587", 10),
-    tls: process.env.SMTP_TLS === "true"
+    tls: process.env.SMTP_TLS === "true",
+    debug: process.env.SMTP_DEBUG === "true"
   },
   dynamo: createDynamoDbConfig(),
   fromAddress: process.env.FROM_ADDRESS ?? "no-reply@mail.bichard7.service.justice.gov.uk",
