@@ -24,9 +24,10 @@ export default class SendReportUseCase {
       return records
     }
 
-    const emailResult = sendEmail(this.emailer, timeRange, records)
+    const emailResult = await sendEmail(this.emailer, timeRange, records)
 
     if (isError(emailResult)) {
+      console.error("Error sending mail", emailResult)
       return emailResult
     }
     return true
