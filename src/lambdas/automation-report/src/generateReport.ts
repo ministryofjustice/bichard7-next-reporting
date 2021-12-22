@@ -1,5 +1,6 @@
 import { findForceName } from "@bichard/forces"
 import type { AuditLog, AuditLogEvent, KeyValuePair } from "@bichard/types"
+import { stringify } from "csv-stringify/sync"
 
 interface Force {
   exceptions: number
@@ -100,13 +101,13 @@ const calculateForces = (messages: AuditLog[]): Forces => {
 }
 
 const generateCsv = (forces: Forces): string => {
-  const lines = ["Force\tAutomated\tResubmitted\tAutomated including Resubmissions"]
+  const lines = [["Force", "Automated", "Resubmitted", "Automated including Resubmissions"]]
   const addLine = (forceName: string, name?: string) => {
     const force = forces[forceName]
     const automated = force.automatedQuotient.toFixed(5)
     const resubmittedAndResolved = force.resubmittedAndResolved.toFixed(5)
     const automatedWithResubmission = force.automatedWithResubmissionQuotient.toFixed(5)
-    lines.push(`${name || forceName}\t${automated}\t${resubmittedAndResolved}\t${automatedWithResubmission}`)
+    lines.push([`${name || forceName}`,`${automated}`,`${resubmittedAndResolved}`,`${automatedWithResubmission}`])
   }
 
   Object.keys(forces)
@@ -116,7 +117,8 @@ const generateCsv = (forces: Forces): string => {
 
   addLine("national", "National Average")
 
-  return lines.join("\n")
+  //return lines.join("\n")
+  return stringify(lines)
 }
 
 export default (events: AuditLog[]): string => {

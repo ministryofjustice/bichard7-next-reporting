@@ -7,16 +7,14 @@ interface AutomationReportResult {
   error?: string
 }
 
-interface AutomatedReportInput {
-  from: string
-  to: string
-}
-
 const config = createDynamoDbConfig()
 const auditLogGateway = new AwsAuditLogDynamoGateway(config, config.AUDIT_LOG_TABLE_NAME)
 
-export default async ({ from, to }: AutomatedReportInput): Promise<AutomationReportResult> => {
-  const messagesForReport = await auditLogGateway.fetchAllByReceivedDate(new Date(from), new Date(to))
+export default async (): Promise<AutomationReportResult> => {
+  let previousMonth = new Date()
+  previousMonth.setDate(1);
+  previousMonth.setMonth(previousMonth.getMonth()-1);
+  const messagesForReport = await auditLogGateway.fetchAllByReceivedDate(previousMonth, new Date())
 
   if (isError(messagesForReport)) {
     return {
@@ -25,6 +23,11 @@ export default async ({ from, to }: AutomatedReportInput): Promise<AutomationRep
   }
 
   const report = generateReport(messagesForReport)
+  if(isError(report)){
+    return {
+      error: report.message
+    }
+  }
 
   return Promise.resolve({
     report

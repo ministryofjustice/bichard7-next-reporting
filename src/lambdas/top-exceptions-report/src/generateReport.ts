@@ -1,6 +1,7 @@
 import { findForceName } from "@bichard/forces"
 import type { AuditLog, KeyValuePair } from "@bichard/types"
 import getErrorName from "./errorNames/getErrorName"
+import { stringify } from "csv-stringify/sync"
 
 type ForceExceptions = KeyValuePair<string, number>
 type ForcesExceptions = KeyValuePair<string, ForceExceptions>
@@ -33,18 +34,15 @@ const calculateForcesExceptions = (allAttributes: KeyValuePair<string, unknown>[
 }
 
 const generateCsv = (forcesExceptions: ForcesExceptions): string => {
-  return Object.keys(forcesExceptions).reduce((output, forceName) => {
+  let rows = [["Force" ,"Exception" ,"Error Text" ,"Count"]]
+  Object.keys(forcesExceptions).forEach((forceName) => {
     const forceExceptions = forcesExceptions[forceName]
-    const exceptionLines = Object.keys(forceExceptions).map((exceptionCode) => {
+    Object.keys(forceExceptions).forEach((exceptionCode) => {
       const errorText = getErrorName(exceptionCode)
-      return `${forceName}\t${exceptionCode}\t${errorText}\t${forceExceptions[exceptionCode]}`
+      rows.push([`${forceName}`,`${exceptionCode}`,`${errorText}`,`${forceExceptions[exceptionCode]}`])
     })
-
-    // eslint-disable-next-line no-param-reassign
-    output = [output, ...exceptionLines].join("\r\n")
-
-    return output
-  }, "Force\tException\tError Text\tCount")
+  })
+  return stringify(rows)
 }
 
 export default (messages: AuditLog[]): string => {
