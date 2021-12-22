@@ -1,0 +1,27 @@
+import { DynamoGateway } from "@bichard/dynamo-gateway"
+import { isError } from "@bichard/types/dist/Result"
+import config from "./config"
+import getEmailer from "./getEmailer"
+import SendReportUseCase from "./SendReportUseCase"
+
+const emailer = getEmailer(config.smtp)
+const gateway = new DynamoGateway(config.dynamo)
+const sendReportUseCase = new SendReportUseCase(gateway, emailer)
+
+interface MpsReportResult {
+  report?: string
+  error?: string
+}
+
+export default async (): Promise<MpsReportResult> => {
+  console.log(" -!- Starting function ...")
+  const result = await sendReportUseCase.execute()
+
+  if (isError(result)) {
+    throw result
+  }
+
+  return Promise.resolve({
+    report: "Report sent successfully"
+  })
+}
