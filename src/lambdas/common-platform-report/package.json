@@ -1,7 +1,7 @@
 {
-  "name": "mps-report",
+  "name": "common-platform-report",
   "version": "1.0.0",
-  "description": "Lambda function to generate MPS report",
+  "description": "Lambda function to generate Common Platform report",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf build",

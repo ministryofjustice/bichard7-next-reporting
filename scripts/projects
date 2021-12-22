@@ -5,3 +5,4 @@ src/@bichard/postgres-gateway
 src/lambdas/automation-report
 src/lambdas/top-exceptions-report
 src/lambdas/mps-report
+src/lambdas/common-platform-report
