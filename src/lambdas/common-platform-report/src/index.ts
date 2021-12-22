@@ -14,12 +14,14 @@ interface MpsReportResult {
 }
 
 export default async (): Promise<MpsReportResult> => {
-  console.log(" -!- Starting function ...")
+  console.log("Sending Common Platform error report")
   const result = await sendReportUseCase.execute()
 
   if (isError(result)) {
+    console.error(result.message)
     throw result
   }
+  console.log("Common Platform error report sent successfully")
 
   return Promise.resolve({
     report: "Report sent successfully"

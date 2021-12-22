@@ -1,4 +1,4 @@
-import { PromiseResult } from "@bichard/types"
+import { isError, PromiseResult } from "@bichard/types"
 import config from "./config"
 import { TimeRange } from "./generateDates"
 import generateReport from "./generateReport"
@@ -22,7 +22,11 @@ export default async (emailer: Emailer, range: TimeRange, records: ReportRecord[
       }
     ]
   }
-  await emailer.sendMail(options)
 
+  const result = await emailer.sendMail(options).catch((err: Error) => err)
+
+  if (isError(result)) {
+    return result
+  }
   return true
 }
