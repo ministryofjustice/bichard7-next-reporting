@@ -1,4 +1,4 @@
-const handler = require("./build/mps-report")
+const handler = require("./build/common-platform-report")
 
 handler
   .default()
