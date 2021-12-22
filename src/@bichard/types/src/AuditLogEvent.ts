@@ -5,6 +5,8 @@ import type AuditLogEventOptions from "./AuditLogEventOptions"
 export default class AuditLogEvent {
   public readonly eventSource: string
 
+  public readonly eventSourceQueueName: string
+
   public readonly category: EventCategory
 
   public readonly eventType: string
