@@ -107,7 +107,7 @@ const generateCsv = (date: Date, forces: Forces): string => {
     const automated = force.automatedQuotient.toFixed(2)
     const resubmittedAndResolved = force.resubmittedAndResolved.toFixed(0)
     const automatedWithResubmission = force.automatedWithResubmissionQuotient.toFixed(2)
-    lines.push([`${name || forceName}`,`${automated}`,`${resubmittedAndResolved}`,`${automatedWithResubmission}`])
+    lines.push([`${name || forceName}`,`${automated}%`,`${resubmittedAndResolved}`,`${automatedWithResubmission}%`])
   }
 
   Object.keys(forces)
