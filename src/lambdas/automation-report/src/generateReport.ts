@@ -92,21 +92,21 @@ const calculateForces = (messages: AuditLog[]): Forces => {
     const automatedWithResubmissionDivider = automated + exceptions - manuallyResolved
 
     if (automatedWithResubmissionDivider > 0) {
-      force.automatedQuotient = automated / automatedWithResubmissionDivider
-      force.automatedWithResubmissionQuotient = (automated + resubmittedAndResolved) / automatedWithResubmissionDivider
+      force.automatedQuotient = (automated / automatedWithResubmissionDivider) * 100
+      force.automatedWithResubmissionQuotient = (automated + resubmittedAndResolved) * 100 / automatedWithResubmissionDivider
     }
   })
 
   return forces
 }
 
-const generateCsv = (forces: Forces): string => {
-  const lines = [["Force", "Automated", "Resubmitted", "Automated including Resubmissions"]]
+const generateCsv = (date: Date, forces: Forces): string => {
+  const lines = [[`Bichard 7 Resubmissions - ${date.toDateString().split(" ")[1]} ${date.getUTCFullYear()}`], ["Force", "FullAutomation", "Number of Resubmissions", "Automated inc. Resubmissions"]]
   const addLine = (forceName: string, name?: string) => {
     const force = forces[forceName]
-    const automated = force.automatedQuotient.toFixed(5)
-    const resubmittedAndResolved = force.resubmittedAndResolved.toFixed(5)
-    const automatedWithResubmission = force.automatedWithResubmissionQuotient.toFixed(5)
+    const automated = force.automatedQuotient.toFixed(2)
+    const resubmittedAndResolved = force.resubmittedAndResolved.toFixed(0)
+    const automatedWithResubmission = force.automatedWithResubmissionQuotient.toFixed(2)
     lines.push([`${name || forceName}`,`${automated}`,`${resubmittedAndResolved}`,`${automatedWithResubmission}`])
   }
 
@@ -121,10 +121,10 @@ const generateCsv = (forces: Forces): string => {
   return stringify(lines)
 }
 
-export default (events: AuditLog[]): string => {
+export default (date: Date, events: AuditLog[]): string => {
   const forces = calculateForces(events)
 
-  const csvResult = generateCsv(forces)
+  const csvResult = generateCsv(date, forces)
 
   return csvResult
 }
