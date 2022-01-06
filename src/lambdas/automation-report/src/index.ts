@@ -15,7 +15,7 @@ export default async (): Promise<AutomationReportResult> => {
   let previousMonth = new Date()
   previousMonth.setDate(1);
   previousMonth.setMonth(previousMonth.getMonth()-1);
-  console.log("Getting messages ...")
+  console.log("Getting messages from " + previousMonth.toLocaleString() + " ... ")
   const messagesForReport = await auditLogGateway.fetchAllByReceivedDate(previousMonth, new Date())
 
   if (isError(messagesForReport)) {
@@ -25,7 +25,7 @@ export default async (): Promise<AutomationReportResult> => {
   }
 
   console.log("Generating report ...")
-  const report = generateReport(messagesForReport)
+  const report = generateReport(previousMonth, messagesForReport)
   if(isError(report)){
     return {
       error: report.message
