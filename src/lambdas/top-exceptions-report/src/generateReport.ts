@@ -8,8 +8,16 @@ type ForcesExceptions = KeyValuePair<string, ForceExceptions>
 
 const getAttributesWithErrors = (messages: AuditLog[]): KeyValuePair<string, unknown>[] => {
   return messages
-    .filter((x) => x.topExceptionsReport?.events)
-    .map((x) => x.topExceptionsReport.events)
+    .filter((x) => x.events && x.events.some((e) =>'Error 1 Details' in e.attributes))
+    .map((x) => {
+      const events = x.events
+      for(let i=0; i< events.length; i+=1) {
+        if(x.automationReport?.forceOwner) {
+          events[i].attributes["Force Owner"] = x.automationReport.forceOwner
+        }
+      }
+      return events
+    })
     .reduce((allEvents, topExceptionsReportEvents) => allEvents.concat(topExceptionsReportEvents), [])
     .map((event) => event.attributes)
 }
