@@ -4,6 +4,10 @@ SHELL := /bin/bash
 # Install, Build
 ########################################
 
-.PHONY: build
-build:
-	scripts/install-all.sh && scripts/build-all.sh
+.PHONY: install
+install:
+	scripts/install-all.sh
+
+.PHONY:
+build: install
+	scripts/build-all.sh
