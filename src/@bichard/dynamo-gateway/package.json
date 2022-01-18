@@ -24,7 +24,8 @@
     "aws-sdk": "^2.870.0"
   },
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc -p tsconfig.json",
     "setup:env": "cd ../../../environment && ./setup.sh && cd -",
     "test": "npm run setup:env && ../../../scripts/test.sh",
     "test:ci": "npm run setup:env && ../../../scripts/test.sh ci",
