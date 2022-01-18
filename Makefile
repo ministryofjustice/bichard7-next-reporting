@@ -8,6 +8,10 @@ SHELL := /bin/bash
 install:
 	scripts/install-all.sh
 
-.PHONY:
-build: install
+.PHONY: build
+build:
 	scripts/build-all.sh
+
+.PHONY: test
+test:
+	scripts/test-all.sh
