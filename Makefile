@@ -4,6 +4,10 @@ SHELL := /bin/bash
 # Install, Build
 ########################################
 
+.PHONY: clean
+clean:
+	rm -rf src/@bichard/*/dist src/lambdas/*/build
+
 .PHONY: install
 install:
 	scripts/install-all.sh
