@@ -1,0 +1,101 @@
+version: 2.1
+
+commands:
+  restore_all_caches:
+    description: Restore all of the node modules directories
+    steps:
+      - run:
+        name: Hash package locks
+        command: bash ./scripts/hash-package-locks.sh
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "package-lock.json.md5" }}
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "src/lambdas/common-platform-report/package-lock.json.md5" }}
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "src/lambdas/automation-report/package-lock.json.md5" }}
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "src/lambdas/mps-report/package-lock.json.md5" }}
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "src/lambdas/top-exceptions-report/package-lock.json.md5" }}
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "src/@bichard/types/package-lock.json.md5" }}
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "src/@bichard/postgres-gateway/package-lock.json.md5" }}
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "src/@bichard/dynamo-gateway/package-lock.json.md5" }}
+      - restore_cache:
+          key: v1-npm-deps-{{ checksum "src/@bichard/forces/package-lock.json.md5" }}
+
+  save_all_caches:
+    description: Save all of the node_modules directories
+    steps:
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "package-lock.json.md5" }}
+          paths: node_modules
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "src/lambdas/common-platform-report/package-lock.json.md5" }}
+          paths: src/lambdas/common-platform-report/node_modules
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "src/lambdas/automation-report/package-lock.json.md5" }}
+          paths: src/lambdas/automation-report/node_modules
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "src/lambdas/mps-report/package-lock.json.md5" }}
+          paths: src/lambdas/mps-report/node_modules
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "src/lambdas/top-exceptions-report/package-lock.json.md5" }}
+          paths: src/lambdas/top-exceptions-report/node_modules
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "src/@bichard/types/package-lock.json.md5" }}
+          paths: src/@bichard/types/node_modules
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "src/@bichard/postgres-gateway/package-lock.json.md5" }}
+          paths: src/@bichard/postgres-gateway/node_modules
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "src/@bichard/dynamo-gateway/package-lock.json.md5" }}
+          paths: src/@bichard/dynamo-gateway/node_modules
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "src/@bichard/forces/package-lock.json.md5" }}
+          paths: src/@bichard/forces/node_modules
+
+  persist_build_dirs:
+    description: Save all of the build directories
+    steps:
+      - persist_to_workspace:
+          root: .
+          paths:
+            - src/@bichard/*/dist
+            - src/lambdas/*/build
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:16.13.1
+    resource_class: xlarge
+    working_directory: ~
+    steps:
+      - checkout
+      - restore_all_caches
+      - run: make install
+      - run: make build
+      - save_all_caches
+      - persist_build_dirs
+
+  test:
+    docker:
+      - image: cimg/node:16.13.1
+    working_directory: ~
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - restore_all_caches
+      - run: make test
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
