@@ -80,8 +80,22 @@ jobs:
       - save_all_caches
       - persist_build_dirs
 
+  test:
+    docker:
+      - image: cimg/node:16.13.1
+    working_directory: ~
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - restore_all_caches
+      - run: make test
+
 workflows:
   version: 2
   build-and-test:
     jobs:
       - build
+      - test:
+          requires:
+            - build
