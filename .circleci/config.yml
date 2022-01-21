@@ -70,6 +70,7 @@ jobs:
   build:
     docker:
       - image: cimg/node:16.13.1
+    resource_class: xlarge
     working_directory: ~
     steps:
       - checkout
