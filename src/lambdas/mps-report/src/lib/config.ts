@@ -1,4 +1,4 @@
-import DatabaseConfig from "@bichard/postgres-gateway/dist/PostgresGateway/DatabaseConfig"
+import { DatabaseConfig } from "@bichard/postgres-gateway"
 
 export interface UserServiceConfig {
   database: DatabaseConfig

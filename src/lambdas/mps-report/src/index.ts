@@ -1,5 +1,5 @@
 import { PostgresGateway } from "@bichard/postgres-gateway"
-import { isError } from "@bichard/types/dist/Result"
+import { isError } from "@bichard/types"
 import checkConnection from "./checkConnection"
 import generateReport from "./generateReport"
 import config from "./lib/config"
@@ -34,7 +34,7 @@ export default async (): Promise<MpsReportResult> => {
 
   console.log(" -!- Saving report ...")
   const saveResult = await saveReport(gateway, '01', report)
-  if(isError(saveResult)){
+  if (isError(saveResult)) {
     return {
       error: saveResult.message
     }

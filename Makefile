@@ -6,7 +6,7 @@ SHELL := /bin/bash
 
 .PHONY: clean
 clean:
-	rm -rf src/@bichard/*/dist src/lambdas/*/build
+	rm -rf src/@bichard/*/build src/lambdas/*/build
 
 .PHONY: install
 install:
@@ -29,10 +29,10 @@ automation-report: src/lambdas/automation-report/build
 common-platform-report: src/lambdas/common-platform-report/build
 mps-report: src/lambdas/mps-report/build
 top-exceptions-report: src/lambdas/top-exceptions-report/build
-dynamo-gateway: src/@bichard/dynamo-gateway/dist
-forces: src/@bichard/forces/dist
-postgres-gateway: src/@bichard/postgres-gateway/dist
-types: src/@bichard/types/dist
+dynamo-gateway: src/@bichard/dynamo-gateway/build
+forces: src/@bichard/forces/build
+postgres-gateway: src/@bichard/postgres-gateway/build
+types: src/@bichard/types/build
 
 define get_source_files
 	$(shell find $(1) \
@@ -76,14 +76,14 @@ src/lambdas/mps-report/build: $(POSTGRES_GATEWAY_SOURCE) $(TYPES_SOURCE) $(MPS_R
 src/lambdas/top-exceptions-report/build: $(DYNAMO_GATEWAY_SOURCE) $(FORCES_SOURCE) $(TYPES_SOURCE) $(TOP_EXCEPTIONS_REPORT_SOURCE)
 	cd src/lambdas/top-exceptions-report && npm run build
 
-src/@bichard/dynamo-gateway/dist: $(TYPES_SOURCE) $(DYNAMO_GATEWAY_SOURCE)
+src/@bichard/dynamo-gateway/build: $(TYPES_SOURCE) $(DYNAMO_GATEWAY_SOURCE)
 	cd src/@bichard/dynamo-gateway && npm run build
 
-src/@bichard/forces/dist: $(FORCES_SOURCE)
+src/@bichard/forces/build: $(FORCES_SOURCE)
 	cd src/@bichard/forces && npm run build
 
-src/@bichard/postgres-gateway/dist: $(TYPES_SOURCE) $(POSTGRES_GATEWAY_SOURCE)
+src/@bichard/postgres-gateway/build: $(TYPES_SOURCE) $(POSTGRES_GATEWAY_SOURCE)
 	cd src/@bichard/postgres-gateway && npm run build
 
-src/@bichard/types/dist: $(TYPES_SOURCE)
+src/@bichard/types/build: $(TYPES_SOURCE)
 	cd src/@bichard/types && npm run build

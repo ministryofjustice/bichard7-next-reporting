@@ -36,7 +36,7 @@ describe("sendEmail", () => {
       ],
       "from": "no-reply@mail.bichard7.service.justice.gov.uk",
       "subject": "Bichard 7 Common Platform Error Report",
-      "text": "Between the dates Fri Jan 28 2022 05:00:00 GMT+0000 (Greenwich Mean Time) and Fri Jan 28 2022 17:00:00 GMT+0000 (Greenwich Mean Time) there were 2 errors reported in Bichard",
+      "text": `Between the dates ${range.start} and ${range.end} there were 2 errors reported in Bichard`,
       "to": "moj-bichard7@madetech.cjsm.net",
     })
     expect(result).toBeTruthy()
