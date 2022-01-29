@@ -42,9 +42,9 @@ function updateCommonHeaders(
     row.triggers, // Triggers
     parseInt(row.error_status) === 1
       ? row.error_report
-          .split(", ")
-          .map((x) => x.split("|")[0])
-          .join(" ")
+        .split(", ")
+        .map((x) => x.split("|")[0])
+        .join(" ")
       : "none", // Errors
     getOffenceCode(offence.CriminalProsecutionReference), // Offence Code
     getText(offence.ActualOffenceStartDate.StartDate), // Offence Start Date
@@ -59,9 +59,10 @@ export default async (gateway: PostgresGateway) => {
   }
 
   let result = []
+  const now = new Date()
   result.push([
     `MPS Data Extract`,
-    `${new Date().toLocaleDateString()} ${new Date().toISOString().split("T")[1].split(".")[0]}`,
+    `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.toISOString().split("T")[1].split(".")[0]}`,
     ``,
     `NOT PROTECTIVELY MARKED`
   ])

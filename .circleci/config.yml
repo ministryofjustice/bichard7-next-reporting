@@ -68,12 +68,26 @@ commands:
 
 jobs:
     build-and-test:
-        docker:
-        - image: cimg/node:16.13.1
-        resource_class: xlarge
+        machine:
+            image: ubuntu-2004:202104-01
+            docker_layer_caching: true
+        resource_class: large
         working_directory: ~
         steps:
         - checkout
+        - add_ssh_keys:
+            fingerprints:
+                - c6:d2:90:a6:86:0d:a0:d7:c2:0b:6e:b2:81:c8:f4:17
+        - run:
+            command: ssh-add -D
+        - run:
+            command: ssh-add ~/.ssh/id_rsa_c6d290a6860da0d7c20b6eb281c8f417
+        - run:
+            name: Clone Bichard7 Next
+            command: git clone --depth 1 git@github.com:ministryofjustice/bichard7-next.git ~/bichard7-next
+        - run:
+            name: Run Postgres
+            command: cd ~/bichard7-next && make run-pg
         - restore_all_caches
         - run: make install
         - save_all_caches
