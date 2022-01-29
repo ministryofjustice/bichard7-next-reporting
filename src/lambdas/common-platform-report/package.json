@@ -19,8 +19,6 @@
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
-    "@bichard/testing-jest": "file:../../@bichard/testing-jest",
-    "@bichard/testing-lambda": "file:../../@bichard/testing-lambda",
     "@types/jest": "^27.4.0",
     "@types/nodemailer": "^6.4.4",
     "aws-sdk": "^2.1065.0",
