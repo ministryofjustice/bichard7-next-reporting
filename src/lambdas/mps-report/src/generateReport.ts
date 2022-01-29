@@ -62,7 +62,7 @@ export default async (gateway: PostgresGateway) => {
   const now = new Date()
   result.push([
     `MPS Data Extract`,
-    `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.toISOString().split("T")[1].split(".")[0]}`,
+    `${now.getUTCDate().toString().padStart(2, '0')}/${(now.getUTCMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.toISOString().split("T")[1].split(".")[0]}`,
     ``,
     `NOT PROTECTIVELY MARKED`
   ])
