@@ -7,12 +7,8 @@
     "clean": "rimraf build",
     "build": "npm run clean && webpack --config ./.webpack/webpack.prod.js",
     "build:dev": "npm run clean && webpack --config ./.webpack/webpack.dev.js",
-<<<<<<< HEAD
     "test": "jest",
     "test:integration": "jest --testPathPattern='integration'"
-=======
-    "test": "jest"
->>>>>>> ab85a2a (Improve the tests for the common platform report)
   },
   "dependencies": {
     "@bichard/dynamo-gateway": "file:../../@bichard/dynamo-gateway",

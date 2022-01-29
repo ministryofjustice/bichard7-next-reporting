@@ -1,5 +1,5 @@
 import { DynamoGateway } from "@bichard/dynamo-gateway"
-import { isError } from "@bichard/types/dist/Result"
+import { isError } from "@bichard/types"
 import config from "./config"
 import getEmailer from "./getEmailer"
 import SendReportUseCase from "./SendReportUseCase"
