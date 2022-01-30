@@ -19,8 +19,7 @@
     "csv-stringify": "^6.0.4",
     "jszip": "^3.7.1",
     "pg-promise": "^10.11.1",
-    "xml-js": "^1.6.11",
-    "xml2js": "^0.4.23"
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.13.12",
