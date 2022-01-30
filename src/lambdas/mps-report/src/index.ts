@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { PostgresGateway } from "@bichard/postgres-gateway"
 import { isError } from "@bichard/types"
 import checkConnection from "./checkConnection"
@@ -33,7 +34,7 @@ export default async (): Promise<MpsReportResult> => {
   console.log(" -+- Report generated ...")
 
   console.log(" -!- Saving report ...")
-  const saveResult = await saveReport(gateway, '01', report)
+  const saveResult = await saveReport(gateway, "01", report)
   if (isError(saveResult)) {
     return {
       error: saveResult.message

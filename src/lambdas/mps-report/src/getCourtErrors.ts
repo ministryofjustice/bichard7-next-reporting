@@ -1,6 +1,25 @@
-import { PostgresGateway } from "@bichard/postgres-gateway"
+import type { PostgresGateway } from "@bichard/postgres-gateway"
+import type { PromiseResult } from "@bichard/types"
 
-export default async (gateway: PostgresGateway) => {
+export type CourtError = {
+  court_date: Date
+  asn: string
+  annotated_msg: string
+  defendant_name: string
+  error_locked_by_id: string
+  trigger_locked_by_id: string
+  error_status: number
+  trigger_status: number
+  is_urgent: number
+  error_id: number
+  error_report: string
+  phase: number
+  triggers: string
+  force_code: string
+  court_code: string
+}
+
+export default (gateway: PostgresGateway): PromiseResult<CourtError[]> => {
   const query = `
     SELECT error.court_date, 
       error.asn, 
@@ -25,6 +44,5 @@ export default async (gateway: PostgresGateway) => {
     FOR READ ONLY
   `
 
-  const result = await gateway.getResult(query)
-  return result
+  return gateway.getResult<CourtError>(query)
 }

@@ -1,18 +1,18 @@
 import { findForceName } from "@bichard/forces"
 import type { AuditLog, KeyValuePair } from "@bichard/types"
-import getErrorName from "./errorNames/getErrorName"
 import { stringify } from "csv-stringify/sync"
+import getErrorName from "./errorNames/getErrorName"
 
 type ForceExceptions = KeyValuePair<string, number>
 type ForcesExceptions = KeyValuePair<string, ForceExceptions>
 
 const getAttributesWithErrors = (messages: AuditLog[]): KeyValuePair<string, unknown>[] => {
   return messages
-    .filter((x) => x.events && x.events.some((e) =>'Error 1 Details' in e.attributes))
+    .filter((x) => x.events && x.events.some((e) => "Error 1 Details" in e.attributes))
     .map((x) => {
-      const events = x.events
-      for(let i=0; i< events.length; i+=1) {
-        if(x.automationReport?.forceOwner) {
+      const { events } = x
+      for (let i = 0; i < events.length; i += 1) {
+        if (x.automationReport?.forceOwner) {
           events[i].attributes["Force Owner"] = x.automationReport.forceOwner
         }
       }
@@ -42,12 +42,12 @@ const calculateForcesExceptions = (allAttributes: KeyValuePair<string, unknown>[
 }
 
 const generateCsv = (forcesExceptions: ForcesExceptions): string => {
-  let rows = [["Force" ,"Exception" ,"Error Text" ,"Count"]]
+  const rows = [["Force", "Exception", "Error Text", "Count"]]
   Object.keys(forcesExceptions).forEach((forceName) => {
     const forceExceptions = forcesExceptions[forceName]
     Object.keys(forceExceptions).forEach((exceptionCode) => {
       const errorText = getErrorName(exceptionCode)
-      rows.push([`${forceName}`,`${exceptionCode}`,`${errorText}`,`${forceExceptions[exceptionCode]}`])
+      rows.push([`${forceName}`, `${exceptionCode}`, `${errorText}`, `${forceExceptions[exceptionCode]}`])
     })
   })
   return stringify(rows)

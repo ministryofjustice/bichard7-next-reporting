@@ -1,5 +1,6 @@
 import { DynamoDB } from "aws-sdk"
-import { DocumentClient, ExpressionAttributeNameMap } from "aws-sdk/clients/dynamodb"
+import type { ExpressionAttributeNameMap } from "aws-sdk/clients/dynamodb"
+import { DocumentClient } from "aws-sdk/clients/dynamodb"
 import type { KeyValuePair, PromiseResult } from "@bichard/types"
 import type DynamoDbConfig from "./DynamoDbConfig"
 import type FetchByIndexOptions from "./FetchByIndexOptions"
@@ -78,8 +79,8 @@ export default class DynamoGateway {
     if (rangeKeyBetween && rangeKeyName) {
       keyConditionExpression.push("#rangeKeyName BETWEEN :rangeKeyValue1 AND :rangeKeyValue2")
       expressionAttributeNames["#rangeKeyName"] = rangeKeyName
-      expressionAttributeValues[":rangeKeyValue1"] = rangeKeyBetween[0]
-      expressionAttributeValues[":rangeKeyValue2"] = rangeKeyBetween[1]
+      expressionAttributeValues[":rangeKeyValue1"] = rangeKeyBetween[0] // eslint-disable-line prefer-destructuring
+      expressionAttributeValues[":rangeKeyValue2"] = rangeKeyBetween[1] // eslint-disable-line prefer-destructuring
     }
 
     const queryOptions: DynamoDB.DocumentClient.QueryInput = {

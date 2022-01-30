@@ -1,10 +1,12 @@
-import { isError, PromiseResult } from "@bichard/types"
+/* eslint-disable no-console */
+import type { PromiseResult } from "@bichard/types"
+import { isError } from "@bichard/types"
 import config from "./config"
-import { TimeRange } from "./generateDates"
+import type { TimeRange } from "./generateDates"
 import generateReport from "./generateReport"
-import { ReportRecord } from "./getReportData"
-import Email from "./types/Email"
-import Emailer from "./types/Emailer"
+import type { ReportRecord } from "./getReportData"
+import type Email from "./types/Email"
+import type Emailer from "./types/Emailer"
 
 export default async (emailer: Emailer, range: TimeRange, records: ReportRecord[]): PromiseResult<boolean> => {
   const options: Email = {

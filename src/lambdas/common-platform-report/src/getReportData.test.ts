@@ -1,6 +1,7 @@
 import { DynamoGateway } from "@bichard/dynamo-gateway"
-process.env.AWS_URL = 'dummy'
-process.env.AWS_REGION = 'dummy'
+
+process.env.AWS_URL = "dummy"
+process.env.AWS_REGION = "dummy"
 process.env.AUDIT_LOG_TABLE_NAME = "bichard-7-production-audit-log"
 import config from "./config"
 import getReportData from "./getReportData"

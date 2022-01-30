@@ -87,3 +87,7 @@ src/@bichard/postgres-gateway/build: $(TYPES_SOURCE) $(POSTGRES_GATEWAY_SOURCE)
 
 src/@bichard/types/build: $(TYPES_SOURCE)
 	cd src/@bichard/types && npm run build
+
+.PHONY: lint
+lint:
+	npm run lint

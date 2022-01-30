@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { DynamoGateway } from "@bichard/dynamo-gateway"
 import { isError } from "@bichard/types"
 import config from "./config"

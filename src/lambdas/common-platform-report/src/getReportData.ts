@@ -1,8 +1,9 @@
-import { DynamoGateway } from "@bichard/dynamo-gateway"
-import { AuditLog, AuditLogEvent, isError, PromiseResult, Result } from "@bichard/types"
-import { DocumentClient } from "aws-sdk/clients/dynamodb"
+import type { DynamoGateway } from "@bichard/dynamo-gateway"
+import type { AuditLog, AuditLogEvent, PromiseResult, Result } from "@bichard/types"
+import { isError } from "@bichard/types"
+import type { DocumentClient } from "aws-sdk/clients/dynamodb"
 import config from "./config"
-import { TimeRange } from "./generateDates"
+import type { TimeRange } from "./generateDates"
 
 export type ReportRecord = {
   messageId: string

@@ -1,4 +1,4 @@
-import { DynamoDbConfig } from "../DynamoGateway"
+import type { DynamoDbConfig } from "../DynamoGateway"
 
 export default (): DynamoDbConfig => {
   const { AWS_URL, AWS_REGION, AUDIT_LOG_TABLE_NAME } = process.env

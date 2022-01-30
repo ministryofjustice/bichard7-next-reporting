@@ -1,4 +1,4 @@
-import HearingOutcomeCase from "./HearingOutcomeCase"
+import type HearingOutcomeCase from "./HearingOutcomeCase"
 
 export default interface AnnotatedPNCUpdateDataset {
   AnnotatedPNCUpdateDataset: {

@@ -75,6 +75,11 @@ jobs:
         working_directory: ~
         steps:
         - checkout
+        - restore_all_caches
+        - run: make install
+        - save_all_caches
+        - run: make build
+        - run: make lint
         - add_ssh_keys:
             fingerprints:
                 - c6:d2:90:a6:86:0d:a0:d7:c2:0b:6e:b2:81:c8:f4:17
@@ -88,10 +93,6 @@ jobs:
         - run:
             name: Run Postgres
             command: cd ~/bichard7-next && make run-pg
-        - restore_all_caches
-        - run: make install
-        - save_all_caches
-        - run: make build
         - run: make test
         - persist_build_dirs
 
