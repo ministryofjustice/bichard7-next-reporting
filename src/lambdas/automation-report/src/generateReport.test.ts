@@ -8167,7 +8167,7 @@ const messages = [
 ] as unknown as AuditLog[]
 
 it("should generate the correct report", () => {
-  const report = generateReport(new Date("2022-01-04T15:23:43.567Z") ,messages)
+  const report = generateReport(new Date("2022-01-04T15:23:43.567Z"), messages)
 
   expect(report).toMatchSnapshot()
 })

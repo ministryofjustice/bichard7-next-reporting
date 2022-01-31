@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 import nodemailer from "nodemailer"
-import Email from "./types/Email"
-import Emailer from "./types/Emailer"
+import type Email from "./types/Email"
+import type Emailer from "./types/Emailer"
 
 export interface SmtpConfig {
   host: string
@@ -33,7 +34,9 @@ const getConsoleMailer = (): Emailer => ({
       subject: email.subject,
       body: email.text
     })
-    email.attachments && email.attachments.forEach((a) => console.log(a))
+    if (email.attachments) {
+      email.attachments.forEach((a) => console.log(a))
+    }
   }
 })
 

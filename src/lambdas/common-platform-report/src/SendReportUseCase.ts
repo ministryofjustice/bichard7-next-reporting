@@ -1,6 +1,8 @@
-import { DynamoGateway } from "@bichard/dynamo-gateway"
-import { isError, PromiseResult } from "@bichard/types"
-import Emailer from "./types/Emailer"
+/* eslint-disable no-console */
+import type { DynamoGateway } from "@bichard/dynamo-gateway"
+import type { PromiseResult } from "@bichard/types"
+import { isError } from "@bichard/types"
+import type Emailer from "./types/Emailer"
 import generateDates from "./generateDates"
 import getReportData from "./getReportData"
 import sendEmail from "./sendEmail"

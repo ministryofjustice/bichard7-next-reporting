@@ -1,7 +1,7 @@
-import { DynamoGateway, IndexSearcher } from "../DynamoGateway"
-import type { DynamoDbConfig } from "../DynamoGateway"
 import type { AuditLog, PromiseResult } from "@bichard/types"
 import { isError } from "@bichard/types"
+import { DynamoGateway, IndexSearcher } from "../DynamoGateway"
+import type { DynamoDbConfig } from "../DynamoGateway"
 import type AuditLogDynamoGateway from "./AuditLogDynamoGateway"
 
 export default class AwsAuditLogDynamoGateway extends DynamoGateway implements AuditLogDynamoGateway {
@@ -13,7 +13,7 @@ export default class AwsAuditLogDynamoGateway extends DynamoGateway implements A
     super(config)
   }
 
-  async fetchAllByReceivedDate(receivedDateFrom: Date, receivedDateTo: Date): PromiseResult<AuditLog[]> {
+  fetchAllByReceivedDate(receivedDateFrom: Date, receivedDateTo: Date): PromiseResult<AuditLog[]> {
     let allItems: AuditLog[] = []
 
     const fetch = (lastMessage?: AuditLog): PromiseResult<AuditLog[] | undefined> =>

@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@bichard/types": "file:../types",
+    "pg": "^8.7.1",
     "pg-promise": "^10.11.1"
   }
 }

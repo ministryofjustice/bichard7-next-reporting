@@ -1,5 +1,6 @@
-import { createDynamoDbConfig, DynamoDbConfig } from "@bichard/dynamo-gateway"
-import { SmtpConfig } from "./getEmailer"
+import type { DynamoDbConfig } from "@bichard/dynamo-gateway"
+import { createDynamoDbConfig } from "@bichard/dynamo-gateway"
+import type { SmtpConfig } from "./getEmailer"
 
 export interface CommonPlatformReportConfig {
   smtp: SmtpConfig

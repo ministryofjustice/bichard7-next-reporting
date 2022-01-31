@@ -1,14 +1,17 @@
-import { PostgresGateway } from "@bichard/postgres-gateway"
-var JSZip = require("jszip");
+/* eslint-disable no-console */
+import type { PostgresGateway } from "@bichard/postgres-gateway"
+import { isError } from "@bichard/types"
+import type { PromiseResult } from "@bichard/types"
+import JSZip from "jszip"
 
-export default async (gateway: PostgresGateway, areaCode: string, report: string) => {
-    var zip = new JSZip();
+export default async (gateway: PostgresGateway, areaCode: string, report: string): PromiseResult<boolean> => {
+  const zip = new JSZip()
 
-    console.log(" -- Creating CSV file")
-    const todaysDate = (new Date()).toISOString().split(':')[0].replace('T','').replace(/-/g,'')
-    zip.file(`Area${areaCode}.${todaysDate}.csv`, report);
+  console.log(" -- Creating CSV file")
+  const todaysDate = new Date().toISOString().split(":")[0].replace("T", "").replace(/-/g, "")
+  zip.file(`Area${areaCode}.${todaysDate}.csv`, report)
 
-    const updateQuery = `
+  const updateQuery = `
 DO $$
     BEGIN
         IF EXISTS (SELECT 1 FROM br7own.work_allocation_report WHERE area_code = $1) THEN
@@ -29,17 +32,20 @@ DO $$
     END
 $$
     `
-    console.log(" -- Zipping file")
-    const zippedReport = await zip.generateAsync({
-        type : "nodebuffer",
-        compression: "DEFLATE",
-        compressionOptions: {
-            level: 5
-        }
-    })
+  console.log(" -- Zipping file")
+  const zippedReport = await zip.generateAsync({
+    type: "nodebuffer",
+    compression: "DEFLATE",
+    compressionOptions: {
+      level: 5
+    }
+  })
 
-    console.log(" -- Running query")
-    const result = await gateway.getResult(updateQuery, [areaCode, zippedReport])
+  console.log(" -- Running query")
+  const result = await gateway.execute(updateQuery, [areaCode, zippedReport])
 
+  if (isError(result)) {
     return result
+  }
+  return true
 }

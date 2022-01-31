@@ -1,6 +1,6 @@
-import ResultDuration from "./ResultDuration"
-import ResultQualifier from "./ResultQualifier"
-import XmlStringCell from "./XmlStringCell"
+import type ResultDuration from "./ResultDuration"
+import type ResultQualifier from "./ResultQualifier"
+import type XmlStringCell from "./XmlStringCell"
 
 export default interface OffenceResult {
   CJSresultCode: XmlStringCell

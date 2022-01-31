@@ -1,9 +1,9 @@
-import OffenceReason from "./OffenceReason"
-import OffenceResult from "./OffenceResult"
-import XmlStringCell from "./XmlStringCell"
+import type OffenceReason from "./OffenceReason"
+import type OffenceResult from "./OffenceResult"
+import type XmlStringCell from "./XmlStringCell"
 
-export function isMultiple<T>(obj: T | [T]): obj is [T]{
-    return (obj as [T]).length > 0
+export function isMultiple<T>(obj: T | [T]): obj is [T] {
+  return (obj as [T]).length > 0
 }
 
 export default interface OffenceDetails {

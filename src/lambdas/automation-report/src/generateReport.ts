@@ -93,7 +93,8 @@ const calculateForces = (messages: AuditLog[]): Forces => {
 
     if (automatedWithResubmissionDivider > 0) {
       force.automatedQuotient = (automated / automatedWithResubmissionDivider) * 100
-      force.automatedWithResubmissionQuotient = (automated + resubmittedAndResolved) * 100 / automatedWithResubmissionDivider
+      force.automatedWithResubmissionQuotient =
+        ((automated + resubmittedAndResolved) * 100) / automatedWithResubmissionDivider
     }
   })
 
@@ -101,13 +102,16 @@ const calculateForces = (messages: AuditLog[]): Forces => {
 }
 
 const generateCsv = (date: Date, forces: Forces): string => {
-  const lines = [[`Bichard 7 Resubmissions - ${date.toDateString().split(" ")[1]} ${date.getUTCFullYear()}`], ["Force", "FullAutomation", "Number of Resubmissions", "Automated inc. Resubmissions"]]
+  const lines = [
+    [`Bichard 7 Resubmissions - ${date.toDateString().split(" ")[1]} ${date.getUTCFullYear()}`],
+    ["Force", "FullAutomation", "Number of Resubmissions", "Automated inc. Resubmissions"]
+  ]
   const addLine = (forceName: string, name?: string) => {
     const force = forces[forceName]
     const automated = force.automatedQuotient.toFixed(2)
     const resubmittedAndResolved = force.resubmittedAndResolved.toFixed(0)
     const automatedWithResubmission = force.automatedWithResubmissionQuotient.toFixed(2)
-    lines.push([`${name || forceName}`,`${automated}%`,`${resubmittedAndResolved}`,`${automatedWithResubmission}%`])
+    lines.push([`${name || forceName}`, `${automated}%`, `${resubmittedAndResolved}`, `${automatedWithResubmission}%`])
   }
 
   Object.keys(forces)
@@ -117,7 +121,7 @@ const generateCsv = (date: Date, forces: Forces): string => {
 
   addLine("national", "National Average")
 
-  //return lines.join("\n")
+  // return lines.join("\n")
   return stringify(lines)
 }
 

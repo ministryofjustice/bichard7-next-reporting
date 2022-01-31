@@ -1,50 +1,38 @@
-import getCourtErrors from "./getCourtErrors"
-import { headers } from "../config/mpsHeadingKeys"
-import getOffenceCode from "./getOffenceCode"
-import AnnotatedHearingOutcome from "./types/AnnotatedHearingOutcome"
-import { PostgresGateway } from "@bichard/postgres-gateway"
+import type { PostgresGateway } from "@bichard/postgres-gateway"
+import type { PromiseResult } from "@bichard/types"
 import { isError } from "@bichard/types"
 import { xml2js } from "xml-js"
+import { stringify } from "csv-stringify/sync"
+import type { CourtError } from "./getCourtErrors"
+import getCourtErrors from "./getCourtErrors"
+import headers from "../config/mpsHeadingKeys"
+import getOffenceCode from "./getOffenceCode"
+import type AnnotatedHearingOutcome from "./types/AnnotatedHearingOutcome"
 import { getText } from "./types/XmlStringCell"
 import getResultQualifierCodes from "./getResultQualifierCodes"
 import getDurationAndAmount from "./getDurationAndAmount"
-import OffenceDetails, { isMultiple } from "./types/OffenceDetails"
-import OffenceResult from "./types/OffenceResult"
-import HearingOutcomeCase from "./types/HearingOutcomeCase"
-import AnnotatedPNCUpdateDataset from "./types/AnnotatedPNCUpdateDataset"
-import { stringify } from "csv-stringify/sync"
+import type OffenceDetails from "./types/OffenceDetails"
+import { isMultiple } from "./types/OffenceDetails"
+import type OffenceResult from "./types/OffenceResult"
+import type HearingOutcomeCase from "./types/HearingOutcomeCase"
+import type AnnotatedPNCUpdateDataset from "./types/AnnotatedPNCUpdateDataset"
 
-interface ReportRowResultQuery {
-  court_date: string
-  court_code: string
-  force_code: string
-  is_urgent: string
-  defendant_name: string
-  triggers: string
-  error_status: string
-  error_report: string
-}
-
-function updateCommonHeaders(
-  row: ReportRowResultQuery,
-  hearingOutcomeCase: HearingOutcomeCase,
-  offence: OffenceDetails
-) {
+function updateCommonHeaders(row: CourtError, hearingOutcomeCase: HearingOutcomeCase, offence: OffenceDetails) {
   return [
     new Date(row.court_date).toISOString().split("T")[0], // Hearing Date
     row.court_code, // Court
-    "1", //row.force_code, // Hard coded Force
-    parseInt(row.is_urgent) === 1 ? "Y" : "N", // Urgent
+    "1", // row.force_code, // Hard coded Force
+    row.is_urgent === 1 ? "Y" : "N", // Urgent
     row.defendant_name, // Defendant
     getText(hearingOutcomeCase.HearingDefendant.DefendantDetail?.BirthDate), // DoB
     getText(hearingOutcomeCase.HearingDefendant.ArrestSummonsNumber), // ASN
     getText(hearingOutcomeCase.PTIURN), // URN
     row.triggers, // Triggers
-    parseInt(row.error_status) === 1
+    row.error_status === 1
       ? row.error_report
-        .split(", ")
-        .map((x) => x.split("|")[0])
-        .join(" ")
+          .split(", ")
+          .map((x) => x.split("|")[0])
+          .join(" ")
       : "none", // Errors
     getOffenceCode(offence.CriminalProsecutionReference), // Offence Code
     getText(offence.ActualOffenceStartDate.StartDate), // Offence Start Date
@@ -52,23 +40,25 @@ function updateCommonHeaders(
   ]
 }
 
-export default async (gateway: PostgresGateway) => {
+export default async (gateway: PostgresGateway): PromiseResult<string> => {
   const rows = await getCourtErrors(gateway)
   if (isError(rows)) {
     return rows
   }
 
-  let result = []
+  const result = []
   const now = new Date()
   result.push([
     `MPS Data Extract`,
-    `${now.getUTCDate().toString().padStart(2, '0')}/${(now.getUTCMonth() + 1).toString().padStart(2, '0')}/${now.getFullYear()} ${now.toISOString().split("T")[1].split(".")[0]}`,
+    `${now.getUTCDate().toString().padStart(2, "0")}/${(now.getUTCMonth() + 1)
+      .toString()
+      .padStart(2, "0")}/${now.getFullYear()} ${now.toISOString().split("T")[1].split(".")[0]}`,
     ``,
     `NOT PROTECTIVELY MARKED`
   ])
   result.push([""])
   result.push(headers)
-  for (let i = 0; i < rows.length; i = i + 1) {
+  for (let i = 0; i < rows.length; i += 1) {
     const annotatedMsg: string = rows[i].annotated_msg.replace(/br7:/g, "").replace(/ds:/g, "")
     let annotatedMsgObject = (xml2js(annotatedMsg, { compact: true }) as AnnotatedPNCUpdateDataset)
       ?.AnnotatedPNCUpdateDataset?.PNCUpdateDataset
@@ -79,12 +69,12 @@ export default async (gateway: PostgresGateway) => {
     const hearingOutcomeCase = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case
 
     if (isMultiple<OffenceDetails>(offences)) {
-      for (let o = 0; o < offences.length; o = o + 1) {
+      for (let o = 0; o < offences.length; o += 1) {
         const newRow = updateCommonHeaders(rows[i], hearingOutcomeCase, offences[o])
 
         const results = offences[o].Result
         if (isMultiple<OffenceResult>(results)) {
-          for (let j = 0; j < 10; j = j + 1) {
+          for (let j = 0; j < 10; j += 1) {
             if (j >= results.length) {
               newRow.push("") // result code
               newRow.push("") // result duration/amount
@@ -105,7 +95,7 @@ export default async (gateway: PostgresGateway) => {
           newRow.push(getResultQualifierCodes(results.ResultQualifierVariable)) // result qualifier
 
           // fill in the remaining 9 groups of cells
-          for (let j = 0; j < 9; j = j + 1) {
+          for (let j = 0; j < 9; j += 1) {
             newRow.push("") // result code
             newRow.push("") // result duration/amount
             newRow.push("") // result text
@@ -122,7 +112,7 @@ export default async (gateway: PostgresGateway) => {
 
       const results = offences.Result
       if (isMultiple<OffenceResult>(results)) {
-        for (let j = 0; j < 10; j = j + 1) {
+        for (let j = 0; j < 10; j += 1) {
           if (j >= results.length) {
             newRow.push("") // result code
             newRow.push("") // result duration/amount
@@ -143,7 +133,7 @@ export default async (gateway: PostgresGateway) => {
         newRow.push(getResultQualifierCodes(results.ResultQualifierVariable)) // result qualifier
 
         // fill in the remaining 9 groups of cells
-        for (let j = 0; j < 9; j = j + 1) {
+        for (let j = 0; j < 9; j += 1) {
           newRow.push("") // result code
           newRow.push("") // result duration/amount
           newRow.push("") // result text

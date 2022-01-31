@@ -5,13 +5,13 @@ it("should return correct offence code when passing the expected type", () => {
     OffenceReason: {
       OffenceCode: {
         ActOrSource: {
-            _text: "SX"
+          _text: "SX"
         },
         Year: {
-            _text: "03"
+          _text: "03"
         },
         Reason: {
-            _text:"001"
+          _text: "001"
         }
       }
     }
