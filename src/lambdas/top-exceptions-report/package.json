@@ -7,7 +7,7 @@
     "clean": "rimraf build",
     "build": "npm run clean && webpack --config ./.webpack/webpack.prod.js",
     "build:dev": "npm run clean && webpack --config ./.webpack/webpack.dev.js",
-    "test": "jest --passWithNoTests",
+    "test": "jest",
     "test:unit": "jest",
     "test:unit:watch": "jest --watchAll"
   },
@@ -21,8 +21,6 @@
   "devDependencies": {
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-typescript": "^7.13.0",
-    "@bichard/testing-jest": "file:../../@bichard/testing-jest",
-    "@bichard/testing-lambda": "file:../../@bichard/testing-lambda",
     "@types/jest": "^26.0.21",
     "aws-sdk": "^2.942.0",
     "babel-loader": "^8.2.2",

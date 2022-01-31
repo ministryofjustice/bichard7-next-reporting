@@ -10,16 +10,20 @@ describe("GenerateReport", () => {
         gateway = new PostgresGateway(config.database)
     })
 
-    beforeEach(async ()=> {
-        await gateway.getResult(`DELETE FROM br7own.error_list`)
+    beforeEach(async () => {
+        await gateway.getResult(`TRUNCATE TABLE br7own.error_list CASCADE`)
         await gateway.getResult(`INSERT INTO br7own.error_list 
         VALUES(default, 'msgid1', 0, 1, 1, 0, 0, 0, 'System', null, 42, '1101ZD0100000448754K', 'B01EF01', '', 'UPD-MSG', '', current_timestamp, 'error-reason', 'trg-reason', 0, 0, current_date, 'ptiurn', 'court-name', null, current_timestamp, 'err-resolved-by', 'trg-resolved-by', null, null, 'defendant', '01ZD', null, 'court-ref', null, null, null, default, default)`)
+    })
+
+    afterAll(async () => {
+        await gateway.close()
     })
 
     it("should be able to retrieve an error from the DB", async () => {
         const result = await getCourtErrors(gateway)
         expect(result).not.toBe(undefined)
-        if(isError(result)) {
+        if (isError(result)) {
             expect(isError(result)).toBeFalsy
             return;
         }

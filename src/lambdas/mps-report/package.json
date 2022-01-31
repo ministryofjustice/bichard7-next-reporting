@@ -7,15 +7,14 @@
     "clean": "rimraf build",
     "build": "npm run clean && webpack --config ./.webpack/webpack.prod.js",
     "build:dev": "npm run clean && webpack --config ./.webpack/webpack.dev.js",
-    "test": "jest",
+    "test": "jest --runInBand",
     "test:unit": "jest --testPathIgnorePatterns='integration'",
     "test:unit:watch": "jest --watchAll --testPathIgnorePatterns='integration'",
-    "test:integration": "jest --testPathPattern='integration'"
+    "test:integration": "jest --testPathPattern=integration --runInBand"
   },
   "dependencies": {
     "@bichard/postgres-gateway": "file:../../@bichard/postgres-gateway",
     "@bichard/types": "file:../../@bichard/types",
-    "adm-zip": "^0.5.9",
     "aws-sdk": "^2.870.0",
     "csv-stringify": "^6.0.4",
     "dom-parser": "^0.1.6",
@@ -28,8 +27,6 @@
   "devDependencies": {
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-typescript": "^7.13.0",
-    "@bichard/testing-jest": "file:../../@bichard/testing-jest",
-    "@bichard/testing-lambda": "file:../../@bichard/testing-lambda",
     "@types/jest": "^26.0.21",
     "aws-sdk": "^2.942.0",
     "babel-loader": "^8.2.2",

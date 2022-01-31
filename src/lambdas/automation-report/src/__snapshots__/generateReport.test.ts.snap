@@ -1,8 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should generate the correct report 1`] = `
-"Force	Automated	Resubmitted	Automated including Resubmissions
-Essex	0.68182	2.00000	0.77273
-London MET	0.33333	0.00000	0.33333
-National Average	0.64000	2.00000	0.72000"
+"Bichard 7 Resubmissions - Jan 2022
+Force,FullAutomation,Number of Resubmissions,Automated inc. Resubmissions
+Essex,68.18%,2,77.27%
+London MET,33.33%,0,33.33%
+National Average,64.00%,2,72.00%
+"
 `;
