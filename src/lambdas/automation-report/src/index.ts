@@ -42,7 +42,7 @@ export default async (): Promise<AutomationReportResult> => {
 
   const params = {
     Bucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files", // pass your bucket name
-    Key: "automation.csv", // file will be saved as reporting/automation.csv
+    Key: "reports/AutomationRage.xls",
     Body: report
   }
 

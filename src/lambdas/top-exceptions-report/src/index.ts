@@ -42,7 +42,7 @@ export default async (): Promise<TopExceptionsReportResult> => {
 
   const params = {
     Bucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files", // pass your bucket name
-    Key: "topExceptions.csv", // file will be saved as reporting/automation.csv
+    Key: "reports/TopExceptions.xls",
     Body: report
   }
 
