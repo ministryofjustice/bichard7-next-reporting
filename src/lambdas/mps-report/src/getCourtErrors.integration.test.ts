@@ -22,7 +22,7 @@ describe("GenerateReport", () => {
 
   it("should be able to retrieve an error from the DB", async () => {
     const result = await getCourtErrors(gateway)
-    expect(result).not.toBeUndefined()
+    expect(result).toBeDefined()
     if (isError(result)) {
       throw result
     }
