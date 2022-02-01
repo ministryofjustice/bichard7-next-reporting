@@ -33,7 +33,7 @@ export default class PostgresGateway {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async execute(query: string, parameters?: any[]): PromiseResult<boolean> {
-    const result = await this.connection.none(query, parameters)
+    const result = await this.connection.manyOrNone(query, parameters)
     if (isError(result)) {
       return result
     }
