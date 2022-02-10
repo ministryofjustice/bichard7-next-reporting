@@ -5,4 +5,5 @@ export default interface AuditLogEventOptions {
   category: EventCategory
   eventType: string
   timestamp: Date
+  eventSourceQueueName?: string
 }

@@ -7,21 +7,25 @@
     "clean": "rimraf build",
     "build": "npm run clean && webpack --config ./.webpack/webpack.prod.js",
     "build:dev": "npm run clean && webpack --config ./.webpack/webpack.dev.js",
-    "test": "jest",
-    "test:integration": "jest --testPathPattern='integration'"
+    "test": "jest --runInBand",
+    "test:unit": "jest --testPathIgnorePatterns='e2e'",
+    "test:e2e": "jest --testPathPattern='e2e'"
   },
   "dependencies": {
     "@bichard/dynamo-gateway": "file:../../@bichard/dynamo-gateway",
     "@bichard/types": "file:../../@bichard/types",
+    "@aws-sdk/client-dynamodb": "^3.50.0",
     "csv-stringify": "^6.0.5",
-    "nodemailer": "^6.7.2"
+    "nodemailer": "^6.7.2",
+    "dynalite": "^3.2.2",
+    "smtp-tester": "^1.2.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.0",
     "@types/nodemailer": "^6.4.4",
-    "aws-sdk": "^2.1066.0",
+    "aws-sdk": "^2.1072.0",
     "babel-loader": "^8.2.3",
     "fork-ts-checker-webpack-plugin": "^7.0.0",
     "jest": "^27.4.7",
