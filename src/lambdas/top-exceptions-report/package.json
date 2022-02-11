@@ -8,17 +8,20 @@
     "build": "npm run clean && webpack --config ./.webpack/webpack.prod.js",
     "build:dev": "npm run clean && webpack --config ./.webpack/webpack.dev.js",
     "test": "jest",
-    "test:unit": "jest",
-    "test:unit:watch": "jest --watchAll"
+    "test:unit": "jest --testPathIgnorePatterns='e2e'",
+    "test:unit:watch": "jest --testPathIgnorePatterns='e2e' --watch",
+    "test:e2e": "jest --testPathPattern='e2e'"
   },
   "dependencies": {
     "@bichard/dynamo-gateway": "file:../../@bichard/dynamo-gateway",
     "@bichard/forces": "file:../../@bichard/forces",
     "@bichard/types": "file:../../@bichard/types",
+    "@bichard/testing": "file:../../@bichard/testing",
     "aws-sdk": "^2.1066.0",
     "csv-stringify": "^6.0.5"
   },
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.50.0",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-typescript": "^7.16.7",
     "@types/jest": "^27.4.0",

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { AwsAuditLogDynamoGateway, createDynamoDbConfig } from "@bichard/dynamo-gateway"
 import { isError } from "@bichard/types"
+import type { S3Config } from "@bichard/types"
 import * as AWS from "aws-sdk"
 import generateReport from "./generateReport"
 import getLastMonthDates from "./getLastMonthDates"
@@ -8,14 +9,6 @@ import getLastMonthDates from "./getLastMonthDates"
 interface AutomationReportResult {
   report?: string
   error?: string
-}
-
-type S3Config = {
-  endpoint: string
-  region: string
-  s3ForcePathStyle: boolean
-  accessKeyId?: string
-  secretAccessKey?: string
 }
 
 const dynamoConfig = createDynamoDbConfig()
@@ -50,7 +43,6 @@ export default async (): Promise<AutomationReportResult> => {
   if (process.env.S3_AWS_ACCESS_KEY_ID) {
     s3Config.accessKeyId = process.env.S3_AWS_ACCESS_KEY_ID
   }
-
   if (process.env.S3_AWS_ACCESS_KEY_ID) {
     s3Config.secretAccessKey = process.env.S3_AWS_ACCESS_KEY_ID
   }
