@@ -30,7 +30,7 @@ export default class MockDynamo {
         {
           IndexName: "receivedDateIndex",
           KeySchema: [
-            { AttributeName: "messageId", KeyType: "HASH" },
+            { AttributeName: "_", KeyType: "HASH" },
             { AttributeName: "receivedDate", KeyType: "RANGE" }
           ],
           Projection: { ProjectionType: "ALL" }

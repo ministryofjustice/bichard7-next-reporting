@@ -121,7 +121,6 @@ const generateCsv = (date: Date, forces: Forces): string => {
 
   addLine("national", "National Average")
 
-  // return lines.join("\n")
   return stringify(lines)
 }
 

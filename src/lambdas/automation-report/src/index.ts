@@ -3,21 +3,29 @@ import { AwsAuditLogDynamoGateway, createDynamoDbConfig } from "@bichard/dynamo-
 import { isError } from "@bichard/types"
 import * as AWS from "aws-sdk"
 import generateReport from "./generateReport"
+import getLastMonthDates from "./getLastMonthDates"
 
 interface AutomationReportResult {
   report?: string
   error?: string
 }
 
-const config = createDynamoDbConfig()
-const auditLogGateway = new AwsAuditLogDynamoGateway(config, config.AUDIT_LOG_TABLE_NAME)
+type S3Config = {
+  endpoint: string
+  region: string
+  s3ForcePathStyle: boolean
+  accessKeyId?: string
+  secretAccessKey?: string
+}
+
+const dynamoConfig = createDynamoDbConfig()
+const auditLogGateway = new AwsAuditLogDynamoGateway(dynamoConfig, dynamoConfig.AUDIT_LOG_TABLE_NAME)
 
 export default async (): Promise<AutomationReportResult> => {
-  const previousMonth = new Date()
-  previousMonth.setDate(1)
-  previousMonth.setMonth(previousMonth.getMonth() - 1)
-  console.log(`Getting messages from ${previousMonth.toLocaleString()} ... `)
-  const messagesForReport = await auditLogGateway.fetchAllByReceivedDate(previousMonth, new Date())
+  const dates = getLastMonthDates(new Date())
+
+  console.log(`Getting messages from ${dates.start.toLocaleString()} ... `)
+  const messagesForReport = await auditLogGateway.fetchAllByReceivedDate(dates.start, dates.end)
 
   if (isError(messagesForReport)) {
     return {
@@ -26,7 +34,7 @@ export default async (): Promise<AutomationReportResult> => {
   }
 
   console.log("Generating report ...")
-  const report = generateReport(previousMonth, messagesForReport)
+  const report = generateReport(dates.start, messagesForReport)
   if (isError(report)) {
     return {
       error: report.message
@@ -34,15 +42,24 @@ export default async (): Promise<AutomationReportResult> => {
   }
 
   console.log("Uploading to S3 ...")
-  const s3 = new AWS.S3({
-    endpoint: "https://s3.eu-west-2.amazonaws.com",
-    region: "eu-west-2",
+  const s3Config: S3Config = {
+    endpoint: process.env.S3_ENDPOINT ?? "https://s3.eu-west-2.amazonaws.com",
+    region: process.env.S3_REGION ?? "eu-west-2",
     s3ForcePathStyle: true
-  })
+  }
+  if (process.env.S3_AWS_ACCESS_KEY_ID) {
+    s3Config.accessKeyId = process.env.S3_AWS_ACCESS_KEY_ID
+  }
+
+  if (process.env.S3_AWS_ACCESS_KEY_ID) {
+    s3Config.secretAccessKey = process.env.S3_AWS_ACCESS_KEY_ID
+  }
+
+  const s3 = new AWS.S3(s3Config)
 
   const params = {
-    Bucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files", // pass your bucket name
-    Key: "reports/AutomationRage.xls",
+    Bucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files",
+    Key: "reports/AutomationRate.xls",
     Body: report
   }
 

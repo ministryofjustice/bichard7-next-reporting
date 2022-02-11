@@ -20,6 +20,8 @@ commands:
         - restore_cache:
             key: v1-npm-deps-{{ checksum "src/@bichard/types/package-lock.json.md5" }}
         - restore_cache:
+            key: v1-npm-deps-{{ checksum "src/@bichard/testing/package-lock.json.md5" }}
+        - restore_cache:
             key: v1-npm-deps-{{ checksum "src/@bichard/postgres-gateway/package-lock.json.md5" }}
         - restore_cache:
             key: v1-npm-deps-{{ checksum "src/@bichard/dynamo-gateway/package-lock.json.md5" }}
@@ -46,6 +48,9 @@ commands:
             paths: src/lambdas/top-exceptions-report/node_modules
         - save_cache:
             key: v1-npm-deps-{{ checksum "src/@bichard/types/package-lock.json.md5" }}
+            paths: src/@bichard/types/node_modules
+        - save_cache:
+            key: v1-npm-deps-{{ checksum "src/@bichard/testing/package-lock.json.md5" }}
             paths: src/@bichard/types/node_modules
         - save_cache:
             key: v1-npm-deps-{{ checksum "src/@bichard/postgres-gateway/package-lock.json.md5" }}
