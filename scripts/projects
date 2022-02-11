@@ -1,8 +1,9 @@
 src/@bichard/types
 src/@bichard/forces
+src/@bichard/testing
 src/@bichard/dynamo-gateway
 src/@bichard/postgres-gateway
+src/lambdas/common-platform-report
 src/lambdas/automation-report
 src/lambdas/top-exceptions-report
 src/lambdas/mps-report
-src/lambdas/common-platform-report

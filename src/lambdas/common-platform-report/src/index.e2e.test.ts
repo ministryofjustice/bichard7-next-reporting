@@ -13,7 +13,7 @@ import { AuditLogEvent, isError } from "@bichard/types"
 import type { TimeRange } from "./generateDates"
 import generateDates from "./generateDates"
 import MockMailServer from "../test/MockMailServer"
-import MockDynamo from "../test/MockDynamo"
+import { MockDynamo } from "@bichard/testing"
 
 describe("End to end testing the lambda", () => {
   let mailServer: MockMailServer

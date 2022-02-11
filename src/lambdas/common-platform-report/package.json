@@ -14,6 +14,7 @@
   "dependencies": {
     "@bichard/dynamo-gateway": "file:../../@bichard/dynamo-gateway",
     "@bichard/types": "file:../../@bichard/types",
+    "@bichard/testing": "file:../../@bichard/testing",
     "@aws-sdk/client-dynamodb": "^3.50.0",
     "csv-stringify": "^6.0.5",
     "nodemailer": "^6.7.2",

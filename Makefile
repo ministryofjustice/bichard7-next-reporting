@@ -13,7 +13,7 @@ install:
 	scripts/install-all.sh
 
 .PHONY: build
-build: types forces postgres-gateway dynamo-gateway \
+build: types forces testing postgres-gateway dynamo-gateway \
 	automation-report common-platform-report mps-report top-exceptions-report
 
 .PHONY: test
@@ -33,6 +33,7 @@ dynamo-gateway: src/@bichard/dynamo-gateway/build
 forces: src/@bichard/forces/build
 postgres-gateway: src/@bichard/postgres-gateway/build
 types: src/@bichard/types/build
+testing: src/@bichard/testing/build
 
 define get_source_files
 	$(shell find $(1) \
@@ -62,6 +63,7 @@ DYNAMO_GATEWAY_SOURCE := $(call get_source_files,src/@bichard/dynamo-gateway)
 FORCES_SOURCE := $(call get_source_files,src/@bichard/forces)
 POSTGRES_GATEWAY_SOURCE := $(call get_source_files,src/@bichard/postgres-gateway)
 TYPES_SOURCE := $(call get_source_files,src/@bichard/types)
+TESTING_SOURCE := $(call get_source_files,src/@bichard/testing)
 
 # How to build each package
 src/lambdas/automation-report/build: $(DYNAMO_GATEWAY_SOURCE) $(FORCES_SOURCE) $(TYPES_SOURCE) $(AUTOMATION_REPORT_SOURCE)
@@ -87,6 +89,9 @@ src/@bichard/postgres-gateway/build: $(TYPES_SOURCE) $(POSTGRES_GATEWAY_SOURCE)
 
 src/@bichard/types/build: $(TYPES_SOURCE)
 	cd src/@bichard/types && npm run build
+
+src/@bichard/testing/build: $(TESTING_SOURCE)
+	cd src/@bichard/testing && npm run build
 
 .PHONY: lint
 lint:
