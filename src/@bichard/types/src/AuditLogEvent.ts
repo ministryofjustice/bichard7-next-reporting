@@ -5,7 +5,7 @@ import type AuditLogEventOptions from "./AuditLogEventOptions"
 export default class AuditLogEvent {
   public readonly eventSource: string
 
-  public readonly eventSourceQueueName: string
+  public readonly eventSourceQueueName?: string
 
   public readonly category: EventCategory
 
@@ -20,6 +20,7 @@ export default class AuditLogEvent {
     this.category = options.category
     this.eventType = options.eventType
     this.timestamp = options.timestamp.toISOString()
+    this.eventSourceQueueName = options.eventSourceQueueName
   }
 
   addAttribute(name: string, value: unknown): void {
