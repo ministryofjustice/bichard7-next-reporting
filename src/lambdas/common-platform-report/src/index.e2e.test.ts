@@ -62,6 +62,7 @@ describe("End to end testing the lambda", () => {
     const log: AuditLog = {
       messageId: "message-1",
       caseId: "caseId-1",
+      systemId: "C00CommonPlatform",
       status: "Error",
       version: 1,
       externalCorrelationId: "externalId-1",

@@ -5,6 +5,7 @@ import type TopExceptionsReport from "./TopExceptionsReport"
 export default interface AuditLog {
   messageId: string
   caseId: string
+  systemId: string
   events: AuditLogEvent[]
   automationReport: AutomationReport
   topExceptionsReport: TopExceptionsReport

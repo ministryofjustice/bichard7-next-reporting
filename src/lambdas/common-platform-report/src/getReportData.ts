@@ -33,7 +33,7 @@ const filterDataFields = (r: AuditLog): ReportRecord => ({
   error: extractError(r.events)
 })
 
-const filterCommonPlatformResults = (r: AuditLog): boolean => !!r.messageXml.match(/C00CommonPlatform/i)
+const filterCommonPlatformResults = (r: AuditLog): boolean => /C00CommonPlatform/i.test(r.systemId)
 
 const filterCourtResultQueueFailures = (r: AuditLog): boolean =>
   r.events.some(
