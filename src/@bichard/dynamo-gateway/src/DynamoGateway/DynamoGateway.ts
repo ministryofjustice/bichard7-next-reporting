@@ -15,7 +15,9 @@ export default class DynamoGateway {
   constructor(config: DynamoDbConfig) {
     this.service = new DynamoDB({
       endpoint: config.DYNAMO_URL,
-      region: config.DYNAMO_REGION
+      region: config.DYNAMO_REGION,
+      accessKeyId: config.AWS_ACCESS_KEY_ID,
+      secretAccessKey: config.AWS_SECRET_ACCESS_KEY
     })
 
     this.client = new DocumentClient({
