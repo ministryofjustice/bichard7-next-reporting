@@ -20,6 +20,10 @@ describe("End to end testing the mps report", () => {
     connection.none('DELETE FROM br7own.work_allocation_report;')
   })
 
+  afterAll(() => {
+    connection.$pool.end()
+  })
+
   it("should put the correct report in Postgres", async () => {
     const result = await handler()
     expect(result).toEqual({

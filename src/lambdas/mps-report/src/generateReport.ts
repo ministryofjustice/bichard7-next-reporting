@@ -65,9 +65,12 @@ export default async (gateway: PostgresGateway): PromiseResult<string> => {
     if (!annotatedMsgObject) {
       annotatedMsgObject = xml2js(annotatedMsg, { compact: true }) as AnnotatedHearingOutcome
     }
-    const offences = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case.HearingDefendant.Offence
-    const hearingOutcomeCase = annotatedMsgObject.AnnotatedHearingOutcome.HearingOutcome.Case
+    const offences = annotatedMsgObject?.AnnotatedHearingOutcome?.HearingOutcome?.Case?.HearingDefendant?.Offence
+    const hearingOutcomeCase = annotatedMsgObject?.AnnotatedHearingOutcome?.HearingOutcome?.Case
 
+    if (!offences) {
+      continue
+    }
     if (isMultiple<OffenceDetails>(offences)) {
       for (let o = 0; o < offences.length; o += 1) {
         const newRow = updateCommonHeaders(rows[i], hearingOutcomeCase, offences[o])
