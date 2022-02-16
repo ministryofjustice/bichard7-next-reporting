@@ -8,9 +8,9 @@
     "build": "npm run clean && webpack --config ./.webpack/webpack.prod.js",
     "build:dev": "npm run clean && webpack --config ./.webpack/webpack.dev.js",
     "test": "jest --runInBand",
-    "test:unit": "jest --testPathIgnorePatterns='integration'",
-    "test:unit:watch": "jest --watchAll --testPathIgnorePatterns='integration'",
-    "test:integration": "jest --testPathPattern=integration --runInBand"
+    "test:unit": "jest --testPathIgnorePatterns='e2e'",
+    "test:unit:watch": "jest --testPathIgnorePatterns='e2e' --watch",
+    "test:e2e": "jest --testPathPattern='e2e'"
   },
   "dependencies": {
     "@bichard/postgres-gateway": "file:../../@bichard/postgres-gateway",
