@@ -6,7 +6,7 @@ import handler from "./index"
 import config from "./lib/config"
 
 describe("End to end testing the mps report", () => {
-    let connection: IDatabase<unknown, pg.IClient>
+  let connection: IDatabase<unknown, pg.IClient>
 
   beforeAll(async () => {
     connection = pgPromise({})({
@@ -17,7 +17,7 @@ describe("End to end testing the mps report", () => {
       password: config.database.password,
       ssl: config.database.ssl ? { rejectUnauthorized: false } : false
     })
-    connection.none("DELETE FROM br7own.work_allocation_report;")
+    await connection.none("DELETE FROM br7own.work_allocation_report;")
   })
 
   afterAll(() => {
