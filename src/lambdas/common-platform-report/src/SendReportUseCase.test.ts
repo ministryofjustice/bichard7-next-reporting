@@ -3,9 +3,9 @@ process.env.AWS_REGION = "dummy"
 process.env.AUDIT_LOG_TABLE_NAME = "bichard-7-production-audit-log"
 process.env.TIME_PERIOD_HOURS = "12"
 import type { DynamoGateway } from "@bichard/dynamo-gateway"
-import SendReportUseCase from "./SendReportUseCase"
 import dynamoResponse from "../test/mocks/dynamoResponse.json"
 import generateDates from "./generateDates"
+import SendReportUseCase from "./SendReportUseCase"
 
 describe("SendReportUseCase", () => {
   it("Should correctly generate the report and send the email", async () => {
@@ -15,7 +15,7 @@ describe("SendReportUseCase", () => {
       fetchByIndex: jest.fn(() => Promise.resolve(dynamoResponse))
     } as unknown as DynamoGateway
     const useCase = new SendReportUseCase(mockDynamoGateway, mockEmailer)
-    const result = await useCase.execute()
+    const result = await useCase.execute(new Date())
     expect(mockEmailer.sendMail).toHaveBeenCalledWith({
       attachments: [
         {

@@ -7,18 +7,15 @@ process.env.SMTP_HOST = "localhost"
 process.env.SMTP_PORT = "20002"
 process.env.SMTP_TLS = "false"
 import { AwsAuditLogDynamoGateway } from "@bichard/dynamo-gateway"
-import handler from "./index"
+import { MockDynamo } from "@bichard/testing"
 import type { AuditLog } from "@bichard/types"
 import { AuditLogEvent, isError } from "@bichard/types"
-import type { TimeRange } from "./generateDates"
-import generateDates from "./generateDates"
 import MockMailServer from "../test/MockMailServer"
-import { MockDynamo } from "@bichard/testing"
+import handler from "./index"
 
 describe("End to end testing the lambda", () => {
   let mailServer: MockMailServer
   let dynamoServer: MockDynamo
-  let dates: TimeRange
 
   beforeAll(async () => {
     dynamoServer = new MockDynamo()
@@ -32,7 +29,6 @@ describe("End to end testing the lambda", () => {
   })
 
   beforeEach(async () => {
-    dates = generateDates(new Date(), 12)
     await dynamoServer.setupTable()
 
     const config = {
@@ -47,14 +43,14 @@ describe("End to end testing the lambda", () => {
       eventType: "Court Result Input Queue Failure",
       eventSource: "foo",
       category: "error",
-      timestamp: new Date(),
+      timestamp: new Date("2022-01-05T16:01:00.000Z"),
       eventSourceQueueName: "COURT_RESULT_INPUT_QUEUE"
     })
     const event2 = new AuditLogEvent({
       eventType: "Message Rejected by MDB",
       eventSource: "foo",
       category: "error",
-      timestamp: new Date()
+      timestamp: new Date("2022-01-05T16:02:00.000Z")
     })
     event2.addAttribute("Exception Message", "Something crashed")
     event2.addAttribute("Exception Stack Trace", "Line 1\nLine 2\nLine 3")
@@ -66,8 +62,7 @@ describe("End to end testing the lambda", () => {
       status: "Error",
       version: 1,
       externalCorrelationId: "externalId-1",
-      receivedDate: dates.start.toISOString(),
-      messageXml: "<xml>C00CommonPlatform</xml>",
+      receivedDate: new Date("2022-01-03T16:02:00.000Z").toISOString(),
       events: [event1, event2],
       lastEventType: "Court Result Input Queue Failure",
       automationReport: { events: [] },
@@ -77,7 +72,7 @@ describe("End to end testing the lambda", () => {
   })
 
   it("should email the report", async () => {
-    await handler()
+    await handler(new Date("2022-01-05T17:01:00.000Z"))
     const mail = await mailServer.getEmail("moj-bichard7@madetech.cjsm.net")
     if (isError(mail)) {
       throw mail
@@ -87,7 +82,12 @@ describe("End to end testing the lambda", () => {
     expect(mail.attachments).toHaveLength(1)
     expect(mail.attachments[0].filename).toMatch(/bichard7-error-report-.*.csv/)
     expect(mail.attachments[0].content.toString().trim()).toBe(
-      `Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n${dates.start.toISOString()},message-1,externalId-1,caseId-1,Something crashed (Line 1)`
+      `Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n2022-01-03T16:02:00.000Z,message-1,externalId-1,caseId-1,Something crashed (Line 1)`
     )
+  })
+
+  it("should not email the report if is the wrong hour", async () => {
+    const result = await handler(new Date("2022-01-05T14:01:00.000Z"))
+    expect(result).toStrictEqual({ report: "Skipping sending report" })
   })
 })

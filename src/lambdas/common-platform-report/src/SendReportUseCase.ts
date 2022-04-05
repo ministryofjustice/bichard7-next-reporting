@@ -2,11 +2,11 @@
 import type { DynamoGateway } from "@bichard/dynamo-gateway"
 import type { PromiseResult } from "@bichard/types"
 import { isError } from "@bichard/types"
-import type Emailer from "./types/Emailer"
+import config from "./config"
 import generateDates from "./generateDates"
 import getReportData from "./getReportData"
 import sendEmail from "./sendEmail"
-import config from "./config"
+import type Emailer from "./types/Emailer"
 
 export default class SendReportUseCase {
   protected readonly dynamo: DynamoGateway
@@ -18,8 +18,8 @@ export default class SendReportUseCase {
     this.emailer = emailer
   }
 
-  async execute(): PromiseResult<boolean> {
-    const timeRange = generateDates(new Date(), config.timePeriodHours)
+  async execute(now: Date): PromiseResult<boolean> {
+    const timeRange = generateDates(now, config.timePeriodHours)
 
     const records = await getReportData(this.dynamo, timeRange)
     if (isError(records)) {
