@@ -14,5 +14,5 @@ export default interface AuditLog {
   version: number
   externalCorrelationId: string
   receivedDate: string
-  messageXml: string
+  messageXml?: string
 }
