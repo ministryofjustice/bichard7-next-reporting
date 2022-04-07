@@ -17,7 +17,12 @@ interface MpsReportResult {
   error?: string
 }
 
-export default async (now: Date = new Date()): Promise<MpsReportResult> => {
+export default async (event: unknown): Promise<MpsReportResult> => {
+  let now = new Date()
+  if (event !== undefined && event instanceof Date) {
+    // Enable us to override the date for end to end testing
+    now = event
+  }
   if (shouldSendReport(now, hoursToSend)) {
     console.log("Sending Common Platform error report")
     const result = await sendReportUseCase.execute(now)
