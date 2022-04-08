@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import { DynamoGateway } from "@bichard/dynamo-gateway"
 import { isError } from "@bichard/types"
 import config from "./config"
 import getEmailer from "./getEmailer"
@@ -7,8 +6,7 @@ import SendReportUseCase from "./SendReportUseCase"
 import shouldSendReport from "./shouldSendReport"
 
 const emailer = getEmailer(config.smtp)
-const gateway = new DynamoGateway(config.dynamo)
-const sendReportUseCase = new SendReportUseCase(gateway, emailer)
+const sendReportUseCase = new SendReportUseCase(emailer)
 
 const hoursToSend = [5, 17]
 

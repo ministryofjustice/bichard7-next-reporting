@@ -1,5 +1,5 @@
 import generateReport from "./generateReport"
-import type { ReportRecord } from "./getReportData"
+import type { ReportRecord } from "./getReportDataApi"
 
 const dummyRecords: ReportRecord[] = [
   {

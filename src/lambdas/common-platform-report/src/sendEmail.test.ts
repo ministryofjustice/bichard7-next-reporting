@@ -1,5 +1,5 @@
 import type { TimeRange } from "./generateDates"
-import type { ReportRecord } from "./getReportData"
+import type { ReportRecord } from "./getReportDataApi"
 
 process.env.AWS_URL = "dummy"
 process.env.AWS_REGION = "dummy"

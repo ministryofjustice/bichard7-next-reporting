@@ -1,13 +1,12 @@
-import type { DynamoDbConfig } from "@bichard/dynamo-gateway"
-import { createDynamoDbConfig } from "@bichard/dynamo-gateway"
 import type { SmtpConfig } from "./getEmailer"
 
 export interface CommonPlatformReportConfig {
   smtp: SmtpConfig
-  dynamo: DynamoDbConfig
   fromAddress: string
   toAddresses: string
   timePeriodHours: number
+  apiUrl: string
+  apiKey: string
 }
 
 const config: CommonPlatformReportConfig = {
@@ -19,10 +18,11 @@ const config: CommonPlatformReportConfig = {
     tls: process.env.SMTP_TLS === "true",
     debug: process.env.SMTP_DEBUG === "true"
   },
-  dynamo: createDynamoDbConfig(),
   fromAddress: process.env.FROM_ADDRESS ?? "no-reply@mail.bichard7.service.justice.gov.uk",
   timePeriodHours: parseInt(process.env.TIME_PERIOD_HOURS ?? "240", 10),
-  toAddresses: process.env.TO_ADDRESSES ?? "moj-bichard7@madetech.cjsm.net"
+  toAddresses: process.env.TO_ADDRESSES ?? "moj-bichard7@madetech.cjsm.net",
+  apiUrl: process.env.API_URL ?? "http://localhost:20001",
+  apiKey: process.env.API_KEY ?? "test-key"
 }
 
 export default config
