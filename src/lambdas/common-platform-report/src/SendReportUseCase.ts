@@ -3,7 +3,7 @@ import type { PromiseResult } from "@bichard/types"
 import { isError } from "@bichard/types"
 import config from "./config"
 import generateDates from "./generateDates"
-import getReportDataApi from "./getReportDataApi"
+import getReportData from "./getReportData"
 import sendEmail from "./sendEmail"
 import type Emailer from "./types/Emailer"
 
@@ -17,12 +17,10 @@ export default class SendReportUseCase {
   async execute(now: Date): PromiseResult<boolean> {
     const timeRange = generateDates(now, config.timePeriodHours)
 
-    const records = await getReportDataApi(timeRange)
+    const records = await getReportData(timeRange)
     if (isError(records)) {
       return records
     }
-    const apiRecords = await getReportDataApi(timeRange)
-    console.log(apiRecords)
 
     const emailResult = await sendEmail(this.emailer, timeRange, records)
 

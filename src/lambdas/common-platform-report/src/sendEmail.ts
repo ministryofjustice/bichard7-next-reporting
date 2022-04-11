@@ -4,7 +4,7 @@ import { isError } from "@bichard/types"
 import config from "./config"
 import type { TimeRange } from "./generateDates"
 import generateReport from "./generateReport"
-import type { ReportRecord } from "./getReportDataApi"
+import type { ReportRecord } from "./getReportData"
 import type Email from "./types/Email"
 import type Emailer from "./types/Emailer"
 

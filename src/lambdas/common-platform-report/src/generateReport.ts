@@ -1,5 +1,5 @@
 import { stringify } from "csv-stringify/sync"
-import type { ReportRecord } from "./getReportDataApi"
+import type { ReportRecord } from "./getReportData"
 
 export default (records: ReportRecord[]): string => {
   const report = [

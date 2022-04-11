@@ -2,7 +2,7 @@ process.env.AWS_URL = "dummy"
 process.env.AWS_REGION = "dummy"
 process.env.AUDIT_LOG_TABLE_NAME = "bichard-7-production-audit-log"
 import fetchReportRecords from "./fetchReportRecords"
-import getReportDataApi from "./getReportDataApi"
+import getReportData from "./getReportData"
 import { log } from "../test/mocks/fetchApiGatewayResponse"
 
 jest.mock("./fetchReportRecords")
@@ -12,7 +12,7 @@ const mockFetch = fetchReportRecords as jest.MockedFunction<typeof fetchReportRe
 const startTime = new Date("2022-01-03T04:00:00.000Z")
 const endTime = new Date("2022-01-04T05:00:00.000Z")
 
-describe("getReportDataApi", () => {
+describe("getReportData", () => {
   it("should extract the correct fields from the api gateway", async () => {
     let callNum = -1
     mockFetch.mockImplementation(() => {
@@ -20,7 +20,7 @@ describe("getReportDataApi", () => {
       return Promise.resolve(log.slice(callNum))
     })
 
-    const result = await getReportDataApi({ start: startTime, end: endTime })
+    const result = await getReportData({ start: startTime, end: endTime })
     expect(mockFetch).toHaveBeenCalledTimes(2)
     expect(result).toEqual([
       {
