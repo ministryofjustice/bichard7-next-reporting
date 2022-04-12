@@ -1,8 +1,7 @@
 /* eslint-disable no-console */
-const handler = require("./build/common-platform-report")
+import handler from "./src"
 
-handler
-  .default()
+handler(new Date())
   .then((succ) => console.log(succ))
   .catch((err) => {
     console.error("Error sending report", err.message)

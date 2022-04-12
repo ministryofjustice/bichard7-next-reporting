@@ -1,8 +1,7 @@
-import type { DynamoGateway } from "@bichard/dynamo-gateway"
-import type { AuditLog, AuditLogEvent, PromiseResult, Result } from "@bichard/types"
+import type { AuditLog, AuditLogEvent, PromiseResult } from "@bichard/types"
+import fetchReportRecords from "./fetchReportRecords"
 import { isError } from "@bichard/types"
-import type { DocumentClient } from "aws-sdk/clients/dynamodb"
-import config from "./config"
+
 import type { TimeRange } from "./generateDates"
 
 export type ReportRecord = {
@@ -11,6 +10,11 @@ export type ReportRecord = {
   receivedDate: string
   ptiurn: string
   error: string
+}
+
+export type ApiConfig = {
+  apiUrl: string
+  apiKey: string
 }
 
 const extractError = (events: AuditLogEvent[]): string => {
@@ -42,23 +46,35 @@ const filterCourtResultQueueFailures = (r: AuditLog): boolean =>
       event.eventType === "Court Result Input Queue Failure"
   )
 
-const processRecords = (records: AuditLog[]): ReportRecord[] =>
-  records.filter(filterCommonPlatformResults).filter(filterCourtResultQueueFailures).map(filterDataFields)
+const filterByDate = (time: TimeRange) => (record: AuditLog) =>
+  new Date(record.receivedDate) > time.start && new Date(record.receivedDate) < time.end
 
-export default async (dynamo: DynamoGateway, timeRange: TimeRange): PromiseResult<ReportRecord[]> => {
-  const result: Result<DocumentClient.QueryOutput> = await dynamo.fetchByIndex(config.dynamo.AUDIT_LOG_TABLE_NAME, {
-    indexName: "statusIndex",
-    attributeName: "status",
-    attributeValue: "Error",
-    rangeKeyName: "receivedDate",
-    rangeKeyBetween: [timeRange.start.toISOString(), timeRange.end.toISOString()],
-    pagination: { limit: 100 }
-  })
-  if (isError(result)) {
-    return result
+const processRecords = (records: AuditLog[], time: TimeRange): ReportRecord[] =>
+  records
+    .filter(filterCommonPlatformResults)
+    .filter(filterCourtResultQueueFailures)
+    .filter(filterByDate(time))
+    .map(filterDataFields)
+
+const recursivelyFetchRecords = async (time: TimeRange, records: AuditLog[]): Promise<AuditLog[]> => {
+  // we need to filter by date here in case there are records which don't fit our date range
+  // records are batched by 10
+  const lastRecord = records.filter(filterByDate(time)).slice(-1)[0]
+
+  if (lastRecord && new Date(lastRecord?.receivedDate) > time.start) {
+    return fetchReportRecords(lastRecord.messageId)
   }
-  if (!result.Items) {
-    return new Error("No items found")
+
+  const results = await fetchReportRecords()
+  return recursivelyFetchRecords(time, [...results])
+}
+
+export default async (timeRange: TimeRange): PromiseResult<ReportRecord[]> => {
+  console.log(timeRange)
+  const results = await recursivelyFetchRecords(timeRange, [])
+  if (isError(results)) {
+    console.log("ERROR: getting results from api gateway")
+    return results
   }
-  return processRecords(result.Items as AuditLog[])
+  return processRecords(results, timeRange)
 }

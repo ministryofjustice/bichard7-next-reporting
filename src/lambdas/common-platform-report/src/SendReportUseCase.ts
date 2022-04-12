@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import type { DynamoGateway } from "@bichard/dynamo-gateway"
 import type { PromiseResult } from "@bichard/types"
 import { isError } from "@bichard/types"
 import config from "./config"
@@ -9,19 +8,16 @@ import sendEmail from "./sendEmail"
 import type Emailer from "./types/Emailer"
 
 export default class SendReportUseCase {
-  protected readonly dynamo: DynamoGateway
-
   protected readonly emailer: Emailer
 
-  constructor(dynamo: DynamoGateway, emailer: Emailer) {
-    this.dynamo = dynamo
+  constructor(emailer: Emailer) {
     this.emailer = emailer
   }
 
   async execute(now: Date): PromiseResult<boolean> {
     const timeRange = generateDates(now, config.timePeriodHours)
 
-    const records = await getReportData(this.dynamo, timeRange)
+    const records = await getReportData(timeRange)
     if (isError(records)) {
       return records
     }
