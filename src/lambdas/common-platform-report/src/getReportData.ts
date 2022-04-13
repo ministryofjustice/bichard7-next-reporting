@@ -66,7 +66,7 @@ const recursivelyFetchRecords = async (time: TimeRange, records: AuditLog[]): Pr
   }
 
   const results = await fetchReportRecords()
-  return recursivelyFetchRecords(time, [...results])
+  return recursivelyFetchRecords(time, results)
 }
 
 export default async (timeRange: TimeRange): PromiseResult<ReportRecord[]> => {
