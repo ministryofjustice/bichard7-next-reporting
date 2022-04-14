@@ -61,11 +61,19 @@ const recursivelyFetchRecords = async (time: TimeRange, records: AuditLog[]): Pr
   // records are batched by 10
   const lastRecord = records.filter(filterByDate(time)).slice(-1)[0]
 
+  // fetch records based on last record with matching date
   if (lastRecord && new Date(lastRecord?.receivedDate) > time.start) {
     return fetchReportRecords(lastRecord.messageId)
   }
 
-  const results = await fetchReportRecords()
+  // use the previous receivedDate to paginate and fetch more
+  const results = await fetchReportRecords(records.length ? records.slice(-1)[0].messageId : undefined)
+
+  // if there are no errors in the specified time period
+  if (!results.length && records.length) {
+    return results
+  }
+
   return recursivelyFetchRecords(time, results)
 }
 

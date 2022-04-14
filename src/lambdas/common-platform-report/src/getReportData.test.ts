@@ -13,6 +13,10 @@ const startTime = new Date("2022-01-03T04:00:00.000Z")
 const endTime = new Date("2022-01-04T05:00:00.000Z")
 
 describe("getReportData", () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   it("should extract the correct fields from the api gateway", async () => {
     let callNum = -1
     mockFetch.mockImplementation(() => {
@@ -31,5 +35,20 @@ describe("getReportData", () => {
         receivedDate: "2022-01-04T04:00:00.000Z"
       }
     ])
+  })
+
+  it("should handle when there are no messages for the specified date range", async () => {
+    let callNum = -1
+    mockFetch.mockImplementation(() => {
+      callNum += 1
+      return Promise.resolve(log.slice(callNum))
+    })
+
+    const startDate = new Date()
+    startDate.setHours(startDate.getHours() - 1)
+
+    const result = await getReportData({ start: startDate, end: new Date() })
+    expect(mockFetch).toHaveBeenCalledTimes(4)
+    expect(result).toEqual([])
   })
 })
