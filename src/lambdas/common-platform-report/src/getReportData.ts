@@ -1,7 +1,6 @@
 import type { AuditLog, AuditLogEvent, PromiseResult } from "@bichard/types"
-import fetchReportRecords from "./fetchReportRecords"
 import { isError } from "@bichard/types"
-
+import fetchReportRecords from "./fetchReportRecords"
 import type { TimeRange } from "./generateDates"
 
 export type ReportRecord = {
@@ -56,25 +55,33 @@ const processRecords = (records: AuditLog[], time: TimeRange): ReportRecord[] =>
     .filter(filterByDate(time))
     .map(filterDataFields)
 
-const recursivelyFetchRecords = async (time: TimeRange, records: AuditLog[]): Promise<AuditLog[]> => {
-  // we need to filter by date here in case there are records which don't fit our date range
-  // records are batched by 10
-  const lastRecord = records.filter(filterByDate(time)).slice(-1)[0]
+const recursivelyFetchRecords = async (
+  time: TimeRange,
+  records: AuditLog[],
+  paginateId?: string
+): Promise<AuditLog[]> => {
+  const results = await fetchReportRecords(paginateId)
 
-  // fetch records based on last record with matching date
-  if (lastRecord && new Date(lastRecord?.receivedDate) > time.start) {
-    return fetchReportRecords(lastRecord.messageId)
-  }
-
-  // use the previous receivedDate to paginate and fetch more
-  const results = await fetchReportRecords(records.length ? records.slice(-1)[0].messageId : undefined)
-
-  // if there are no errors in the specified time period
-  if (!results.length && records.length) {
+  if (isError(results)) {
     return results
   }
 
-  return recursivelyFetchRecords(time, results)
+  const lastRecord = results?.slice(-1)[0]
+
+  const matches = results?.filter(filterByDate(time))
+
+  const recordOutsideTimeRange = new Date(lastRecord?.receivedDate) < time.start
+
+  const isOldestRecordInDb = lastRecord?.messageId === paginateId
+
+  const noMoreMatches = !matches.length && records?.length
+
+  if (noMoreMatches || recordOutsideTimeRange || isOldestRecordInDb) {
+    //bail out conditions
+    return [...matches, ...records]
+  }
+
+  return recursivelyFetchRecords(time, [...matches, ...records], lastRecord?.messageId) // paginate and fetch more
 }
 
 export default async (timeRange: TimeRange): PromiseResult<ReportRecord[]> => {

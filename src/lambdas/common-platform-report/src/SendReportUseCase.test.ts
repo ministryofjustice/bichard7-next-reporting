@@ -23,7 +23,11 @@ describe("SendReportUseCase", () => {
     const dates = generateDates(new Date(), 12)
 
     dates.end.setHours(dates.end.getHours() - 1) // get a valid date to give to the log message
-    const mockContent = `Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n${dates.end.toISOString()},${mockMessageId},${mockCorrelationId},${mockPTIURN},${mockExceptionMessage} (${mockExceptionStackTrace})\n`
+    const mockContent =
+      "Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n" +
+      `${dates.end.toISOString()},${mockMessageId},${mockCorrelationId},${mockPTIURN},${mockExceptionMessage} (${mockExceptionStackTrace})\n`.repeat(
+        2
+      )
 
     event3.addAttribute("Exception Message", mockExceptionMessage)
     event3.addAttribute("Exception Stack Trace", mockExceptionStackTrace)
@@ -60,7 +64,7 @@ describe("SendReportUseCase", () => {
       ],
       from: "no-reply@mail.bichard7.service.justice.gov.uk",
       subject: "Bichard 7 Common Platform Error Report",
-      text: `Between the dates ${dates.start} and ${dates.end} there were 1 errors reported in Bichard`,
+      text: `Between the dates ${dates.start} and ${dates.end} there were 2 errors reported in Bichard`,
       to: "moj-bichard7@madetech.cjsm.net"
     })
     expect(result).toBeTruthy()
