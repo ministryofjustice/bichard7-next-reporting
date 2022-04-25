@@ -19,7 +19,7 @@ const config: CommonPlatformReportConfig = {
     debug: process.env.SMTP_DEBUG === "true"
   },
   fromAddress: process.env.FROM_ADDRESS ?? "no-reply@mail.bichard7.service.justice.gov.uk",
-  timePeriodHours: parseInt(process.env.TIME_PERIOD_HOURS ?? "240", 10),
+  timePeriodHours: parseInt(process.env.TIME_PERIOD_HOURS ?? "12", 10),
   toAddresses: process.env.TO_ADDRESSES ?? "moj-bichard7@madetech.cjsm.net",
   apiUrl: process.env.API_URL ?? "http://localhost:20001",
   apiKey: process.env.API_KEY ?? "test-key"

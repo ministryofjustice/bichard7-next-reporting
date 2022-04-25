@@ -40,7 +40,7 @@ describe("End to end testing the lambda", () => {
   })
 
   it("should email the report", async () => {
-    await handler(new Date("2022-01-03T17:04:00.000Z"))
+    await handler(new Date("2022-01-04T05:00:00.000Z"))
     const mail = await mailServer.getEmail("moj-bichard7@madetech.cjsm.net")
     if (isError(mail)) {
       throw mail
@@ -50,7 +50,7 @@ describe("End to end testing the lambda", () => {
     expect(mail.attachments).toHaveLength(1)
     expect(mail.attachments[0].filename).toMatch(/bichard7-error-report-.*.csv/)
     expect(mail.attachments[0].content.toString().trim()).toBe(
-      `Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n2022-01-02T04:00:00.000Z,message-1,externalId-1,caseId-1,Something crashed (Line 1)`
+      `Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n2022-01-04T04:00:00.000Z,message-2,externalId-2,caseId-2,Something crashed (Line 1)`
     )
   })
 
