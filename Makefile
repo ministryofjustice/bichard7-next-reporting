@@ -32,7 +32,7 @@ top-exceptions-report: src/lambdas/top-exceptions-report/build
 dynamo-gateway: src/@bichard/dynamo-gateway/build
 forces: src/@bichard/forces/build
 postgres-gateway: src/@bichard/postgres-gateway/build
-csv-to-xls: src/@bichard/csv-to-xls
+csv-to-xls: src/@bichard/csv-to-xls/build
 types: src/@bichard/types/build
 testing: src/@bichard/testing/build
 
