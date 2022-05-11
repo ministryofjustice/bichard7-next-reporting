@@ -20,7 +20,7 @@ const mockResponse = (status: number, body: string) => (ctx: any) => {
 
 describe("End to end testing the lambda", () => {
   let mailServer: MockMailServer
-  let apiGatewayServer: any
+  let apiGatewayServer: MockServer
 
   beforeAll(async () => {
     apiGatewayServer = new MockServer({ port: 20001 })
