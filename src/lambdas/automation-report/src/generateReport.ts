@@ -1,6 +1,7 @@
 import { findForceName } from "@bichard/forces"
 import type { AuditLog, AuditLogEvent, KeyValuePair } from "@bichard/types"
 import { stringify } from "csv-stringify/sync"
+import convertCsvToXls from "@bichard/csv-to-xls"
 
 interface Force {
   exceptions: number
@@ -101,7 +102,7 @@ const calculateForces = (messages: AuditLog[]): Forces => {
   return forces
 }
 
-const generateCsv = (date: Date, forces: Forces): string => {
+const generateCsvLines = (date: Date, forces: Forces): string[][] => {
   const lines = [
     [`Bichard 7 Resubmissions - ${date.toDateString().split(" ")[1]} ${date.getUTCFullYear()}`],
     ["Force", "FullAutomation", "Number of Resubmissions", "Automated inc. Resubmissions"]
@@ -121,13 +122,16 @@ const generateCsv = (date: Date, forces: Forces): string => {
 
   addLine("national", "National Average")
 
-  return stringify(lines)
+  return lines
 }
 
-export default (date: Date, events: AuditLog[]): string => {
+export default (date: Date, events: AuditLog[]): Buffer => {
   const forces = calculateForces(events)
 
-  const csvResult = generateCsv(date, forces)
+  const csvLinesResult = generateCsvLines(date, forces)
 
-  return csvResult
+  const title = csvLinesResult.shift()?.[0]
+  const xlsResult = convertCsvToXls(stringify(csvLinesResult), title)
+
+  return xlsResult
 }

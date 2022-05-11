@@ -13,6 +13,19 @@ interface AutomationReportResult {
 
 const dynamoConfig = createDynamoDbConfig()
 const auditLogGateway = new AwsAuditLogDynamoGateway(dynamoConfig, dynamoConfig.AUDIT_LOG_TABLE_NAME)
+const s3Config: S3Config = {
+  endpoint: process.env.S3_ENDPOINT ?? "https://s3.eu-west-2.amazonaws.com",
+  region: process.env.S3_REGION ?? "eu-west-2",
+  s3ForcePathStyle: true
+}
+if (process.env.S3_AWS_ACCESS_KEY_ID) {
+  s3Config.accessKeyId = process.env.S3_AWS_ACCESS_KEY_ID
+}
+if (process.env.S3_AWS_ACCESS_KEY_ID) {
+  s3Config.secretAccessKey = process.env.S3_AWS_ACCESS_KEY_ID
+}
+
+const s3 = new AWS.S3(s3Config)
 
 export default async (): Promise<AutomationReportResult> => {
   const dates = getLastMonthDates(new Date())
@@ -35,20 +48,6 @@ export default async (): Promise<AutomationReportResult> => {
   }
 
   console.log("Uploading to S3 ...")
-  const s3Config: S3Config = {
-    endpoint: process.env.S3_ENDPOINT ?? "https://s3.eu-west-2.amazonaws.com",
-    region: process.env.S3_REGION ?? "eu-west-2",
-    s3ForcePathStyle: true
-  }
-  if (process.env.S3_AWS_ACCESS_KEY_ID) {
-    s3Config.accessKeyId = process.env.S3_AWS_ACCESS_KEY_ID
-  }
-  if (process.env.S3_AWS_ACCESS_KEY_ID) {
-    s3Config.secretAccessKey = process.env.S3_AWS_ACCESS_KEY_ID
-  }
-
-  const s3 = new AWS.S3(s3Config)
-
   const params = {
     Bucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files",
     Key: "reports/AutomationRate.xls",
@@ -65,7 +64,7 @@ export default async (): Promise<AutomationReportResult> => {
     throw result as Error
   }
 
-  return Promise.resolve({
+  return {
     report: "Upload succeeded"
-  })
+  }
 }
