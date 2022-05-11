@@ -2,6 +2,7 @@ import { findForceName } from "@bichard/forces"
 import type { AuditLog, KeyValuePair } from "@bichard/types"
 import { stringify } from "csv-stringify/sync"
 import getErrorName from "./errorNames/getErrorName"
+import convertCsvToXls from "@bichard/csv-to-xls"
 
 type ForceExceptions = KeyValuePair<string, number>
 type ForcesExceptions = KeyValuePair<string, ForceExceptions>
@@ -53,12 +54,14 @@ const generateCsv = (forcesExceptions: ForcesExceptions): string => {
   return stringify(rows)
 }
 
-export default (messages: AuditLog[]): string => {
+export default (messages: AuditLog[]): Buffer => {
   const attributesWithErrors = getAttributesWithErrors(messages)
 
   const forcesExceptions = calculateForcesExceptions(attributesWithErrors)
 
   const csvResult = generateCsv(forcesExceptions)
 
-  return csvResult
+  const xlsResult = convertCsvToXls(csvResult)
+
+  return xlsResult
 }
