@@ -27,6 +27,8 @@ commands:
             key: v1-npm-deps-{{ checksum "src/@bichard/dynamo-gateway/package-lock.json.md5" }}
         - restore_cache:
             key: v1-npm-deps-{{ checksum "src/@bichard/forces/package-lock.json.md5" }}
+        - restore_cache:
+            key: v1-npm-deps-{{ checksum "src/@bichard/csv-to-xls/package-lock.json.md5" }}
 
     save_all_caches:
         description: Save all of the node_modules directories
@@ -61,6 +63,9 @@ commands:
         - save_cache:
             key: v1-npm-deps-{{ checksum "src/@bichard/forces/package-lock.json.md5" }}
             paths: src/@bichard/forces/node_modules
+        - save_cache:
+            key: v1-npm-deps-{{ checksum "src/@bichard/csv-to-xls/package-lock.json.md5" }}
+            paths: src/@bichard/csv-to-xls/node_modules
 
     persist_build_dirs:
         description: Save all of the build directories

@@ -3,6 +3,7 @@ src/@bichard/forces
 src/@bichard/testing
 src/@bichard/dynamo-gateway
 src/@bichard/postgres-gateway
+src/@bichard/csv-to-xls
 src/lambdas/common-platform-report
 src/lambdas/automation-report
 src/lambdas/top-exceptions-report

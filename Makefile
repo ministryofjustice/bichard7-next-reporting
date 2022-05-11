@@ -13,7 +13,7 @@ install:
 	scripts/install-all.sh
 
 .PHONY: build
-build: types forces testing postgres-gateway dynamo-gateway \
+build: types forces testing postgres-gateway dynamo-gateway csv-to-xls \
 	automation-report common-platform-report mps-report top-exceptions-report
 
 .PHONY: test
@@ -32,6 +32,7 @@ top-exceptions-report: src/lambdas/top-exceptions-report/build
 dynamo-gateway: src/@bichard/dynamo-gateway/build
 forces: src/@bichard/forces/build
 postgres-gateway: src/@bichard/postgres-gateway/build
+csv-to-xls: src/@bichard/csv-to-xls
 types: src/@bichard/types/build
 testing: src/@bichard/testing/build
 
@@ -62,6 +63,7 @@ TOP_EXCEPTIONS_REPORT_SOURCE := $(call get_source_files,src/lambdas/top-exceptio
 DYNAMO_GATEWAY_SOURCE := $(call get_source_files,src/@bichard/dynamo-gateway)
 FORCES_SOURCE := $(call get_source_files,src/@bichard/forces)
 POSTGRES_GATEWAY_SOURCE := $(call get_source_files,src/@bichard/postgres-gateway)
+CSV_TO_XLS_SOURCE := $(call get_source_files,src/@bichard/csv-to-xls)
 TYPES_SOURCE := $(call get_source_files,src/@bichard/types)
 TESTING_SOURCE := $(call get_source_files,src/@bichard/testing)
 
@@ -86,6 +88,9 @@ src/@bichard/forces/build: $(FORCES_SOURCE)
 
 src/@bichard/postgres-gateway/build: $(TYPES_SOURCE) $(POSTGRES_GATEWAY_SOURCE)
 	cd src/@bichard/postgres-gateway && npm run build
+
+src/@bichard/csv-to-xls/build: $(CSV_TO_XLS_SOURCE)
+	cd src/@bichard/csv-to-xls && npm run build
 
 src/@bichard/types/build: $(TYPES_SOURCE)
 	cd src/@bichard/types && npm run build
