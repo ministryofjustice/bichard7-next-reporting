@@ -59,7 +59,7 @@ describe("End to end testing the automation report", () => {
       report: "Upload succeeded"
     })
     const client = new S3Client({ region, endpoint, credentials: { accessKeyId, secretAccessKey } })
-    const command = new HeadObjectCommand({ Bucket: reportsBucket, Key: "reports/TopExceptions.xls" })
+    const command = new HeadObjectCommand({ Bucket: reportsBucket, Key: "reports/TopExceptions.xlsx" })
     const response = await client.send(command)
     expect(response).toBeDefined()
     expect(response.ContentLength).toBeGreaterThan(300)
