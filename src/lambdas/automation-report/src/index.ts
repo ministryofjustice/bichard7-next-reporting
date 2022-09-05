@@ -50,7 +50,7 @@ export default async (): Promise<AutomationReportResult> => {
   console.log("Uploading to S3 ...")
   const params = {
     Bucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files",
-    Key: "reports/AutomationRate.xls",
+    Key: "reports/AutomationRate.xlsx",
     Body: report
   }
 

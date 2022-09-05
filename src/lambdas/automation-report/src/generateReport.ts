@@ -1,7 +1,7 @@
 import { findForceName } from "@bichard/forces"
 import type { AuditLog, AuditLogEvent, KeyValuePair } from "@bichard/types"
 import { stringify } from "csv-stringify/sync"
-import convertCsvToXls from "@bichard/csv-to-xls"
+import convertCsvToXlsx from "@bichard/csv-to-xlsx"
 
 interface Force {
   exceptions: number
@@ -131,7 +131,7 @@ export default (date: Date, events: AuditLog[]): Buffer => {
   const csvLinesResult = generateCsvLines(date, forces)
 
   const title = csvLinesResult.shift()?.[0]
-  const xlsResult = convertCsvToXls(stringify(csvLinesResult), title)
+  const xlsxResult = convertCsvToXlsx(stringify(csvLinesResult), title)
 
-  return xlsResult
+  return xlsxResult
 }

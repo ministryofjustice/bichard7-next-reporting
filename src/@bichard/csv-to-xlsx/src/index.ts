@@ -53,7 +53,7 @@ const calculateColumnWidths = (records: KeyValuePair<string, string>[]): { width
   return columnWidths.map((width) => ({ width }))
 }
 
-const convertCsvToXls = (csvData: string, title?: string): Buffer => {
+const convertCsvToXlsx = (csvData: string, title?: string): Buffer => {
   const records = csv(csvData, csvOptions) as KeyValuePair<string, string>[]
   const wb = xlsx.utils.book_new()
   let jsonRows = []
@@ -84,4 +84,4 @@ const convertCsvToXls = (csvData: string, title?: string): Buffer => {
   return xlsx.write(wb, { type: "buffer" })
 }
 
-export default convertCsvToXls
+export default convertCsvToXlsx
