@@ -16,7 +16,7 @@
     "@bichard/forces": "file:../../@bichard/forces",
     "@bichard/testing": "file:../../@bichard/testing",
     "@bichard/types": "file:../../@bichard/types",
-    "@bichard/csv-to-xls": "file:../../@bichard/csv-to-xls",
+    "@bichard/csv-to-xlsx": "file:../../@bichard/csv-to-xlsx",
     "aws-sdk": "^2.1101.0",
     "csv-stringify": "^6.0.5",
     "install": "^0.13.0",
