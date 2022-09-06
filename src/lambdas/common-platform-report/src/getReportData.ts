@@ -41,8 +41,9 @@ const filterCommonPlatformResults = (r: AuditLog): boolean => /C00CommonPlatform
 const filterCourtResultQueueFailures = (r: AuditLog): boolean =>
   r.events.some(
     (event) =>
-      event.eventSourceQueueName === "COURT_RESULT_INPUT_QUEUE" &&
-      event.eventType === "Court Result Input Queue Failure"
+      (event.eventSourceQueueName === "COURT_RESULT_INPUT_QUEUE" &&
+        event.eventType === "Court Result Input Queue Failure") ||
+      event.eventType.startsWith("Message Rejected")
   )
 
 const filterByDate = (time: TimeRange) => (record: AuditLog) =>
