@@ -1,9 +1,8 @@
 import { PostgresGateway } from "@bichard/postgres-gateway"
-import { isError } from "@bichard/types"
+import { isError } from "@bichard/types/src/Result"
+import JSZip from "jszip"
 import config from "./lib/config"
 import saveReport from "./saveReport"
-
-const JSZip = require("jszip")
 
 type ReportRecord = {
   area_code: string
@@ -19,7 +18,7 @@ describe("GenerateReport", () => {
   })
 
   beforeEach(async () => {
-    await gateway.execute(`DELETE FROM br7own.work_allocation_report`)
+    await gateway.execute("DELETE FROM br7own.work_allocation_report")
   })
 
   afterAll(async () => {

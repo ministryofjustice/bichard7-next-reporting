@@ -49,12 +49,12 @@ export default async (gateway: PostgresGateway): PromiseResult<string> => {
   const result = []
   const now = new Date()
   result.push([
-    `MPS Data Extract`,
+    "MPS Data Extract",
     `${now.getUTCDate().toString().padStart(2, "0")}/${(now.getUTCMonth() + 1)
       .toString()
       .padStart(2, "0")}/${now.getFullYear()} ${now.toISOString().split("T")[1].split(".")[0]}`,
-    ``,
-    `NOT PROTECTIVELY MARKED`
+    "",
+    "NOT PROTECTIVELY MARKED"
   ])
   result.push([""])
   result.push(headers)

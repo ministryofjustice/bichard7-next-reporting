@@ -1,5 +1,5 @@
 jest.setTimeout(30000)
-process.env.AWS_URL = `http://localhost:20001`
+process.env.AWS_URL = "http://localhost:20001"
 process.env.AWS_REGION = "local"
 process.env.DYNAMO_AWS_ACCESS_KEY_ID = "test"
 process.env.DYNAMO_AWS_SECRET_ACCESS_KEY = "test"
@@ -50,7 +50,7 @@ describe("End to end testing the lambda", () => {
     expect(mail.attachments).toHaveLength(1)
     expect(mail.attachments[0].filename).toMatch(/bichard7-error-report-.*.csv/)
     expect(mail.attachments[0].content.toString().trim()).toBe(
-      `Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n2022-01-04T04:00:00.000Z,message-2,externalId-2,caseId-2,Something crashed (Line 1)`
+      "Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n2022-01-04T04:00:00.000Z,message-2,externalId-2,caseId-2,Something crashed (Line 1)"
     )
   })
 

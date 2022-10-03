@@ -1,7 +1,7 @@
-import pgPromise from "pg-promise"
+import { isError } from "@bichard/types/src/Result"
 import type { IDatabase } from "pg-promise"
+import pgPromise from "pg-promise"
 import type pg from "pg-promise/typescript/pg-subset"
-import { isError } from "../../../@bichard/types/build"
 
 import handler from "./index"
 import config from "./lib/config"
