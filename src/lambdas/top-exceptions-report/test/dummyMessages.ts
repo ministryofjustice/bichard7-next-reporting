@@ -13,6 +13,12 @@ export default (date: Date) =>
           timestamp: "2021-10-14T14:08:44.225Z"
         },
         {
+          eventSource: "Incoming Message Handler",
+          eventType: "Dummy event type",
+          category: "information",
+          timestamp: "2021-10-14T14:08:44.225Z"
+        },
+        {
           s3Path: "2021/9/4/14/8/GeneralEvent-743a7328-1249-4b68-b5bc-b544ba5ef20b.xml",
           eventSourceArn:
             "arn:aws:mq:eu-west-2:108839434327:broker:cjse-emad-bichard-7-amq:b-deda4101-9cb9-4ac1-993b-a0ac4bbc253e",

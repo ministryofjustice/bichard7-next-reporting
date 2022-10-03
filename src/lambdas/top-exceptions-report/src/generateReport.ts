@@ -9,18 +9,18 @@ type ForcesExceptions = KeyValuePair<string, ForceExceptions>
 
 const getAttributesWithErrors = (messages: AuditLog[]): KeyValuePair<string, unknown>[] => {
   return messages
-    .filter((x) => x.events && x.events.some((e) => "Error 1 Details" in e.attributes))
+    .filter((x) => x.events && x.events.some((e) => e.attributes && "Error 1 Details" in e.attributes))
     .map((x) => {
       const { events } = x
       for (let i = 0; i < events.length; i += 1) {
-        if (x.automationReport?.forceOwner) {
+        if (x.automationReport?.forceOwner && events[i].attributes) {
           events[i].attributes["Force Owner"] = x.automationReport.forceOwner
         }
       }
       return events
     })
     .reduce((allEvents, topExceptionsReportEvents) => allEvents.concat(topExceptionsReportEvents), [])
-    .map((event) => event.attributes)
+    .map((event) => event.attributes ?? {})
 }
 
 const calculateForcesExceptions = (allAttributes: KeyValuePair<string, unknown>[]): ForcesExceptions => {
