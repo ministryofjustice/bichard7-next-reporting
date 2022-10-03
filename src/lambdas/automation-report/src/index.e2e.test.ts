@@ -1,4 +1,4 @@
-const dynamoUrl = (process.env.AWS_URL = `http://localhost:20001`)
+const dynamoUrl = (process.env.AWS_URL = "http://localhost:20001")
 const region = (process.env.AWS_REGION = "local")
 process.env.S3_REGION = region
 const accessKeyId = (process.env.S3_AWS_ACCESS_KEY_ID = "S3RVER")

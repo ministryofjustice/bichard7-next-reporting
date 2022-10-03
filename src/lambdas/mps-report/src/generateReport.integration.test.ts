@@ -12,7 +12,7 @@ describe("GenerateReport", () => {
   })
 
   beforeEach(async () => {
-    await gateway.execute(`TRUNCATE TABLE br7own.error_list CASCADE`)
+    await gateway.execute("TRUNCATE TABLE br7own.error_list CASCADE")
   })
 
   afterAll(async () => {

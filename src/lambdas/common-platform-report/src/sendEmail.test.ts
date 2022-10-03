@@ -31,7 +31,8 @@ describe("sendEmail", () => {
     expect(mockEmailer.sendMail).toHaveBeenCalledWith({
       attachments: [
         {
-          content: `Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n2021-12-21T18:55:27.000Z,1,CID-1,XYZ12345,Error message\n2021-12-21T18:55:28.000Z,2,CID-2,XYZ12346,Error message 2\n`,
+          content:
+            "Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n2021-12-21T18:55:27.000Z,1,CID-1,XYZ12345,Error message\n2021-12-21T18:55:28.000Z,2,CID-2,XYZ12346,Error message 2\n",
           filename: "bichard7-error-report-2022-01-28T05:00:00.000Z.csv"
         }
       ],

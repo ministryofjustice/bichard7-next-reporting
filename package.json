@@ -28,6 +28,10 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "prepare": "husky install",
     "update-deps": "ncu -u --deep && make install"
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --cache --fix"
   }
 }

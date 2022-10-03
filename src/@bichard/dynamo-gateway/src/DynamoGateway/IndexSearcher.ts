@@ -1,7 +1,7 @@
 /* eslint-disable no-prototype-builtins */
-import type { DocumentClient } from "aws-sdk/clients/dynamodb"
 import type { KeyValuePair, PromiseResult, Result } from "@bichard/types"
 import { isError } from "@bichard/types"
+import type { DocumentClient } from "aws-sdk/clients/dynamodb"
 import type DynamoGateway from "./DynamoGateway"
 import type FetchByIndexOptions from "./FetchByIndexOptions"
 import type Pagination from "./Pagination"
@@ -117,7 +117,7 @@ export default class IndexSearcher<TResult> {
       pagination
     }
 
-    if (this.rangeKey && this.rangeKeyBetween) {
+    if (this.rangeKey && this.rangeKeyValues) {
       options.rangeKeyName = this.rangeKey
       options.rangeKeyBetween = this.rangeKeyValues
     }
