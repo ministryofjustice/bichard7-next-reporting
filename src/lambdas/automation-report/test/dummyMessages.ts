@@ -872,7 +872,7 @@ export default (date: Date) =>
             "Error 2 Details": "HO100304||br7:ArrestSummonsNumber",
             "Error 1 Details": "HO100300||ds:OrganisationUnitCode"
           },
-          eventType: "Hearing Outcome passed to Error List",
+          eventType: "Exceptions generated",
           category: "information",
           timestamp: "2021-10-29T10:31:12.396Z"
         },
