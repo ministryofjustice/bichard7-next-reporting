@@ -1,7 +1,7 @@
+import convertCsvToXlsx from "@bichard/csv-to-xlsx"
 import { findForceName } from "@bichard/forces"
 import type { AuditLog, AuditLogEvent, KeyValuePair } from "@bichard/types"
 import { stringify } from "csv-stringify/sync"
-import convertCsvToXlsx from "@bichard/csv-to-xlsx"
 
 interface Force {
   exceptions: number
@@ -21,6 +21,7 @@ type Forces = KeyValuePair<string, Force>
 
 const exceptionsCategoryEventTypes = [
   "Hearing Outcome passed to Error List",
+  "Exceptions generated",
   "PNC Update added to Error List",
   "Exception marked as resolved by user"
 ]
