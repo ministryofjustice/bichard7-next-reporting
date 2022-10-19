@@ -1,6 +1,6 @@
-import csv from "csv-parse/lib/sync"
-import xlsx from "xlsx-js-style"
 import type { KeyValuePair } from "@bichard/types"
+import { parse } from "csv-parse/sync"
+import xlsx from "xlsx-js-style"
 
 const csvOptions = {
   columns: true,
@@ -54,7 +54,7 @@ const calculateColumnWidths = (records: KeyValuePair<string, string>[]): { width
 }
 
 const convertCsvToXlsx = (csvData: string, title?: string): Buffer => {
-  const records = csv(csvData, csvOptions) as KeyValuePair<string, string>[]
+  const records = parse(csvData, csvOptions) as KeyValuePair<string, string>[]
   const wb = xlsx.utils.book_new()
   let jsonRows = []
   if (title) {
