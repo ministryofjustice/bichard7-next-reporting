@@ -13,7 +13,7 @@ install:
 	scripts/install-all.sh
 
 .PHONY: build
-build: types forces testing postgres-gateway dynamo-gateway csv-to-xlsx \
+build: types shared forces testing postgres-gateway dynamo-gateway csv-to-xlsx \
 	automation-report common-platform-report mps-report top-exceptions-report
 
 .PHONY: test
@@ -35,6 +35,7 @@ postgres-gateway: src/@bichard/postgres-gateway/build
 csv-to-xlsx: src/@bichard/csv-to-xlsx/build
 types: src/@bichard/types/build
 testing: src/@bichard/testing/build
+shared: src/@bichard/shared/build
 
 define get_source_files
 	$(shell find $(1) \
@@ -66,9 +67,10 @@ POSTGRES_GATEWAY_SOURCE := $(call get_source_files,src/@bichard/postgres-gateway
 CSV_TO_XLSX_SOURCE := $(call get_source_files,src/@bichard/csv-to-xlsx)
 TYPES_SOURCE := $(call get_source_files,src/@bichard/types)
 TESTING_SOURCE := $(call get_source_files,src/@bichard/testing)
+SHARED_SOURCE := $(call get_source_files,src/@bichard/shared)
 
 # How to build each package
-src/lambdas/automation-report/build: $(DYNAMO_GATEWAY_SOURCE) $(FORCES_SOURCE) $(TYPES_SOURCE) $(AUTOMATION_REPORT_SOURCE)
+src/lambdas/automation-report/build: $(DYNAMO_GATEWAY_SOURCE) $(SHARED_SOURCE) $(FORCES_SOURCE) $(TYPES_SOURCE) $(AUTOMATION_REPORT_SOURCE)
 	cd src/lambdas/automation-report && npm run build
 
 src/lambdas/common-platform-report/build: $(DYNAMO_GATEWAY_SOURCE) $(TYPES_SOURCE) $(COMMON_PLATFORM_REPORT_SOURCE)
@@ -96,6 +98,9 @@ src/@bichard/types/build: $(TYPES_SOURCE)
 	cd src/@bichard/types && npm run build
 
 src/@bichard/testing/build: $(TESTING_SOURCE)
+	cd src/@bichard/testing && npm run build
+
+src/@bichard/shared/build: $(shared_SOURCE)
 	cd src/@bichard/testing && npm run build
 
 .PHONY: lint

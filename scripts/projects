@@ -1,4 +1,5 @@
 src/@bichard/types
+src/@bichard/shared
 src/@bichard/forces
 src/@bichard/testing
 src/@bichard/dynamo-gateway

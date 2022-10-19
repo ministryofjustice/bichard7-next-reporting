@@ -7,12 +7,13 @@ export default interface AuditLog {
   caseId: string
   systemId: string
   events: AuditLogEvent[]
-  automationReport: AutomationReport
-  topExceptionsReport: TopExceptionsReport
+  automationReport?: AutomationReport
+  topExceptionsReport?: TopExceptionsReport
   status: string
   lastEventType: string
   version: number
   externalCorrelationId: string
   receivedDate: string
   messageXml?: string
+  forceOwner?: number
 }

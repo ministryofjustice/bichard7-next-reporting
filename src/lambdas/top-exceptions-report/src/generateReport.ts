@@ -1,8 +1,8 @@
+import convertCsvToXlsx from "@bichard/csv-to-xlsx"
 import { findForceName } from "@bichard/forces"
 import type { AuditLog, KeyValuePair } from "@bichard/types"
 import { stringify } from "csv-stringify/sync"
 import getErrorName from "./errorNames/getErrorName"
-import convertCsvToXlsx from "@bichard/csv-to-xlsx"
 
 type ForceExceptions = KeyValuePair<string, number>
 type ForcesExceptions = KeyValuePair<string, ForceExceptions>
@@ -26,7 +26,8 @@ const getAttributesWithErrors = (messages: AuditLog[]): KeyValuePair<string, unk
 const calculateForcesExceptions = (allAttributes: KeyValuePair<string, unknown>[]): ForcesExceptions => {
   return allAttributes.reduce((forces, attributes) => {
     const forceOwner = attributes["Force Owner"] as string
-    const forceName = findForceName(forceOwner) ?? "National"
+    const forceNumber = forceOwner ? Number(forceOwner.substring(0, 2)) : undefined
+    const forceName = findForceName(forceNumber) ?? "National"
     const forceExceptions = (forces[forceName] || {}) as ForceExceptions
 
     Object.keys(attributes)

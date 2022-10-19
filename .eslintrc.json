@@ -70,13 +70,6 @@
         ],
         "@typescript-eslint/no-non-null-assertion": "off",
         "no-plusplus": "off",
-        "react/react-in-jsx-scope": "off",
-        "react/jsx-curly-brace-presence": [
-          "off"
-        ],
-        "react/require-default-props": [
-          "off"
-        ],
         "curly": [
           2,
           "all"
