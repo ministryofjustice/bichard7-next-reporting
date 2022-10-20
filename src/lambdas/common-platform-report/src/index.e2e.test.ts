@@ -8,10 +8,10 @@ process.env.SMTP_HOST = "localhost"
 process.env.SMTP_PORT = "20002"
 process.env.SMTP_TLS = "false"
 import { isError } from "@bichard/types"
+import { MockServer } from "jest-mock-server"
 import MockMailServer from "../test/MockMailServer"
 import { log } from "../test/mocks/fetchApiGatewayResponse"
 import handler from "./index"
-import { MockServer } from "jest-mock-server"
 
 const mockResponse = (status: number, body: string) => (ctx: any) => {
   ctx.status = status
@@ -50,7 +50,7 @@ describe("End to end testing the lambda", () => {
     expect(mail.attachments).toHaveLength(1)
     expect(mail.attachments[0].filename).toMatch(/bichard7-error-report-.*.csv/)
     expect(mail.attachments[0].content.toString().trim()).toBe(
-      "Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n2022-01-04T04:00:00.000Z,message-2,externalId-2,caseId-2,Something crashed (Line 1)"
+      "Received Date,Internal Message ID,External Correlation ID,PTIURN,Error Message\n2022-01-04T04:00:00.000Z,message-2,externalId-2,caseId-2,The XML Converter encountered an Error during message UnMarshalling (Line 1)"
     )
   })
 
