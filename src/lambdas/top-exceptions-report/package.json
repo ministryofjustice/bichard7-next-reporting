@@ -20,6 +20,7 @@
     "@bichard/testing": "file:../../@bichard/testing",
     "@bichard/types": "file:../../@bichard/types",
     "aws-sdk": "^2.1235.0",
+    "axios": "^1.1.3",
     "csv-parse": "^5.3.1",
     "csv-stringify": "^6.2.0",
     "xlsx-js-style": "^1.2.0"

@@ -77,11 +77,8 @@ src/lambdas/common-platform-report/build: $(TYPES_SOURCE) $(COMMON_PLATFORM_REPO
 src/lambdas/mps-report/build: $(POSTGRES_GATEWAY_SOURCE) $(TYPES_SOURCE) $(MPS_REPORT_SOURCE)
 	cd src/lambdas/mps-report && npm run build
 
-src/lambdas/top-exceptions-report/build: $(FORCES_SOURCE) $(TYPES_SOURCE) $(TOP_EXCEPTIONS_REPORT_SOURCE)
+src/lambdas/top-exceptions-report/build: $(SHARED_SOURCE) $(FORCES_SOURCE) $(TYPES_SOURCE) $(TOP_EXCEPTIONS_REPORT_SOURCE)
 	cd src/lambdas/top-exceptions-report && npm run build
-
-src/@bichard/dynamo-gateway/build: $(TYPES_SOURCE)
-	cd src/@bichard/dynamo-gateway && npm run build
 
 src/@bichard/forces/build: $(FORCES_SOURCE)
 	cd src/@bichard/forces && npm run build
@@ -98,8 +95,8 @@ src/@bichard/types/build: $(TYPES_SOURCE)
 src/@bichard/testing/build: $(TESTING_SOURCE)
 	cd src/@bichard/testing && npm run build
 
-src/@bichard/shared/build: $(shared_SOURCE)
-	cd src/@bichard/testing && npm run build
+src/@bichard/shared/build: $(SHARED_SOURCE)
+	cd src/@bichard/shared && npm run build
 
 .PHONY: lint
 lint:
