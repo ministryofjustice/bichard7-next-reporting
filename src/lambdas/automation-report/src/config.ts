@@ -4,6 +4,7 @@ export type AutomationReportConfig = {
   api: ApiConfig
   s3: S3Config
   reportsBucket: string
+  reportName: string
 }
 
 type S3Credentails = {
@@ -30,7 +31,8 @@ const config: AutomationReportConfig = {
     s3ForcePathStyle: true,
     ...s3Credentials
   },
-  reportsBucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files"
+  reportsBucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files",
+  reportName: process.env.REPORT_NAME ?? "reports/AutomationRate.xlsx"
 }
 
 export default config

@@ -36,7 +36,7 @@ export default async (): Promise<AutomationReportResult> => {
   console.log("Uploading to S3 ...")
   const params = {
     Bucket: config.reportsBucket,
-    Key: "reports/AutomationRate.xlsx",
+    Key: config.reportName,
     Body: report
   }
 

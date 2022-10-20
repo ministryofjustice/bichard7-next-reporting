@@ -36,7 +36,7 @@ export default async (): Promise<TopExceptionsReportResult> => {
 
   const params = {
     Bucket: config.reportsBucket,
-    Key: "reports/TopExceptions.xlsx",
+    Key: config.reportName,
     Body: report
   }
 
