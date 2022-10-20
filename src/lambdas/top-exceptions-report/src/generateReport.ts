@@ -9,12 +9,14 @@ type ForcesExceptions = KeyValuePair<string, ForceExceptions>
 
 const getAttributesWithErrors = (messages: AuditLog[]): KeyValuePair<string, unknown>[] => {
   return messages
-    .filter((x) => x.events && x.events.some((e) => e.attributes && "Error 1 Details" in e.attributes))
-    .map((x) => {
-      const { events } = x
+    .filter(
+      (message) => message.events && message.events.some((e) => e.attributes && "Error 1 Details" in e.attributes)
+    )
+    .map((message) => {
+      const { events, forceOwner } = message
       for (let i = 0; i < events.length; i += 1) {
-        if (x.automationReport?.forceOwner && events[i].attributes) {
-          events[i].attributes["Force Owner"] = x.automationReport.forceOwner
+        if (forceOwner !== undefined && events[i].attributes) {
+          events[i].attributes["Force Owner"] = forceOwner
         }
       }
       return events
@@ -24,11 +26,10 @@ const getAttributesWithErrors = (messages: AuditLog[]): KeyValuePair<string, unk
 }
 
 const calculateForcesExceptions = (allAttributes: KeyValuePair<string, unknown>[]): ForcesExceptions => {
-  return allAttributes.reduce((forces, attributes) => {
-    const forceOwner = attributes["Force Owner"] as string
-    const forceNumber = forceOwner ? Number(forceOwner.substring(0, 2)) : undefined
+  return allAttributes.reduce((forces: ForcesExceptions, attributes) => {
+    const forceNumber = attributes["Force Owner"] as number
     const forceName = findForceName(forceNumber) ?? "National"
-    const forceExceptions = (forces[forceName] || {}) as ForceExceptions
+    const forceExceptions = forces[forceName] || {}
 
     Object.keys(attributes)
       .filter((attributeName) => attributeName.match(/Error.*Details/))
@@ -37,7 +38,6 @@ const calculateForcesExceptions = (allAttributes: KeyValuePair<string, unknown>[
         forceExceptions[exceptionCode] = (forceExceptions[exceptionCode] || 0) + 1
       })
 
-    // eslint-disable-next-line no-param-reassign
     forces[forceName] = forceExceptions
     return forces
   }, {}) as ForcesExceptions

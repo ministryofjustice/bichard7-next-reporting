@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@bichard/csv-to-xlsx": "file:../../@bichard/csv-to-xlsx",
-    "@bichard/dynamo-gateway": "file:../../@bichard/dynamo-gateway",
     "@bichard/forces": "file:../../@bichard/forces",
     "@bichard/shared": "file:../../@bichard/shared",
     "@bichard/testing": "file:../../@bichard/testing",
