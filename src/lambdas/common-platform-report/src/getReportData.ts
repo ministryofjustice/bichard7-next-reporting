@@ -46,6 +46,14 @@ const filterCourtResultQueueFailures = (r: AuditLog): boolean =>
       event.eventType.startsWith("Message Rejected")
   )
 
+const filterXMLParsingErrors = (r: AuditLog): boolean =>
+  r.events.some(
+    (event) =>
+      event.attributes["Exception Message"] &&
+      (event.attributes["Exception Message"] as string) ===
+        "The XML Converter encountered an Error during message UnMarshalling"
+  )
+
 const filterByDate = (time: TimeRange) => (record: AuditLog) =>
   new Date(record.receivedDate) > time.start && new Date(record.receivedDate) < time.end
 
@@ -53,6 +61,7 @@ const processRecords = (records: AuditLog[], time: TimeRange): ReportRecord[] =>
   records
     .filter(filterCommonPlatformResults)
     .filter(filterCourtResultQueueFailures)
+    .filter(filterXMLParsingErrors)
     .filter(filterByDate(time))
     .map(filterDataFields)
 

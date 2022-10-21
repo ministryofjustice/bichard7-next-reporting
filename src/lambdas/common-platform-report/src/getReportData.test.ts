@@ -1,9 +1,9 @@
 process.env.AWS_URL = "dummy"
 process.env.AWS_REGION = "dummy"
 process.env.AUDIT_LOG_TABLE_NAME = "bichard-7-production-audit-log"
+import { log } from "../test/mocks/fetchApiGatewayResponse"
 import fetchReportRecords from "./fetchReportRecords"
 import getReportData from "./getReportData"
-import { log } from "../test/mocks/fetchApiGatewayResponse"
 
 jest.mock("./fetchReportRecords")
 
@@ -17,7 +17,7 @@ describe("getReportData", () => {
     jest.clearAllMocks()
   })
 
-  it("should extract the correct fields from records which match the specified time range", async () => {
+  it("should extract the correct fields from records which match the specified time range and only include relevant exceptions", async () => {
     let callNum = 0
     // mock the recursive call
     mockFetch.mockImplementation(() => {
@@ -26,10 +26,10 @@ describe("getReportData", () => {
     })
 
     const result = await getReportData({ start: startTime, end: endTime })
-    expect(mockFetch).toHaveBeenCalledTimes(3)
+    expect(mockFetch).toHaveBeenCalledTimes(4)
     expect(result).toEqual([
       {
-        error: "Something crashed (Line 1)",
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-2",
         messageId: "message-2",
         ptiurn: "caseId-2",
@@ -51,7 +51,7 @@ describe("getReportData", () => {
     expect(mockFetch).toHaveBeenCalledTimes(1)
     expect(result).toEqual([
       {
-        error: "Something crashed (Line 1)",
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-5",
         messageId: "message-5",
         ptiurn: "caseId-5",
@@ -72,24 +72,24 @@ describe("getReportData", () => {
     const endDate = new Date("2022-01-05T04:00:00.000Z")
 
     const result = await getReportData({ start: startDate, end: endDate })
-    expect(mockFetch).toHaveBeenCalledTimes(5)
+    expect(mockFetch).toHaveBeenCalledTimes(6)
     expect(result).toEqual([
       {
-        error: "Something crashed (Line 1)",
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-4",
         messageId: "message-4",
         ptiurn: "caseId-4",
         receivedDate: "2022-01-03T04:00:00.000Z"
       },
       {
-        error: "Something crashed (Line 1)",
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-3",
         messageId: "message-3",
         ptiurn: "caseId-3",
         receivedDate: "2022-01-03T04:00:00.000Z"
       },
       {
-        error: "Something crashed (Line 1)",
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-2",
         messageId: "message-2",
         ptiurn: "caseId-2",
@@ -109,31 +109,31 @@ describe("getReportData", () => {
     const startDate = new Date("2022-01-02T04:00:00.000Z")
 
     const result = await getReportData({ start: startDate, end: new Date() })
-    expect(mockFetch).toHaveBeenCalledTimes(5)
+    expect(mockFetch).toHaveBeenCalledTimes(6)
     expect(result).toEqual([
       {
-        error: "Something crashed (Line 1)",
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-4",
         messageId: "message-4",
         ptiurn: "caseId-4",
         receivedDate: "2022-01-03T04:00:00.000Z"
       },
       {
-        error: "Something crashed (Line 1)",
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-3",
         messageId: "message-3",
         ptiurn: "caseId-3",
         receivedDate: "2022-01-03T04:00:00.000Z"
       },
       {
-        error: "Something crashed (Line 1)",
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-2",
         messageId: "message-2",
         ptiurn: "caseId-2",
         receivedDate: "2022-01-04T04:00:00.000Z"
       },
       {
-        error: "Something crashed (Line 1)",
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-1",
         messageId: "message-1",
         ptiurn: "caseId-1",
@@ -168,7 +168,7 @@ describe("getReportData", () => {
     const endDate = new Date("January 02, 1970 12:13:00")
 
     const result = await getReportData({ start: startDate, end: endDate })
-    expect(mockFetch).toHaveBeenCalledTimes(8)
+    expect(mockFetch).toHaveBeenCalledTimes(9)
     expect(result).toEqual([])
   })
 })
