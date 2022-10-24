@@ -22,7 +22,8 @@ type Forces = KeyValuePair<string, Force>
 const exceptionsCategoryEventTypes = [
   "Hearing Outcome passed to Error List",
   "Exceptions generated",
-  "PNC Update added to Error List",
+  "PNC Update added to Error List (PNC message construction)",
+  "PNC Update added to Error List (Unexpected PNC response)",
   "Exception marked as resolved by user"
 ]
 const manuallyResolvedCategoryEventType = "Exception marked as resolved by user"
@@ -72,10 +73,10 @@ const calculateForces = (messages: AuditLog[]): Forces => {
   let national = newForce()
 
   messages.forEach((message) => {
-    const { forceOwner, events } = message.automationReport
+    const { forceOwner, events } = message
     const forceName = findForceName(forceOwner)
 
-    if (!forceName) {
+    if (!forceName || forceName === "National") {
       return
     }
 

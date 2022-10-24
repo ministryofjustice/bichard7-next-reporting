@@ -1,7 +1,7 @@
 src/@bichard/types
+src/@bichard/shared
 src/@bichard/forces
 src/@bichard/testing
-src/@bichard/dynamo-gateway
 src/@bichard/postgres-gateway
 src/@bichard/csv-to-xlsx
 src/lambdas/common-platform-report
