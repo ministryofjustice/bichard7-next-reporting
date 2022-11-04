@@ -23,19 +23,18 @@ function upload_to_s3 {
 # Lambdas
 ############################################
 
-LAMBDAS=$(ls src/lambdas)
+LAMBDAS=$(ls build)
 
 echo "Packaging each lambda..."
 for lambda in ${LAMBDAS}; do
-  NAME=$(echo "$lambda")
+  echo "Packaging $lambda as $lambda..."
+  cd "build/$lambda"
+  mv "index.js" "$lambda.js"
 
-  echo "Packaging $lambda as $NAME..."
-  cd "src/lambdas/$lambda/build"
-
-  zip "$NAME.zip" "$NAME.js"
+  zip "$lambda.zip" "$lambda.js"
 
   # Upload to S3
-  upload_to_s3 "$NAME.zip" "$NAME.zip"
+  upload_to_s3 "$lambda.zip" "$lambda.zip"
 
   cd -
 done
