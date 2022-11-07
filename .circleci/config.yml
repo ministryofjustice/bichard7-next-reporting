@@ -9,26 +9,6 @@ commands:
           command: bash ./scripts/hash-package-locks.sh
       - restore_cache:
           key: v1-npm-deps-{{ checksum "package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/lambdas/common-platform-report/package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/lambdas/automation-report/package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/lambdas/mps-report/package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/lambdas/top-exceptions-report/package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/types/package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/testing/package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/postgres-gateway/package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/shared/package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/forces/package-lock.json.md5" }}
-      - restore_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/csv-to-xlsx/package-lock.json.md5" }}
 
   save_all_caches:
     description: Save all of the node_modules directories
@@ -36,45 +16,6 @@ commands:
       - save_cache:
           key: v1-npm-deps-{{ checksum "package-lock.json.md5" }}
           paths: node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/lambdas/common-platform-report/package-lock.json.md5" }}
-          paths: src/lambdas/common-platform-report/node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/lambdas/automation-report/package-lock.json.md5" }}
-          paths: src/lambdas/automation-report/node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/lambdas/mps-report/package-lock.json.md5" }}
-          paths: src/lambdas/mps-report/node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/lambdas/top-exceptions-report/package-lock.json.md5" }}
-          paths: src/lambdas/top-exceptions-report/node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/types/package-lock.json.md5" }}
-          paths: src/@bichard/types/node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/testing/package-lock.json.md5" }}
-          paths: src/@bichard/types/node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/postgres-gateway/package-lock.json.md5" }}
-          paths: src/@bichard/postgres-gateway/node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/shared/package-lock.json.md5" }}
-          paths: src/@bichard/shared/node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/forces/package-lock.json.md5" }}
-          paths: src/@bichard/forces/node_modules
-      - save_cache:
-          key: v1-npm-deps-{{ checksum "src/@bichard/csv-to-xlsx/package-lock.json.md5" }}
-          paths: src/@bichard/csv-to-xlsx/node_modules
-
-  persist_build_dirs:
-    description: Save all of the build directories
-    steps:
-      - persist_to_workspace:
-          root: .
-          paths:
-            - src/@bichard/*/dist
-            - src/lambdas/*/build
 
 jobs:
   build-and-test:
@@ -86,10 +27,10 @@ jobs:
     steps:
       - checkout
       - restore_all_caches
-      - run: make install
+      - run: npm install
       - save_all_caches
-      - run: make build
-      - run: make lint
+      - run: npm run build
+      - run: npm run lint
       - add_ssh_keys:
           fingerprints:
             - c6:d2:90:a6:86:0d:a0:d7:c2:0b:6e:b2:81:c8:f4:17
@@ -103,8 +44,7 @@ jobs:
       - run:
           name: Run Postgres
           command: cd ~/bichard7-next && make run-pg
-      - run: make test
-      - persist_build_dirs
+      - run: npm run test
 
 workflows:
   version: 2

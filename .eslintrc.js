@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   env: { es6: true },
-  ignorePatterns: ["build/*", "jest.setup.ts"],
+  ignorePatterns: ["build/*", "jest.setup.ts", "build.js"],
   overrides: [
     {
       // Plain JavaScript files
@@ -23,7 +23,7 @@ module.exports = {
       parser: "@typescript-eslint/parser",
       parserOptions: {
         ecmaVersion: 2020,
-        project: "tsconfig.eslint.json",
+        project: "tsconfig.json",
         tsconfigRootDir: __dirname
       },
       plugins: ["@typescript-eslint", "jest", "import"],
@@ -44,7 +44,8 @@ module.exports = {
         "prettier/prettier": ["error"],
         "@typescript-eslint/consistent-type-imports": ["error"],
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_$", varsIgnorePattern: "^_$" }]
+        "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_$", varsIgnorePattern: "^_$" }],
+        "import/no-extraneous-dependencies": ["error", { devDependencies: ["**/*.test.ts", "**/test/*"] }]
       }
     },
     {

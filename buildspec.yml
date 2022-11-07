@@ -1,5 +1,4 @@
 ---
-
 version: 0.2
 
 phases:
@@ -10,7 +9,6 @@ phases:
       - dockerd &> dockerd-logfile &
   build:
     commands:
-      - scripts/install-all.sh
-      - scripts/build-all.sh
+      - npm install
+      - npm run build
       - scripts/codebuild-artifacts.sh
-...
