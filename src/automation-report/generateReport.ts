@@ -19,15 +19,9 @@ interface CalculateForceResult {
 
 type Forces = KeyValuePair<string, Force>
 
-const exceptionsCategoryEventTypes = [
-  "Hearing Outcome passed to Error List",
-  "Exceptions generated",
-  "PNC Update added to Error List (PNC message construction)",
-  "PNC Update added to Error List (Unexpected PNC response)",
-  "Exception marked as resolved by user"
-]
-const manuallyResolvedCategoryEventType = "Exception marked as resolved by user"
-const pncUpdateSuccessfullyEventType = "PNC Update applied successfully"
+const exceptionsCategoryEventCodes = ["exceptions.generated", "exceptions.resolved"]
+const manuallyResolvedCategoryeventCode = "exceptions.resolved"
+const pncUpdateSuccessfullyeventCode = "pnc.updated"
 
 const calculateForce = (events: AuditLogEvent[], force: Force, national: Force): CalculateForceResult => {
   const sortedEvents = events.sort((eventA, eventB) => (eventA.timestamp > eventB.timestamp ? 1 : -1))
@@ -36,16 +30,16 @@ const calculateForce = (events: AuditLogEvent[], force: Force, national: Force):
 
   let foundException = false
   sortedEvents.forEach((event) => {
-    const { eventType } = event
+    const { eventCode } = event
 
-    if (exceptionsCategoryEventTypes.includes(eventType)) {
+    if (exceptionsCategoryEventCodes.includes(eventCode)) {
       updatedForce.exceptions += 1
       updatedNational.exceptions += 1
       foundException = true
-    } else if (eventType === manuallyResolvedCategoryEventType) {
+    } else if (eventCode === manuallyResolvedCategoryeventCode) {
       updatedForce.manuallyResolved += 1
       updatedNational.manuallyResolved += 1
-    } else if (eventType === pncUpdateSuccessfullyEventType) {
+    } else if (eventCode === pncUpdateSuccessfullyeventCode) {
       updatedForce.automated += 1
       updatedNational.automated += 1
 

@@ -23,6 +23,7 @@ export default (date: Date) =>
             ASN: "1201ZD0100000448755K"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:34:08.531Z"
         }
@@ -141,6 +142,7 @@ export default (date: Date) =>
             ASN: "1201ZD0100000448748C"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:31:26.839Z"
         }
@@ -170,11 +172,13 @@ export default (date: Date) =>
             ASN: "1201ZD0100000448749D"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:31:38.052Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "ae2c8027-f72e-431b-87c8-9e8e6a06d261",
       externalCorrelationId: "CID-6236acbe-3074-41df-acd2-79ed27c2483e",
       forceOwner: 42
@@ -202,6 +206,7 @@ export default (date: Date) =>
             "Error 1 Details": "HO100300||ds:OrganisationUnitCode"
           },
           eventType: "Hearing Outcome passed to Error List",
+          eventCode: "exceptions.generated",
           category: "information",
           timestamp: "2021-10-29T10:31:12.396Z"
         }
@@ -258,6 +263,7 @@ export default (date: Date) =>
             "Error 1 Details": "HO100326||br7:ResultClass"
           },
           eventType: "Hearing Outcome passed to Error List",
+          eventCode: "exceptions.generated",
           category: "information",
           timestamp: "2021-10-29T10:30:14.347Z"
         }
@@ -288,6 +294,7 @@ export default (date: Date) =>
             ASN: "1300000000000000001L"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:31:01.095Z"
         }
@@ -332,6 +339,7 @@ export default (date: Date) =>
             "Error 1 Details": "HO100325||br7:ResultClass"
           },
           eventType: "Hearing Outcome passed to Error List",
+          eventCode: "exceptions.generated",
           category: "information",
           timestamp: "2021-10-29T10:29:41.234Z"
         }
@@ -362,6 +370,7 @@ export default (date: Date) =>
             ASN: "1201ZD0100000445746P"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:29:54.346Z"
         }
@@ -392,6 +401,7 @@ export default (date: Date) =>
             ASN: "1201ZD0100000445746P"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:30:02.809Z"
         }
@@ -509,6 +519,7 @@ export default (date: Date) =>
             ASN: "1201ZD0100000445741J"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:27:48.307Z"
         }
@@ -538,6 +549,7 @@ export default (date: Date) =>
             "Error 1 Details": "HO100306||ds:Reason"
           },
           eventType: "Hearing Outcome passed to Error List",
+          eventCode: "exceptions.generated",
           category: "information",
           timestamp: "2021-10-29T10:27:27.451Z"
         }
@@ -568,6 +580,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000445117G"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:27:07.334Z"
         },
@@ -584,11 +597,13 @@ export default (date: Date) =>
             ASN: "1101ZD0100000445117G"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:27:07.459Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "274999e8-7f7f-4dc9-95c4-5e099c70f268",
       externalCorrelationId: "CID-57779830-6bf1-43cd-b702-378b5e153e2d"
     },
@@ -613,6 +628,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000445117G"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:27:16.362Z"
         }
@@ -643,6 +659,7 @@ export default (date: Date) =>
             "Error 1 Details": "HO100507||br7:ArrestSummonsNumber"
           },
           eventType: "Hearing Outcome passed to Error List",
+          eventCode: "exceptions.generated",
           category: "information",
           timestamp: "2021-10-29T10:27:38.098Z"
         }
@@ -673,11 +690,13 @@ export default (date: Date) =>
             ASN: "1101ZD0100000445118H"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:26:54.346Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "df27864a-052a-4063-b661-53b5418e0938",
       externalCorrelationId: "CID-bf28d966-0393-4fea-899a-2ed4133a8d3f"
     },
@@ -702,11 +721,13 @@ export default (date: Date) =>
             ASN: "1101ZD0100000445115E"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:26:37.340Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "7c5aa57e-c87e-4453-9039-170f2c56fed6",
       externalCorrelationId: "CID-c1f5804e-dad7-40ec-929a-60f144c1978f"
     },
@@ -769,6 +790,7 @@ export default (date: Date) =>
             ASN: "1201ZD0100000445110Y"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:25:23.857Z"
         }
@@ -799,11 +821,13 @@ export default (date: Date) =>
             ASN: "1201ZD0100000445108W"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:25:11.744Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "b03818ee-6395-46de-b000-4324c5728b47",
       externalCorrelationId: "CID-68192a3b-9217-4e51-a3e2-2164b57ba72f"
     },
@@ -854,11 +878,13 @@ export default (date: Date) =>
             ASN: "1201ZD0100000445098K"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:24:47.805Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "5afa1070-dfa5-4f23-a45e-879ce811c889",
       externalCorrelationId: "CID-97e5692f-9328-4d31-88a0-d0ecdf0cdaac",
       forceOwner: 42
@@ -884,6 +910,7 @@ export default (date: Date) =>
             "Error 1 Details": "HO100209||br7:CourtPNCIdentifier"
           },
           eventType: "Hearing Outcome passed to Error List",
+          eventCode: "exceptions.generated",
           category: "information",
           timestamp: "2021-10-29T10:24:11.467Z"
         },
@@ -900,11 +927,13 @@ export default (date: Date) =>
             ASN: "1101ZD0100000445720M"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:24:17.157Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "3257dfa2-3c3e-42ab-8a94-988c140f2d98",
       externalCorrelationId: "CID-75a49ef9-04af-41bd-ae9e-859ddbf46715",
       forceOwner: 42
@@ -943,6 +972,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000440814E"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:24:23.773Z"
         }
@@ -972,11 +1002,13 @@ export default (date: Date) =>
             ASN: "1101ZD0100000440811B"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:23:52.656Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "adf97784-4bcf-460e-ad60-2727d4d922cf",
       externalCorrelationId: "CID-c3a89a6c-8bb0-4691-a0c4-9a9d3377f1b8"
     },
@@ -1001,6 +1033,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000440811B"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:24:01.773Z"
         }
@@ -1030,6 +1063,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000440769F"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:23:12.416Z"
         },
@@ -1046,11 +1080,13 @@ export default (date: Date) =>
             ASN: "1101ZD0100000440769F"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:23:12.586Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "bbec1424-58b2-4479-8d60-91ec424b2b35",
       externalCorrelationId: "CID-1ca35cd4-1391-415d-8402-0a4123bc9a2b"
     },
@@ -1125,11 +1161,13 @@ export default (date: Date) =>
             ASN: "0801VK0100000000378Y"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:22:20.265Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "4f7a98d2-e291-4914-86e3-b1671a4cefaa",
       externalCorrelationId: "CID-ae8473f6-f7a5-46af-8293-53fbd21bd37e"
     },
@@ -1154,11 +1192,13 @@ export default (date: Date) =>
             ASN: "0801VK0100000000356Z"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:22:28.214Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "41b3bd57-f76c-403c-a514-f69e178a7af0",
       externalCorrelationId: "CID-50f56c2e-0630-4d40-8298-c3a7ce6c6ae1",
       forceOwner: 1
@@ -1197,11 +1237,13 @@ export default (date: Date) =>
             ASN: "1101ZD0100000415366U"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:21:21.010Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "ff5f53ad-5599-44b8-a254-491964af854a",
       externalCorrelationId: "CID-938762e6-a4c5-4511-a032-e48f7326e4f7"
     },
@@ -1251,6 +1293,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000415365T"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:21:07.866Z"
         },
@@ -1267,6 +1310,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000415365T"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:21:08.037Z"
         }
@@ -1347,6 +1391,7 @@ export default (date: Date) =>
             "Error 1 Details": "HO100305||br7:ResultClass"
           },
           eventType: "Hearing Outcome passed to Error List",
+          eventCode: "exceptions.generated",
           category: "information",
           timestamp: "2021-10-29T10:19:11.425Z"
         }
@@ -1415,6 +1460,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000410871H"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:18:37.067Z"
         }
@@ -1484,6 +1530,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000410926T"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:18:16.458Z"
         }
@@ -1527,11 +1574,13 @@ export default (date: Date) =>
             ASN: "1200000000000000016D"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:17:34.965Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "011dfd23-9740-4908-8184-d8fcd0fe441a",
       externalCorrelationId: "CID-1f61deec-e4f5-4591-894f-d9bb27fe2a51",
       forceOwner: 42
@@ -1557,6 +1606,7 @@ export default (date: Date) =>
             ASN: "1200000000000000016D"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:17:43.950Z"
         },
@@ -1573,11 +1623,13 @@ export default (date: Date) =>
             ASN: "1200000000000000016D"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:17:44.183Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "3bf4f47a-a0ea-4822-913d-d952bf00dd67",
       externalCorrelationId: "CID-b58b3bbe-017e-4dd2-af72-53a8ff28cee6"
     },
@@ -1602,6 +1654,7 @@ export default (date: Date) =>
             ASN: "1200000000000000012Z"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:17:24.893Z"
         },
@@ -1618,11 +1671,13 @@ export default (date: Date) =>
             ASN: "1200000000000000012Z"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:17:25.172Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "8035c50b-190f-4eba-99e3-9d433cd66db5",
       externalCorrelationId: "CID-aabc00ea-e639-4409-bbef-e3e152f9a3cd"
     },
@@ -1659,6 +1714,7 @@ export default (date: Date) =>
             "Error 1 Details": "HO100304||br7:ArrestSummonsNumber"
           },
           eventType: "Hearing Outcome passed to Error List",
+          eventCode: "exceptions.generated",
           category: "information",
           timestamp: "2021-10-29T10:17:49.580Z"
         }
@@ -1689,11 +1745,13 @@ export default (date: Date) =>
             ASN: "1200000000000000010X"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:16:52.784Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "a74a1028-5f53-4760-96ec-63934d1d658a",
       externalCorrelationId: "CID-0894fdf2-f44e-413d-8393-267851103e22"
     },
@@ -1771,6 +1829,7 @@ export default (date: Date) =>
             "Error 1 Details": "HO100310||ds:OffenceReasonSequence"
           },
           eventType: "Hearing Outcome passed to Error List",
+          eventCode: "exceptions.generated",
           category: "information",
           timestamp: "2021-10-29T10:15:24.279Z"
         },
@@ -1787,6 +1846,7 @@ export default (date: Date) =>
             ASN: "1101ZD0100000411417B"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:15:30.114Z"
         }
@@ -1817,11 +1877,13 @@ export default (date: Date) =>
             ASN: "1200000000000000008V"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:15:36.642Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "df31446c-5ec1-4237-8299-628e775cba60",
       externalCorrelationId: "CID-806595c3-fc8a-4ed1-9ce6-2f1fdbb93c9d"
     },
@@ -1858,11 +1920,13 @@ export default (date: Date) =>
             ASN: "1101ZD0100000410923P"
           },
           eventType: "PNC Update applied successfully",
+          eventCode: "pnc.updated",
           category: "information",
           timestamp: "2021-10-29T10:15:17.182Z"
         }
       ],
       lastEventType: "PNC Update applied successfully",
+      eventCode: "pnc.updated",
       messageId: "841eeb71-770d-4c36-8417-c2d415d1117c",
       externalCorrelationId: "CID-7d67ac8f-b9a4-43d7-9e82-918cb93a216e",
       forceOwner: 42
