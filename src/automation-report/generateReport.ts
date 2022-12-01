@@ -19,7 +19,7 @@ interface CalculateForceResult {
 
 type Forces = KeyValuePair<string, Force>
 
-const exceptionsCategoryEventCodes = ["exceptions.generated", "exceptions.resolved"]
+const exceptionsGeneratedEventCode = "exceptions.generated"
 const manuallyResolvedCategoryeventCode = "exceptions.resolved"
 const pncUpdateSuccessfullyeventCode = "pnc.updated"
 
@@ -32,7 +32,7 @@ const calculateForce = (events: AuditLogEvent[], force: Force, national: Force):
   sortedEvents.forEach((event) => {
     const { eventCode } = event
 
-    if (exceptionsCategoryEventCodes.includes(eventCode)) {
+    if (eventCode === exceptionsGeneratedEventCode) {
       updatedForce.exceptions += 1
       updatedNational.exceptions += 1
       foundException = true
