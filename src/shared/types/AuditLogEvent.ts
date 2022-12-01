@@ -1,6 +1,6 @@
+import type AuditLogEventOptions from "./AuditLogEventOptions"
 import type EventCategory from "./EventCategory"
 import type KeyValuePair from "./KeyValuePair"
-import type AuditLogEventOptions from "./AuditLogEventOptions"
 
 export default class AuditLogEvent {
   public readonly eventSource: string
@@ -10,6 +10,8 @@ export default class AuditLogEvent {
   public readonly category: EventCategory
 
   public readonly eventType: string
+
+  public readonly eventCode: string
 
   public readonly timestamp: string
 
