@@ -11,7 +11,7 @@ const fetchReportRecordsPage = (
   { start, end }: Interval,
   config: ApiConfig,
   lastMessageId?: string,
-  attempts = 5
+  attempts = 10
 ): PromiseResult<AuditLog[]> => {
   let lastMessageIdQuery = ""
   if (lastMessageId) {
