@@ -30,15 +30,16 @@ const fetchReportRecordsPage = (
       return result.data
     })
     .catch((e: AxiosError) => {
-      if (e.response?.status === 504 && attempts > 0) {
-        console.error(
-          "Request timed out. Duration: ",
-          (new Date().getTime() - startTime) / 1000,
-          "attempts: ",
-          attempts
-        )
+      if (attempts > 0) {
+        const message =
+          e.response?.status === 504
+            ? `Request timed out. Duration: ${(new Date().getTime() - startTime) / 1000}`
+            : e.message
+        console.error(message, "attempts remaining: ", attempts - 1, url)
+
         return fetchReportRecordsPage(report, { start, end }, config, lastMessageId, attempts - 1)
       }
+
       console.error("Fetching page failed: ", url)
       return e
     })
