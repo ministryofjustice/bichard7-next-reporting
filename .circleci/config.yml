@@ -33,11 +33,7 @@ jobs:
       - run: npm run lint
       - add_ssh_keys:
           fingerprints:
-            - c6:d2:90:a6:86:0d:a0:d7:c2:0b:6e:b2:81:c8:f4:17
-      - run:
-          command: ssh-add -D
-      - run:
-          command: ssh-add ~/.ssh/id_rsa_c6d290a6860da0d7c20b6eb281c8f417
+            - 2e:0e:60:da:7c:5e:82:5e:cd:01:b8:e1:02:30:25:da
       - run:
           name: Clone Bichard7 Next
           command: git clone --depth 1 git@github.com:ministryofjustice/bichard7-next.git ~/bichard7-next
