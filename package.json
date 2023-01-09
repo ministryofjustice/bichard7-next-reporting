@@ -39,7 +39,7 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky install",
     "test": "jest --runInBand",
-    "update-deps": "ncu -u --deep && make install"
+    "update-deps": "ncu -u && npm install"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --cache --fix"
