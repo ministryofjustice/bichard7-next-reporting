@@ -26,8 +26,22 @@ describe("getReportData", () => {
     })
 
     const result = await getReportData({ start: startTime, end: endTime })
-    expect(mockFetch).toHaveBeenCalledTimes(4)
+    expect(mockFetch).toHaveBeenCalledTimes(6)
     expect(result).toEqual([
+      {
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
+        externalCorrelationId: "externalId-4",
+        messageId: "message-4",
+        ptiurn: "caseId-4",
+        receivedDate: "2022-01-03T04:00:00.000Z"
+      },
+      {
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
+        externalCorrelationId: "externalId-3",
+        messageId: "message-3",
+        ptiurn: "caseId-3",
+        receivedDate: "2022-01-03T04:00:00.000Z"
+      },
       {
         error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-2",
@@ -72,8 +86,15 @@ describe("getReportData", () => {
     const endDate = new Date("2022-01-05T04:00:00.000Z")
 
     const result = await getReportData({ start: startDate, end: endDate })
-    expect(mockFetch).toHaveBeenCalledTimes(6)
+    expect(mockFetch).toHaveBeenCalledTimes(7)
     expect(result).toEqual([
+      {
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
+        externalCorrelationId: "externalId-5",
+        messageId: "message-5",
+        ptiurn: "caseId-5",
+        receivedDate: "2022-01-02T04:00:00.000Z"
+      },
       {
         error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-4",
@@ -109,8 +130,15 @@ describe("getReportData", () => {
     const startDate = new Date("2022-01-02T04:00:00.000Z")
 
     const result = await getReportData({ start: startDate, end: new Date() })
-    expect(mockFetch).toHaveBeenCalledTimes(6)
+    expect(mockFetch).toHaveBeenCalledTimes(7)
     expect(result).toEqual([
+      {
+        error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
+        externalCorrelationId: "externalId-5",
+        messageId: "message-5",
+        ptiurn: "caseId-5",
+        receivedDate: "2022-01-02T04:00:00.000Z"
+      },
       {
         error: "The XML Converter encountered an Error during message UnMarshalling (Line 1)",
         externalCorrelationId: "externalId-4",
