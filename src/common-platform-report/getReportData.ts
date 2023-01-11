@@ -55,7 +55,7 @@ const filterXMLParsingErrors = (r: AuditLog): boolean =>
   )
 
 const filterByDate = (time: TimeRange) => (record: AuditLog) =>
-  new Date(record.receivedDate) > time.start && new Date(record.receivedDate) < time.end
+  new Date(record.receivedDate) >= time.start && new Date(record.receivedDate) < time.end
 
 const processRecords = (records: AuditLog[], time: TimeRange): ReportRecord[] =>
   records
