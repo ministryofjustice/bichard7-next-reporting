@@ -12,12 +12,13 @@ interface AutomationReportResult {
 }
 
 const s3 = new AWS.S3(config.s3)
+const pageLimit = process.env.API_PAGE_LIMIT ? Number(process.env.API_PAGE_LIMIT) : 100
 
 export default async (): Promise<AutomationReportResult> => {
   const dates = getLastMonthDates(new Date())
 
   console.log(`Getting messages from ${dates.start.toISOString()} to ${dates.end.toISOString()}`)
-  const messagesForReport = await fetchReportRecordsParallel("automationReport", dates, config.api)
+  const messagesForReport = await fetchReportRecordsParallel("automationReport", dates, config.api, pageLimit)
 
   if (isError(messagesForReport)) {
     return {

@@ -11,11 +11,13 @@ interface TopExceptionsReportResult {
   error?: string
 }
 
+const pageLimit = process.env.API_PAGE_LIMIT ? Number(process.env.API_PAGE_LIMIT) : 100
+
 export default async (): Promise<TopExceptionsReportResult> => {
   const dates = getLastMonthDates(new Date())
 
   console.log("Getting messages ...")
-  const messagesForReport = await fetchReportRecordsParallel("topExceptionsReport", dates, config.api)
+  const messagesForReport = await fetchReportRecordsParallel("topExceptionsReport", dates, config.api, pageLimit)
 
   if (isError(messagesForReport)) {
     return {
