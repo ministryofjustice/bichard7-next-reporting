@@ -9,9 +9,9 @@
     "@types/jest": "^29.5.3",
     "@types/nodemailer": "^6.4.8",
     "@types/s3rver": "^3.7.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "esbuild": "^0.18.13",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "esbuild": "^0.18.16",
     "esbuild-plugin-ignore": "^1.1.1",
     "eslint": "^8.45.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -45,15 +45,15 @@
     "*.{js,ts}": "eslint --cache --fix"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.370.0",
-    "aws-sdk": "^2.1415.0",
+    "@aws-sdk/client-s3": "^3.374.0",
+    "aws-sdk": "^2.1420.0",
     "axios": "^1.4.0",
     "csv-parse": "^5.4.0",
     "csv-stringify": "^6.4.0",
     "jszip": "^3.10.1",
-    "nodemailer": "^6.9.3",
+    "nodemailer": "^6.9.4",
     "pg": "^8.11.1",
-    "pg-promise": "^11.5.0",
+    "pg-promise": "^11.5.1",
     "xlsx-js-style": "^1.2.0",
     "xml-js": "^1.6.11"
   }
