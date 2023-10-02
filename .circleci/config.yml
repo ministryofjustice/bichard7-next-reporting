@@ -35,11 +35,11 @@ jobs:
           fingerprints:
             - 2e:0e:60:da:7c:5e:82:5e:cd:01:b8:e1:02:30:25:da
       - run:
-          name: Clone Bichard7 Next
-          command: git clone --depth 1 git@github.com:ministryofjustice/bichard7-next.git ~/bichard7-next
+          name: Clone Core
+          command: git clone --depth 1 git@github.com:ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
       - run:
           name: Run Postgres
-          command: cd ~/bichard7-next && make run-pg
+          command: cd ~/bichard7-next-core && npm run postgres
       - run: npm run test
 
 workflows:
