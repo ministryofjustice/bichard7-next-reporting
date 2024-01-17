@@ -41,8 +41,8 @@ export default async (): Promise<AutomationReportResult> => {
 
   if (config.writeToFile) {
     console.log("Writing to file ...")
-    const monthString = date.getMonth().toString().padStart(2, "0")
-    const reportFileName = `AutomationRate-${date.getFullYear()}-${monthString}.xlsx`
+    const reportDate = new Date(process.env.DATE || date).toISOString().split("-").slice(0, 2).join("-")
+    const reportFileName = `AutomationRate-${reportDate}.xlsx`
     fs.writeFileSync(reportFileName, report)
 
     return {
