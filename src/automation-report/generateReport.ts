@@ -23,32 +23,32 @@ const exceptionsGeneratedEventCode = "exceptions.generated"
 const manuallyResolvedCategoryeventCode = "exceptions.resolved"
 const pncUpdateSuccessfullyeventCode = "pnc.updated"
 
+const hasEvent = (events: AuditLogEvent[], eventCode: string): boolean => events.some((e) => e.eventCode === eventCode)
+
 const calculateForce = (events: AuditLogEvent[], force: Force, national: Force): CalculateForceResult => {
-  const sortedEvents = events.sort((eventA, eventB) => (eventA.timestamp > eventB.timestamp ? 1 : -1))
   const updatedForce = { ...force }
   const updatedNational = { ...national }
 
-  let foundException = false
-  sortedEvents.forEach((event) => {
-    const { eventCode } = event
+  const foundException = hasEvent(events, exceptionsGeneratedEventCode)
+  if (foundException) {
+    updatedForce.exceptions += 1
+    updatedNational.exceptions += 1
+  }
 
-    if (eventCode === exceptionsGeneratedEventCode) {
-      updatedForce.exceptions += 1
-      updatedNational.exceptions += 1
-      foundException = true
-    } else if (eventCode === manuallyResolvedCategoryeventCode) {
-      updatedForce.manuallyResolved += 1
-      updatedNational.manuallyResolved += 1
-    } else if (eventCode === pncUpdateSuccessfullyeventCode) {
+  if (hasEvent(events, manuallyResolvedCategoryeventCode)) {
+    updatedForce.manuallyResolved += 1
+    updatedNational.manuallyResolved += 1
+  }
+
+  if (hasEvent(events, pncUpdateSuccessfullyeventCode)) {
+    if (foundException) {
+      updatedForce.resubmittedAndResolved += 1
+      updatedNational.resubmittedAndResolved += 1
+    } else {
       updatedForce.automated += 1
       updatedNational.automated += 1
-
-      if (foundException) {
-        updatedForce.resubmittedAndResolved += 1
-        updatedNational.resubmittedAndResolved += 1
-      }
     }
-  })
+  }
 
   return { force: updatedForce, national: updatedNational }
 }
@@ -86,7 +86,7 @@ const calculateForces = (messages: AuditLog[]): Forces => {
   Object.keys(forces).forEach((forceName) => {
     const force = forces[forceName]
     const { automated, exceptions, manuallyResolved, resubmittedAndResolved } = force
-    const automatedWithResubmissionDivider = automated + exceptions - manuallyResolved
+    const automatedWithResubmissionDivider = automated + resubmittedAndResolved + exceptions - manuallyResolved
 
     if (automatedWithResubmissionDivider > 0) {
       force.automatedQuotient = (automated / automatedWithResubmissionDivider) * 100
