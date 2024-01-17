@@ -5,6 +5,7 @@ export type AutomationReportConfig = {
   s3: S3Config
   reportsBucket: string
   reportName: string
+  writeToFile: boolean
 }
 
 type S3Credentails = {
@@ -32,7 +33,8 @@ const config: AutomationReportConfig = {
     ...s3Credentials
   },
   reportsBucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files",
-  reportName: process.env.REPORT_NAME ?? "reports/AutomationRate.xlsx"
+  reportName: process.env.REPORT_NAME ?? "reports/AutomationRate.xlsx",
+  writeToFile: process.env.WRITE_TO_FILE === "true"
 }
 
 export default config
