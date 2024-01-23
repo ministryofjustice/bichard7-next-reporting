@@ -19,28 +19,52 @@ interface CalculateForceResult {
 
 type Forces = KeyValuePair<string, Force>
 
-const exceptionsGeneratedEventCode = "exceptions.generated"
-const manuallyResolvedCategoryeventCode = "exceptions.resolved"
-const pncUpdateSuccessfullyeventCode = "pnc.updated"
+const hasExceptions = (events: AuditLogEvent[]) =>
+  events.some(
+    (e) =>
+      ["exceptions.generated", "exceptions.locked", "exceptions.unlocked", "exceptions.resolved"].includes(
+        e.eventCode
+      ) ||
+      [
+        "Exceptions generated",
+        "Exception locked",
+        "Exception unlocked",
+        "Exception marked as resolved by user",
+        "PNC Update marked as resolved"
+      ].includes(e.eventType)
+  )
 
-const hasEvent = (events: AuditLogEvent[], eventCode: string): boolean => events.some((e) => e.eventCode === eventCode)
+const hasBeenResolvedManually = (events: AuditLogEvent[]) =>
+  events.some(
+    (e) =>
+      e.eventCode === "exceptions.resolved" ||
+      ["Exception marked as resolved by user", "PNC Update marked as resolved"].includes(e.eventType)
+  )
+
+const hasUpdatedPnc = (events: AuditLogEvent[]) =>
+  events.some((e) => e.eventCode === "pnc.updated" || e.eventType === "PNC Update applied successfully") ||
+  events.some(
+    (e) =>
+      (e.eventCode === "pnc.response-received" || e.eventType === "PNC Response received") &&
+      e.attributes?.["PNC Request Type"] !== "ENQASI"
+  )
 
 const calculateForce = (events: AuditLogEvent[], force: Force, national: Force): CalculateForceResult => {
   const updatedForce = { ...force }
   const updatedNational = { ...national }
 
-  const foundException = hasEvent(events, exceptionsGeneratedEventCode)
+  const foundException = hasExceptions(events)
   if (foundException) {
     updatedForce.exceptions += 1
     updatedNational.exceptions += 1
   }
 
-  if (hasEvent(events, manuallyResolvedCategoryeventCode)) {
+  if (hasBeenResolvedManually(events)) {
     updatedForce.manuallyResolved += 1
     updatedNational.manuallyResolved += 1
   }
 
-  if (hasEvent(events, pncUpdateSuccessfullyeventCode)) {
+  if (hasUpdatedPnc(events)) {
     if (foundException) {
       updatedForce.resubmittedAndResolved += 1
       updatedNational.resubmittedAndResolved += 1
@@ -68,17 +92,13 @@ const calculateForces = (messages: AuditLog[]): Forces => {
 
   messages.forEach((message) => {
     const { forceOwner, events } = message
-    const forceName = findForceName(forceOwner)
-
-    if (!forceName || forceName === "National") {
-      return
-    }
-
-    const force = forces[forceName] || newForce()
-
+    const forceName = findForceName(forceOwner) || "Unknown"
+    const force = (forceName && forces[forceName]) || newForce()
     const calculateForceResult = calculateForce(events, force, national)
     national = calculateForceResult.national
-    forces[forceName] = calculateForceResult.force
+    if (forceName !== "Unknown") {
+      forces[forceName] = calculateForceResult.force
+    }
   })
 
   forces.national = national
