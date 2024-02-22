@@ -1,4 +1,5 @@
 jest.setTimeout(30000)
+process.env.API_URL = "http://localhost:23851"
 process.env.AWS_URL = "http://localhost:20001"
 process.env.AWS_REGION = "local"
 process.env.DYNAMO_AWS_ACCESS_KEY_ID = "test"
@@ -23,7 +24,7 @@ describe("End to end testing the lambda", () => {
   let apiGatewayServer: MockServer
 
   beforeAll(async () => {
-    apiGatewayServer = new MockServer({ port: 20001 })
+    apiGatewayServer = new MockServer({ port: 23851 })
     await apiGatewayServer.start()
     mailServer = new MockMailServer(20002)
   })
