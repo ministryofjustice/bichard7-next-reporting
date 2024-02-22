@@ -27,6 +27,7 @@ jobs:
     steps:
       - checkout
       - restore_all_caches
+      - run: nvm install
       - run: npm install
       - save_all_caches
       - run: npm run build
