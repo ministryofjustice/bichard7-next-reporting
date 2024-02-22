@@ -37,12 +37,12 @@
     "build": "node build.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "jest --runInBand",
     "update-deps": "ncu -u -x @typescript-eslint/eslint-plugin -x @typescript-eslint/parser && npm install"
   },
   "lint-staged": {
-    "*.{js,ts}": "eslint --cache --fix"
+    "*.{js,ts}": "eslint --cache --fix --max-warnings 0"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.515.0",
