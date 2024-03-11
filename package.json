@@ -31,7 +31,7 @@
     "smtp-tester": "^2.1.0",
     "ts-jest": "^29.1.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   },
   "scripts": {
     "build": "node build.js",
@@ -45,13 +45,13 @@
     "*.{js,ts}": "eslint --cache --fix --max-warnings 0"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.525.0",
-    "aws-sdk": "^2.1571.0",
+    "@aws-sdk/client-s3": "^3.529.1",
+    "aws-sdk": "^2.1574.0",
     "axios": "^1.6.7",
     "csv-parse": "^5.5.5",
     "csv-stringify": "^6.4.6",
     "jszip": "^3.10.1",
-    "nodemailer": "^6.9.11",
+    "nodemailer": "^6.9.12",
     "pg": "^8.11.3",
     "pg-promise": "^11.5.4",
     "xlsx-js-style": "^1.2.0",
