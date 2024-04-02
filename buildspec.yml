@@ -4,8 +4,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - yum install -y zip
-      - yum install amazon-linux-extras -y
+      - yum install -y zip aws
       - yum install docker -y
       - dockerd &> dockerd-logfile &
   build:
