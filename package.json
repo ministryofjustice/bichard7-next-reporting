@@ -9,8 +9,8 @@
     "@types/jest": "^29.5.12",
     "@types/nodemailer": "^6.4.14",
     "@types/s3rver": "^3.7.4",
-    "@typescript-eslint/eslint-plugin": "^7.6.0",
-    "@typescript-eslint/parser": "^7.6.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.0",
+    "@typescript-eslint/parser": "^7.7.0",
     "esbuild": "^0.20.2",
     "esbuild-plugin-ignore": "^1.1.1",
     "eslint": "^8.57.0",
@@ -45,8 +45,8 @@
     "*.{js,ts}": "eslint --cache --fix --max-warnings 0"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.554.0",
-    "aws-sdk": "^2.1599.0",
+    "@aws-sdk/client-s3": "^3.556.0",
+    "aws-sdk": "^2.1603.0",
     "axios": "^1.6.8",
     "csv-parse": "^5.5.5",
     "csv-stringify": "^6.4.6",
