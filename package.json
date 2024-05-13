@@ -11,7 +11,7 @@
     "@types/s3rver": "^3.7.4",
     "@typescript-eslint/eslint-plugin": "^7.8.0",
     "@typescript-eslint/parser": "^7.8.0",
-    "esbuild": "^0.20.2",
+    "esbuild": "^0.21.2",
     "esbuild-plugin-ignore": "^1.1.1",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -45,8 +45,8 @@
     "*.{js,ts}": "eslint --cache --fix --max-warnings 0"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.569.0",
-    "aws-sdk": "^2.1613.0",
+    "@aws-sdk/client-s3": "^3.574.0",
+    "aws-sdk": "^2.1618.0",
     "axios": "^1.6.8",
     "csv-parse": "^5.5.5",
     "csv-stringify": "^6.4.6",
