@@ -13,6 +13,7 @@ require("esbuild")
     outdir: "build",
     minify: true,
     target: "node16",
+    packages: "bundle",
     platform: "node",
     plugins: [
       ignorePlugin([
