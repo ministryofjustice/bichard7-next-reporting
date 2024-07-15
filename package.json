@@ -9,8 +9,8 @@
     "@types/jest": "^29.5.12",
     "@types/nodemailer": "^6.4.15",
     "@types/s3rver": "^3.7.4",
-    "@typescript-eslint/eslint-plugin": "^7.15.0",
-    "@typescript-eslint/parser": "^7.15.0",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
     "esbuild": "^0.23.0",
     "esbuild-plugin-ignore": "^1.1.1",
     "eslint": "^8.57.0",
@@ -25,11 +25,11 @@
     "jest-mock-server": "^0.1.0",
     "lint-staged": "^15.2.7",
     "npm-check-updates": "^16.14.20",
-    "prettier": "^3.3.2",
+    "prettier": "^3.3.3",
     "s3rver": "^3.7.1",
     "shelljs": "^0.8.5",
     "smtp-tester": "^2.1.0",
-    "ts-jest": "^29.1.5",
+    "ts-jest": "^29.2.2",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.5.3"
   },
@@ -45,15 +45,15 @@
     "*.{js,ts}": "eslint --cache --fix --max-warnings 0"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.609.0",
-    "aws-sdk": "^2.1655.0",
+    "@aws-sdk/client-s3": "^3.614.0",
+    "aws-sdk": "^2.1659.0",
     "axios": "^1.7.2",
     "csv-parse": "^5.5.6",
     "csv-stringify": "^6.5.0",
     "jszip": "^3.10.1",
     "nodemailer": "^6.9.14",
     "pg": "^8.12.0",
-    "pg-promise": "^11.9.0",
+    "pg-promise": "^11.9.1",
     "xlsx-js-style": "^1.2.0",
     "xml-js": "^1.6.11"
   }
