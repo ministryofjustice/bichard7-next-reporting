@@ -39,10 +39,10 @@
     "lint:fix": "eslint . --fix",
     "prepare": "husky",
     "test": "jest --runInBand",
-    "update-deps": "ncu -u -x eslint && npm install"
+    "update-deps": "ncu -u && npm install"
   },
   "lint-staged": {
-    "*.{js,ts}": "eslint --cache --fix --max-warnings 0"
+    "*.{js,ts}": "eslint --cache --fix --max-warnings 0 --ignore-pattern !.ncurc.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.620.0",
