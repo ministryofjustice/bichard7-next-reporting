@@ -57,6 +57,12 @@ module.exports = {
         "@typescript-eslint/no-explicit-any": "off",
         "jest/no-standalone-expect": "off"
       }
+    },
+    {
+      files: [".ncurc.js"],
+      rules: {
+        "no-console": "off"
+      }
     }
   ]
 }
