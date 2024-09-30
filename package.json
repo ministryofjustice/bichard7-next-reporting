@@ -45,7 +45,7 @@
     "*.{js,ts}": "eslint --cache --fix --max-warnings 0 --ignore-pattern !.ncurc.js"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.654.0",
+    "@aws-sdk/client-s3": "^3.658.1",
     "aws-sdk": "^2.1691.0",
     "axios": "^1.7.7",
     "csv-parse": "^5.5.6",
