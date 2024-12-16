@@ -23,7 +23,7 @@
     "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-mock-server": "^0.1.0",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^15.2.11",
     "npm-check-updates": "^17.1.11",
     "prettier": "^3.4.2",
     "s3rver": "^3.7.1",
@@ -45,7 +45,7 @@
     "*.{js,ts}": "eslint --cache --fix --max-warnings 0 --ignore-pattern !.ncurc.js"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.705.0",
+    "@aws-sdk/client-s3": "^3.712.0",
     "aws-sdk": "^2.1692.0",
     "axios": "^1.7.9",
     "csv-parse": "^5.6.0",
