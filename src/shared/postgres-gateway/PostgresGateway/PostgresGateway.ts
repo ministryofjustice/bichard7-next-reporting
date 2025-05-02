@@ -5,8 +5,8 @@ import { isError } from "src/shared/types"
 import type Database from "./Database"
 import type DatabaseConfig from "./DatabaseConfig"
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const TypeOverrides = require("pg/lib/type-overrides")
+// eslint-disable-next-line @typescript-eslint/no-var-requires, import/extensions
+const TypeOverrides = require("pg/lib/type-overrides.js")
 
 const types: ITypeOverrides = new TypeOverrides() // creating type overrides
 types.setTypeParser(1082, (str: string) => new Date(str)) // setting new parser for Date using UTC
