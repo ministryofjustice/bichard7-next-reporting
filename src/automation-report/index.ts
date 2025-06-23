@@ -43,7 +43,7 @@ export default async (): Promise<AutomationReportResult> => {
     console.log("Writing to file ...")
     const reportDate = new Date(process.env.DATE || date).toISOString().split("-").slice(0, 2).join("-")
     const reportFileName = `AutomationRate-${reportDate}.xlsx`
-    fs.writeFileSync(reportFileName, report)
+    fs.writeFileSync(reportFileName, new Uint8Array(report))
 
     return {
       report: `Saved successfully: ${reportFileName}`
