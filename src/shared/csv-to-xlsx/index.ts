@@ -54,6 +54,7 @@ const calculateColumnWidths = (records: KeyValuePair<string, string>[]): { width
 }
 
 const convertCsvToXlsx = (csvData: string, title?: string): Buffer => {
+  // @ts-expect-error: Incorrect type definition in csv-parse/sync parse function
   const records = parse(csvData, csvOptions) as KeyValuePair<string, string>[]
   const wb = xlsx.utils.book_new()
   let jsonRows = []
