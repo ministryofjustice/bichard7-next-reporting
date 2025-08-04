@@ -38,7 +38,7 @@ describe("GenerateReport", () => {
       throw result
     }
     expect(result).toHaveLength(1)
-    const zipData = await JSZip.loadAsync(result[0].report)
+    const zipData = await JSZip.loadAsync(new Uint8Array(result[0].report))
     const zipFiles = zipData.file(/Area01\.\d{10}\.csv/)
     expect(zipFiles).toHaveLength(1)
     const content = await zipFiles[0].async("string")
