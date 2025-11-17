@@ -45,7 +45,7 @@
     "*.{js,ts}": "eslint --cache --fix --max-warnings 0 --ignore-pattern !.ncurc.js"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.927.0",
+    "@aws-sdk/client-s3": "^3.932.0",
     "aws-sdk": "^2.1692.0",
     "axios": "^1.13.2",
     "csv-parse": "^6.1.0",
@@ -53,7 +53,7 @@
     "jszip": "^3.10.1",
     "nodemailer": "^7.0.10",
     "pg": "^8.16.3",
-    "pg-promise": "^12.2.0",
+    "pg-promise": "^12.3.0",
     "xlsx-js-style": "^1.2.0",
     "xml-js": "^1.6.11"
   }
