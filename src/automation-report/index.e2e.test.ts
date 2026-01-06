@@ -1,34 +1,44 @@
-import { HeadObjectCommand, S3Client } from "@aws-sdk/client-s3"
+import { HeadObjectCommand, S3Client, CreateBucketCommand } from "@aws-sdk/client-s3"
 import { MockServer } from "jest-mock-server"
 import { generateDayIntervals } from "src/shared"
-import { MockS3 } from "src/shared/test"
 import type { AuditLog, Interval } from "src/shared/types"
 import getLastMonthDates from "./getLastMonthDates"
 import messages from "./test/dummyMessages"
-const region = (process.env.AWS_REGION = "local")
+
+const region = (process.env.AWS_REGION = "eu-west-2")
 process.env.S3_REGION = region
-const accessKeyId = (process.env.S3_AWS_ACCESS_KEY_ID = "S3RVER")
-const secretAccessKey = (process.env.S3_AWS_SECRET_ACCESS_KEY = "S3RVER")
-const s3Port = 21001
-const endpoint = (process.env.S3_ENDPOINT = `http://localhost:${s3Port}`)
-const reportsBucket = (process.env.REPORTS_BUCKET = "testBucket")
+const accessKeyId = (process.env.S3_AWS_ACCESS_KEY_ID = "test")
+const secretAccessKey = (process.env.S3_AWS_SECRET_ACCESS_KEY = "test")
+const endpoint = (process.env.S3_ENDPOINT = "http://localhost:4566")
+const reportsBucket = (process.env.REPORTS_BUCKET = "testbucket")
 
 import handler from "./index"
 
 describe("End to end testing the automation report", () => {
-  let s3Server: MockS3
   let apiServer: MockServer
+  let s3Client: S3Client
 
   beforeAll(async () => {
     apiServer = new MockServer({ port: 20001 })
     await apiServer.start()
-    s3Server = new MockS3(s3Port, reportsBucket)
-    await s3Server.start()
+
+    s3Client = new S3Client({
+      region,
+      endpoint,
+      credentials: { accessKeyId, secretAccessKey },
+      forcePathStyle: true
+    })
+
+    try {
+      await s3Client.send(new CreateBucketCommand({ Bucket: reportsBucket }))
+    } catch {
+      console.log("Bucket creation skipped (may already exist)")
+    }
   })
 
   afterAll(async () => {
-    await s3Server.stop()
     await apiServer.stop()
+    s3Client.destroy()
   })
 
   beforeEach(async () => {
@@ -36,7 +46,7 @@ describe("End to end testing the automation report", () => {
     previousMonth.setMonth(previousMonth.getMonth() - 1)
     const dummyMessages = messages(previousMonth)
     await apiServer.reset()
-    await s3Server.reset()
+
     const mockEndpoint = apiServer.get("/messages")
 
     const dates = getLastMonthDates(new Date())
@@ -71,9 +81,9 @@ describe("End to end testing the automation report", () => {
     expect(result).toEqual({
       report: "Upload succeeded"
     })
-    const client = new S3Client({ region, endpoint, credentials: { accessKeyId, secretAccessKey } })
+
     const command = new HeadObjectCommand({ Bucket: reportsBucket, Key: "reports/AutomationRate.xlsx" })
-    const response = await client.send(command)
+    const response = await s3Client.send(command)
     expect(response).toBeDefined()
     expect(response.ContentLength).toBeGreaterThan(100)
   })

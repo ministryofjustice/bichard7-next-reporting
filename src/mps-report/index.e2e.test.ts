@@ -21,8 +21,8 @@ describe("End to end testing the mps report", () => {
     await connection.none("DELETE FROM br7own.work_allocation_report;")
   })
 
-  afterAll(() => {
-    connection.$pool.end()
+  afterAll(async () => {
+    await connection.$pool.end()
   })
 
   it("should put the correct report in Postgres", async () => {

@@ -39,9 +39,14 @@ jobs:
           name: Clone Core
           command: git clone --depth 1 git@github.com:ministryofjustice/bichard7-next-core.git ~/bichard7-next-core
       - run:
-          name: Run Postgres
-          command: cd ~/bichard7-next-core && npm run postgres
-      - run: npm run test
+          name: Run Postgres and LocalStack
+          working_directory: ~/bichard7-next-core
+          command: |
+            npm run postgres
+            npm run localstack
+      - run:
+          name: Run tests
+          command: npm run test
 
 workflows:
   version: 2
