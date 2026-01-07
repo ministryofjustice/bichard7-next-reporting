@@ -9,7 +9,7 @@ import importPlugin from "eslint-plugin-import"
 export default [
   // Global ignores
   {
-    ignores: ["build/*", "jest.setup.ts", "build.js"]
+    ignores: ["node_modules/**", "dist/**", "build/**", "jest.setup.ts", "build.js"]
   },
 
   // Plain JavaScript files
@@ -30,6 +30,7 @@ export default [
     rules: {
       ...js.configs.recommended.rules,
       ...prettier.rules,
+      "no-console": "off",
       curly: ["error", "all"],
       quotes: ["error", "double", { avoidEscape: true }],
       semi: ["error", "never"],
@@ -65,6 +66,7 @@ export default [
       ...jestPlugin.configs.recommended.rules,
       ...jestPlugin.configs.style.rules,
       ...prettier.rules,
+      "no-console": "off",
       curly: ["error", "all"],
       quotes: ["error", "double", { avoidEscape: true }],
       semi: ["error", "never"],
@@ -90,14 +92,6 @@ export default [
       "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "jest/no-standalone-expect": "off"
-    }
-  },
-
-  // .ncurc.js specific config
-  {
-    files: [".ncurc.js"],
-    rules: {
-      "no-console": "off"
     }
   }
 ]

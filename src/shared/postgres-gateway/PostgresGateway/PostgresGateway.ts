@@ -5,7 +5,6 @@ import { isError } from "src/shared/types"
 import type Database from "./Database"
 import type DatabaseConfig from "./DatabaseConfig"
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires, import/extensions
 const TypeOverrides = require("pg/lib/type-overrides.js")
 
 const types: ITypeOverrides = new TypeOverrides() // creating type overrides
@@ -26,12 +25,10 @@ export default class PostgresGateway {
     })
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getResult<T = null>(query: string, parameters?: any[]): PromiseResult<T[]> {
     return this.connection.any<T>(query, parameters)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async execute(query: string, parameters?: any[]): PromiseResult<boolean> {
     const result = await this.connection.manyOrNone(query, parameters)
     if (isError(result)) {

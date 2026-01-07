@@ -48,7 +48,6 @@ const fetchReportRecordsPage = (
 const fetchReportRecords = async (report: string, interval: Interval, config: ApiConfig): Promise<AuditLog[]> => {
   let lastMessageId: string | undefined = undefined
   let records: AuditLog[] = []
-  // eslint-disable-next-line no-constant-condition
   while (true) {
     const fetchResult: AuditLog[] | Error = await fetchReportRecordsPage(report, interval, config, lastMessageId)
 

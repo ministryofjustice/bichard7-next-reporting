@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import nodemailer from "nodemailer"
 import type Email from "./types/Email"
 import type Emailer from "./types/Emailer"

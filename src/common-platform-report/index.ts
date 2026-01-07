@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { isError } from "src/shared/types"
 import config from "./config"
 import getEmailer from "./getEmailer"
