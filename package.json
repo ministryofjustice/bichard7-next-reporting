@@ -13,8 +13,6 @@
     "esbuild": "^0.27.2",
     "esbuild-plugin-ignore": "^1.1.1",
     "eslint": "^8.57.1",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jest": "^28.14.0",
@@ -29,7 +27,8 @@
     "smtp-tester": "^2.1.0",
     "ts-jest": "^29.4.6",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.52.0"
   },
   "scripts": {
     "build": "node build.js",

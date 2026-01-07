@@ -32,7 +32,7 @@ describe("End to end testing the automation report", () => {
 
     try {
       await s3Client.send(new CreateBucketCommand({ Bucket: reportsBucket }))
-    } catch (error) {
+    } catch {
       console.log("Bucket creation skipped (may already exist)")
     }
   })
