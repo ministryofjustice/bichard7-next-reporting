@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import handler from "src/common-platform-report"
 
 handler(new Date())

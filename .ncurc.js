@@ -1,8 +1,6 @@
 module.exports = {
   target: (pkg) => {
-    if (
-      ["eslint", "@typescript-eslint/eslint-plugin", "@typescript-eslint/parser", "eslint-plugin-jest"].includes(pkg)
-    ) {
+    if ([].includes(pkg)) {
       console.log(` ${pkg} is pinned to minor upgrades only (.ncurc.js)`)
       return "minor"
     }

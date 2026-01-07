@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { isMultiple } from "./types/OffenceDetails"
 import type ResultQualifier from "./types/ResultQualifier"
 

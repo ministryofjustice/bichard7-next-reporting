@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { PostgresGateway } from "src/shared/postgres-gateway"
 import { isError } from "src/shared/types"
 import checkConnection from "./checkConnection"

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import * as AWS from "aws-sdk"
 import { fetchReportRecordsParallel } from "src/shared"
 import { isError } from "src/shared/types"

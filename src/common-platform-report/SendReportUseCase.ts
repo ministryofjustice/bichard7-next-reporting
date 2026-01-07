@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import type { PromiseResult } from "src/shared/types"
 import { isError } from "src/shared/types"
 import config from "./config"
