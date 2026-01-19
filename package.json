@@ -25,7 +25,7 @@
     "jest-mock-server": "^0.1.0",
     "lint-staged": "^16.2.7",
     "npm-check-updates": "^19.3.1",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.0",
     "s3rver": "^3.7.1",
     "shelljs": "^0.10.0",
     "smtp-tester": "^2.1.0",
@@ -45,14 +45,14 @@
     "*.{js,ts}": "eslint --cache --fix --max-warnings 0 --ignore-pattern !.ncurc.js"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.968.0",
+    "@aws-sdk/client-s3": "^3.971.0",
     "aws-sdk": "^2.1693.0",
     "axios": "^1.13.2",
     "csv-parse": "^6.1.0",
     "csv-stringify": "^6.6.0",
     "jszip": "^3.10.1",
     "nodemailer": "^7.0.12",
-    "pg": "^8.16.3",
+    "pg": "^8.17.1",
     "pg-promise": "^12.3.0",
     "xlsx-js-style": "^1.2.0",
     "xml-js": "^1.6.11"
