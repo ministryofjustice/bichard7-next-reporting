@@ -1,6 +1,9 @@
 name: Test Slack Notification
 
 on:
+  push:
+    branches:
+      - wren/BICAWS7-4115-slack-notifs
   workflow_dispatch:
 
 jobs:
