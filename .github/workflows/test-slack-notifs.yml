@@ -22,14 +22,16 @@ jobs:
           webhook-type: incoming-webhook
           payload: |
             text: "Test GitHub Action Failed Successfully!"
-            blocks:
-              - type: "section"
-                text:
-                  type: "mrkdwn"
-                  text: ":elmo-fire: *${{ github.workflow }}* failed in <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>"
-              - type: "context"
-                elements:
-                  - type: "mrkdwn"
-                    text: "Linked to Repo <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>"
+            attachments:
+              - color: "#a30000" # Red
+                blocks:
+                  - type: "section"
+                    text:
+                      type: "mrkdwn"
+                      text: ":elmo-fire: *${{ github.workflow }}* failed in <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>"
+                  - type: "context"
+                    elements:
+                      - type: "mrkdwn"
+                        text: "Linked to Repo <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
