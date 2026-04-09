@@ -1,0 +1,32 @@
+name: Test Slack Notification
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Force a Failure
+        run: |
+          echo "This step is designed to fail."
+          exit 1
+
+      - name: Report Status
+        if: failure()
+        uses: slackapi/slack-github-action@485a9d42d3a73031f12ec201c457e2162c45d02d #v2.0.0
+        with:
+          payload: |
+            text: "Test GitHub Action Failed Successfully!"
+            blocks:
+              - type: "section"
+                text:
+                  type: "mrkdwn"
+                  text: ":elmo-fire: *${{ github.workflow }}* failed in <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>"
+              - type: "context"
+                elements:
+                  - type: "mrkdwn"
+                    text: "Linked to Repo <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
