@@ -8,6 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4
 
+      - name: ⛓️ SLSA Supply Chain Security
+        uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278 # v1.4.0
+
       - uses: ministryofjustice/github-actions/code-formatter@db1a54895bf5fb975c60af47e5a3aab96505ca3e #v18.6.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
