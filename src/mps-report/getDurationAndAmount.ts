@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { isMultiple } from "./types/OffenceDetails"
 import type ResultDuration from "./types/ResultDuration"
 import type XmlStringCell from "./types/XmlStringCell"
