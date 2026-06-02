@@ -1,4 +1,4 @@
-import handler from "src/common-platform-report"
+import { handler } from "src/common-platform-report"
 
 handler(new Date())
   .then((succ) => console.log(succ))

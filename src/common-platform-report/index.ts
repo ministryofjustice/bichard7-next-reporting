@@ -14,7 +14,7 @@ interface MpsReportResult {
   error?: string
 }
 
-export default async (event: unknown): Promise<MpsReportResult> => {
+export const handler = async (event: unknown): Promise<MpsReportResult> => {
   let now = new Date()
   if (event !== undefined && event instanceof Date) {
     // Enable us to override the date for end to end testing

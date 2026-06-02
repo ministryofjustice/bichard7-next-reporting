@@ -12,7 +12,7 @@ const secretAccessKey = (process.env.S3_AWS_SECRET_ACCESS_KEY = "test")
 const endpoint = (process.env.S3_ENDPOINT = "http://localhost:4566")
 const reportsBucket = (process.env.REPORTS_BUCKET = "testbucket")
 
-import handler from "./index"
+import { handler } from "./index"
 
 describe("End to end testing the automation report", () => {
   let apiServer: MockServer

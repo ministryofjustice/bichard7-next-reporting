@@ -1,4 +1,4 @@
-import handler from "src/top-exceptions-report"
+import { handler } from "src/top-exceptions-report"
 
 handler()
   .then((succ) => console.log(succ))

@@ -3,7 +3,7 @@ import pgPromise from "pg-promise"
 import type pg from "pg-promise/typescript/pg-subset"
 import { isError } from "src/shared/types"
 
-import handler from "./index"
+import { handler } from "./index"
 import config from "./lib/config"
 
 describe("End to end testing the mps report", () => {

@@ -4,7 +4,7 @@ import { isError } from "src/shared/types"
 import config from "./config"
 import generateReport from "./generateReport"
 import getLastMonthDates from "./getLastMonthDates"
-import fs from "fs"
+import fs from "node:fs"
 
 interface AutomationReportResult {
   report?: string
@@ -13,7 +13,7 @@ interface AutomationReportResult {
 
 const s3 = new AWS.S3(config.s3)
 
-export default async (): Promise<AutomationReportResult> => {
+export const handler = async (): Promise<AutomationReportResult> => {
   let date = new Date()
   if (process.env.DATE) {
     date = new Date(process.env.DATE)

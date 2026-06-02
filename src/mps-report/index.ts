@@ -10,7 +10,7 @@ interface MpsReportResult {
   error?: string
 }
 
-export default async (): Promise<MpsReportResult> => {
+export const handler = async (): Promise<MpsReportResult> => {
   console.log(" -!- Starting function ...")
   const gateway = new PostgresGateway(config.database)
 

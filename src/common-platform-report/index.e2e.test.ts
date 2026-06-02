@@ -8,9 +8,10 @@ process.env.AUDIT_LOG_TABLE_NAME = "auditLogTable"
 process.env.SMTP_HOST = "localhost"
 process.env.SMTP_PORT = "20002"
 process.env.SMTP_TLS = "false"
+
 import { MockServer } from "jest-mock-server"
 import { isError } from "src/shared/types"
-import handler from "./index"
+import { handler } from "./index"
 import MockMailServer from "./test/MockMailServer"
 import { log } from "./test/mocks/fetchApiGatewayResponse"
 

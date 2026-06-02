@@ -12,7 +12,7 @@ import { MockServer } from "jest-mock-server"
 import { generateDayIntervals } from "src/shared"
 import type { AuditLog, Interval } from "src/shared/types"
 import getLastMonthDates from "./getLastMonthDates"
-import handler from "./index"
+import { handler } from "./index"
 import messages from "./test/dummyMessages"
 
 describe("End to end testing the automation report", () => {
