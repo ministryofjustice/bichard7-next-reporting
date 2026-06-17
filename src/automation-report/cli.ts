@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import handler from "./index"
+import { handler } from "./index"
 
 handler()
   .then((succ) => console.log(succ))

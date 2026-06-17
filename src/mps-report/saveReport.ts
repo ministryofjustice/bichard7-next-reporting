@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import JSZip from "jszip"
 import type { PostgresGateway } from "src/shared/postgres-gateway"
 import type { PromiseResult } from "src/shared/types"

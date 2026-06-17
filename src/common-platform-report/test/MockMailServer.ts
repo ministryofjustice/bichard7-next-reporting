@@ -19,7 +19,7 @@ export type Email = {
 export default class MockMailServer {
   messages: Email[]
 
-  server: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  server: any
 
   constructor(port: number) {
     this.server = mailServer.init(port)

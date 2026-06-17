@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import * as AWS from "aws-sdk"
 import { fetchReportRecordsParallel } from "src/shared"
 import { isError } from "src/shared/types"
@@ -11,7 +10,7 @@ interface TopExceptionsReportResult {
   error?: string
 }
 
-export default async (): Promise<TopExceptionsReportResult> => {
+export const handler = async (): Promise<TopExceptionsReportResult> => {
   const dates = getLastMonthDates(new Date())
 
   console.log("Getting messages ...")

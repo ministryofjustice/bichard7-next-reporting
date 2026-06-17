@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { PostgresGateway } from "src/shared/postgres-gateway"
 import { isError } from "src/shared/types"
 import checkConnection from "./checkConnection"
@@ -11,7 +10,7 @@ interface MpsReportResult {
   error?: string
 }
 
-export default async (): Promise<MpsReportResult> => {
+export const handler = async (): Promise<MpsReportResult> => {
   console.log(" -!- Starting function ...")
   const gateway = new PostgresGateway(config.database)
 
