@@ -1,6 +1,6 @@
 module.exports = {
   target: (pkg) => {
-    if ([].includes(pkg)) {
+    if (["typescript"].includes(pkg)) {
       console.log(` ${pkg} is pinned to minor upgrades only (.ncurc.js)`)
       return "minor"
     }
