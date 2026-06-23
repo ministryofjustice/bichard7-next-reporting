@@ -109,3 +109,6 @@ junit.xml
 
 # IDE Setup
 .idea/
+
+# macOS files
+.DS_Store
