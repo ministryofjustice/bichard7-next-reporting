@@ -3,6 +3,8 @@ import convertCsvToXlsx from "src/shared/csv-to-xlsx"
 import { findForceName } from "src/shared/forces"
 import type { AuditLog, KeyValuePair } from "src/shared/types"
 import getErrorName from "./errorNames/getErrorName"
+import type { TimeRange } from "./getLastMonthDates"
+import { formatInTimeZone } from "date-fns-tz"
 
 type ForceExceptions = KeyValuePair<string, number>
 type ForcesExceptions = KeyValuePair<string, ForceExceptions>
@@ -43,8 +45,9 @@ const calculateForcesExceptions = (allAttributes: KeyValuePair<string, unknown>[
   }, {}) as ForcesExceptions
 }
 
-const generateCsv = (forcesExceptions: ForcesExceptions): string => {
+const generateCsv = (forcesExceptions: ForcesExceptions): string[][] => {
   const rows = [["Force", "Exception", "Error Text", "Count"]]
+
   Object.keys(forcesExceptions).forEach((forceName) => {
     const forceExceptions = forcesExceptions[forceName]
     Object.keys(forceExceptions).forEach((exceptionCode) => {
@@ -52,17 +55,22 @@ const generateCsv = (forcesExceptions: ForcesExceptions): string => {
       rows.push([`${forceName}`, `${exceptionCode}`, `${errorText}`, `${forceExceptions[exceptionCode]}`])
     })
   })
-  return stringify(rows)
+
+  return rows
 }
 
-export default (messages: AuditLog[]): Buffer => {
+export default (messages: AuditLog[], dates: TimeRange): Buffer => {
   const attributesWithErrors = getAttributesWithErrors(messages)
 
   const forcesExceptions = calculateForcesExceptions(attributesWithErrors)
 
   const csvResult = generateCsv(forcesExceptions)
 
-  const xlsxResult = convertCsvToXlsx(csvResult)
+  const startDateFormatted = formatInTimeZone(dates.start, "Europe/London", "dd/MM/yyyy")
+  const endDateFormatted = formatInTimeZone(dates.end, "Europe/London", "dd/MM/yyyy")
+  const title = `Bichard 7 Top Exceptions - ${startDateFormatted} to ${endDateFormatted}`
+
+  const xlsxResult = convertCsvToXlsx(stringify(csvResult), title)
 
   return xlsxResult
 }

@@ -14,4 +14,11 @@ describe("getLastMonthDates", () => {
     expect(result.start.toISOString()).toBe("2020-12-01T00:00:00.000Z")
     expect(result.end.toISOString()).toBe("2021-01-01T00:00:00.000Z")
   })
+
+  it("should generate the handle dates for BST", () => {
+    const now = new Date("2021-07-21T18:50:26.123Z")
+    const result = getLastMonthDates(now)
+    expect(result.start.toISOString()).toBe("2021-05-31T23:00:00.000Z")
+    expect(result.end.toISOString()).toBe("2021-06-30T23:00:00.000Z")
+  })
 })

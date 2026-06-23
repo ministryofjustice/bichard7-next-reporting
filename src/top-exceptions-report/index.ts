@@ -23,7 +23,7 @@ export const handler = async (): Promise<TopExceptionsReportResult> => {
   }
 
   console.log("Generating report ...")
-  const report = generateReport(messagesForReport)
+  const report = generateReport(messagesForReport, dates)
   if (isError(report)) {
     return {
       error: report.message
