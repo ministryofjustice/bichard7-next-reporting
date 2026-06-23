@@ -1,4 +1,5 @@
 import { endOfMonth, startOfMonth, subMonths } from "date-fns"
+import { toZonedTime, toDate } from "date-fns-tz"
 
 export type TimeRange = {
   start: Date
@@ -6,8 +7,15 @@ export type TimeRange = {
 }
 
 export default (now: Date): TimeRange => {
-  const start = startOfMonth(subMonths(now, 1))
-  const end = endOfMonth(subMonths(now, 1))
+  const timeZone = "Europe/London"
 
-  return { start, end }
+  const zonedNow = toZonedTime(now, timeZone)
+
+  const zonedStart = startOfMonth(subMonths(zonedNow, 1))
+  const zonedEnd = endOfMonth(subMonths(zonedNow, 1))
+
+  return {
+    start: toDate(zonedStart, { timeZone }),
+    end: toDate(zonedEnd, { timeZone })
+  }
 }
