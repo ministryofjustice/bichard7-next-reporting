@@ -45,14 +45,8 @@ const calculateForcesExceptions = (allAttributes: KeyValuePair<string, unknown>[
   }, {}) as ForcesExceptions
 }
 
-const generateCsv = (forcesExceptions: ForcesExceptions, dates: TimeRange): string[][] => {
-  const startDateFormatted = formatInTimeZone(dates.start, "Europe/London", "dd/MM/yyyy")
-  const endDateFormatted = formatInTimeZone(dates.end, "Europe/London", "dd/MM/yyyy")
-
-  const rows = [
-    [`Bichard 7 Top Exceptions - ${startDateFormatted} to ${endDateFormatted}`],
-    ["Force", "Exception", "Error Text", "Count"]
-  ]
+const generateCsv = (forcesExceptions: ForcesExceptions): string[][] => {
+  const rows = [["Force", "Exception", "Error Text", "Count"]]
 
   Object.keys(forcesExceptions).forEach((forceName) => {
     const forceExceptions = forcesExceptions[forceName]
@@ -70,9 +64,12 @@ export default (messages: AuditLog[], dates: TimeRange): Buffer => {
 
   const forcesExceptions = calculateForcesExceptions(attributesWithErrors)
 
-  const csvResult = generateCsv(forcesExceptions, dates)
+  const csvResult = generateCsv(forcesExceptions)
 
-  const title = csvResult.shift()?.[0]
+  const startDateFormatted = formatInTimeZone(dates.start, "Europe/London", "dd/MM/yyyy")
+  const endDateFormatted = formatInTimeZone(dates.end, "Europe/London", "dd/MM/yyyy")
+  const title = `Bichard 7 Top Exceptions - ${startDateFormatted} to ${endDateFormatted}`
+
   const xlsxResult = convertCsvToXlsx(stringify(csvResult), title)
 
   return xlsxResult
