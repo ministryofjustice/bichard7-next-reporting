@@ -1,8 +1,11 @@
+const minor = ["typescript", "eslint"]
+
 module.exports = {
   target: (pkg) => {
-    if (["typescript"].includes(pkg)) {
-      console.log(` ${pkg} is pinned to minor upgrades only (.ncurc.js)`)
-      return "minor"
+    if (minor.some((pin) => pin === pkg)) {
+      const res = "minor"
+      console.log(` ${pkg} is pinned to ${res} upgrades only (.ncurc.js)`)
+      return res
     }
 
     if ([].includes(pkg)) {
