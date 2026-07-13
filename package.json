@@ -29,8 +29,7 @@
     "smtp-tester": "^2.1.0",
     "ts-jest": "^29.4.11",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.52.0"
+    "typescript": "^5.9.3"
   },
   "scripts": {
     "build": "node build.js",
