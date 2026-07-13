@@ -1,6 +1,7 @@
 import js from "@eslint/js"
 import globals from "globals"
-import tseslint from "typescript-eslint"
+import typescriptEslint from "@typescript-eslint/eslint-plugin"
+import tsParser from "@typescript-eslint/parser"
 import prettier from "eslint-config-prettier"
 import prettierPlugin from "eslint-plugin-prettier"
 import jestPlugin from "eslint-plugin-jest"
@@ -44,7 +45,7 @@ export default [
   {
     files: ["**/*.ts"],
     languageOptions: {
-      parser: tseslint.parser,
+      parser: tsParser,
       parserOptions: {
         ecmaVersion: 2020,
         project: "./tsconfig.json"
@@ -55,14 +56,13 @@ export default [
       }
     },
     plugins: {
-      "@typescript-eslint": tseslint.plugin,
+      "@typescript-eslint": typescriptEslint,
       jest: jestPlugin,
       import: importPlugin,
       prettier: prettierPlugin
     },
     rules: {
       ...js.configs.recommended.rules,
-      ...tseslint.configs.recommended.rules,
       ...jestPlugin.configs.recommended.rules,
       ...jestPlugin.configs.style.rules,
       ...prettier.rules,
