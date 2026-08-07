@@ -30,13 +30,17 @@ jobs:
       - name: Run build
         run: npm run build
 
-      - name: Clone Core Repo
+      - name: Checkout Core Repository
         uses: actions/checkout@v4
         with:
           repository: 'ministryofjustice/bichard7-next-core'
           token: ${{ secrets.GH_PAT_TOKEN }}
           path: 'bichard7-next-core'
           fetch-depth: 1
+    
+      - name: Install core dependencies
+        working-directory: ./bichard7-next-core
+        run: npm ci
 
       - name: Run Postgres and LocalStack
         working-directory: ./bichard7-next-core
