@@ -49,5 +49,4 @@ jobs:
           npm run localstack
 
       - name: Run tests
-        working-directory: ./bichard7-next-reporting
         run: npm run test
