@@ -31,11 +31,11 @@ jobs:
         run: npm run build
 
       - name: Checkout Core Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4
         with:
           repository: 'ministryofjustice/bichard7-next-core'
           token: ${{ secrets.GH_PAT_TOKEN }}
-          path: 'bichard7-next-core'
+          path: '~/bichard7-next-core'
           fetch-depth: 1
     
       - name: Install core dependencies
