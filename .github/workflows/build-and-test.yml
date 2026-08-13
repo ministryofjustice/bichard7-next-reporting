@@ -50,7 +50,7 @@ jobs:
         with:
           repository: 'ministryofjustice/bichard7-next-core'
           token: ${{ secrets.GH_PAT_TOKEN }}
-          path: '~/bichard7-next-core'
+          path: 'bichard7-next-core'
           fetch-depth: 1
 
       - name: Print working directory
@@ -59,7 +59,7 @@ jobs:
           ls 
     
       - name: Install core dependencies
-        working-directory: ~/bichard7-next-core
+        working-directory: ./bichard7-next-core
         run: npm ci --ignore-scripts
 
       - name: Print working directory
@@ -68,7 +68,7 @@ jobs:
           ls 
 
       - name: Run Postgres and LocalStack
-        working-directory: ~/bichard7-next-core
+        working-directory: ./bichard7-next-core
         run: |
           npm run postgres
           npm run localstack
@@ -79,7 +79,7 @@ jobs:
           ls 
 
       - name: Run test
-        working-directory: ~/bichard7-next-reporting
+        working-directory: ./bichard7-next-reporting
         run: |
           pwd
           ls
