@@ -19,8 +19,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4
+
+      - name: Checkout Core Repository
+        uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4
         with:
-          path: '~/bichard7-next-reporting'
+          repository: 'ministryofjustice/bichard7-next-core'
+          token: ${{ secrets.GH_PAT_TOKEN }}
+          fetch-depth: 1
+
+      - name: Print working directory
+        run: |
+          pwd
+          ls 
 
       - name: Setup node version
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6
@@ -51,19 +61,6 @@ jobs:
           pwd
           ls 
 
-      - name: Checkout Core Repository
-        uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4
-        with:
-          repository: 'ministryofjustice/bichard7-next-core'
-          token: ${{ secrets.GH_PAT_TOKEN }}
-          path: '~/bichard7-next-core'
-          fetch-depth: 1
-
-      - name: Print working directory
-        run: |
-          pwd
-          ls 
-    
       - name: Install core dependencies
         working-directory: ~/bichard7-next-core
         run: npm ci --ignore-scripts
