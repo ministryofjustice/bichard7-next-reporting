@@ -23,12 +23,21 @@ jobs:
           
       - name: ⛓️ SLSA Supply Chain Security
         uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278 # v1.4.0
+      
+      - name: Print working directory
+        run: pwd 
 
       - name: Install dependencies
         run: npm ci --ignore-scripts
+      
+      - name: Print working directory
+        run: pwd 
 
       - name: Run build
         run: npm run build
+      
+      - name: Print working directory
+        run: pwd 
 
       - name: Checkout Core Repository
         uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4
@@ -37,10 +46,16 @@ jobs:
           token: ${{ secrets.GH_PAT_TOKEN }}
           path: '~/bichard7-next-core'
           fetch-depth: 1
+
+      - name: Print working directory
+        run: pwd 
     
       - name: Install core dependencies
         working-directory: ~/bichard7-next-core
         run: npm ci --ignore-scripts
+
+      - name: Print working directory
+        run: pwd 
 
       - name: Run Postgres and LocalStack
         working-directory: ~/bichard7-next-core
@@ -48,6 +63,11 @@ jobs:
           npm run postgres
           npm run localstack
 
+      - name: Print working directory
+        run: pwd 
+
       - name: Run test
-        working-directory: ~/bichard7-next-core
-        run: npm run test
+        working-directory: ~/bichard7-next-reporting
+        run: |
+          pwd
+          npm run test
