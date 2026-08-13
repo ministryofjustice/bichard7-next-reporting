@@ -48,6 +48,5 @@ jobs:
           npm run postgres
           npm run localstack
 
-      - name: Run tests
-        working-directory: ./bichard7-next-reporting
+      - name: Run test
         run: npm run test
