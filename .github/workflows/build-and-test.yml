@@ -23,7 +23,7 @@ jobs:
         with:
           repository: 'ministryofjustice/bichard7-next-core'
           token: ${{ secrets.GH_PAT_TOKEN }}
-          path: bichard7-next-reporting
+          path: bichard7-next-core
           fetch-depth: 1
 
       - name: Print working directory
