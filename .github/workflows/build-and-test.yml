@@ -39,11 +39,11 @@ jobs:
           fetch-depth: 1
     
       - name: Install core dependencies
-        working-directory: ./bichard7-next-core
-        run: npm ci
+        working-directory: ~/bichard7-next-core
+        run: npm ci --ignore-scripts
 
       - name: Run Postgres and LocalStack
-        working-directory: ./bichard7-next-core
+        working-directory: ~/bichard7-next-core
         run: |
           npm run postgres
           npm run localstack
