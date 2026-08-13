@@ -34,7 +34,8 @@ jobs:
       - name: Setup node version
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6
         with:
-          node-version-file: .nvmrc
+          node-version-file: bichard7-next-reporting/.nvmrc
+          cache-dependency-path: bichard7-next-reporting/package-lock.json
           
       - name: ⛓️ SLSA Supply Chain Security
         uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278 # v1.4.0
@@ -45,6 +46,7 @@ jobs:
           ls 
 
       - name: Install dependencies
+        working-directory: ./bichard7-next-reporting
         run: npm ci --ignore-scripts
       
       - name: Print working directory
@@ -53,6 +55,7 @@ jobs:
           ls 
 
       - name: Run build
+        working-directory: ./bichard7-next-reporting
         run: npm run build
       
       - name: Print working directory
@@ -61,7 +64,7 @@ jobs:
           ls 
 
       - name: Install core dependencies
-        working-directory: ~/bichard7-next-core
+        working-directory: ./bichard7-next-core
         run: npm ci --ignore-scripts
 
       - name: Print working directory
@@ -70,7 +73,7 @@ jobs:
           ls 
 
       - name: Run Postgres and LocalStack
-        working-directory: ~/bichard7-next-core
+        working-directory: ./bichard7-next-core
         run: |
           npm run postgres
           npm run localstack
@@ -81,7 +84,7 @@ jobs:
           ls 
 
       - name: Run test
-        working-directory: ~/bichard7-next-reporting
+        working-directory: ./bichard7-next-reporting
         run: |
           pwd
           ls
