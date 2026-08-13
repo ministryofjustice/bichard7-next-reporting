@@ -12,10 +12,6 @@ jobs:
     name: Build and Test Reporting
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./work
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@1e31de5234b9f8995739874a8ce0492dc87873e2 # v4
@@ -30,7 +26,7 @@ jobs:
       - name: Print working directory
         run: |
           pwd
-          ls 
+          find . -maxdepth 2 
 
       - name: Setup node version
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6
