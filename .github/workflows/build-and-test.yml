@@ -26,11 +26,6 @@ jobs:
           path: bichard7-next-core
           fetch-depth: 1
 
-      - name: Print working directory
-        run: |
-          pwd
-          find . -maxdepth 2 
-
       - name: Setup node version
         uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6
         with:
@@ -39,38 +34,18 @@ jobs:
           
       - name: ⛓️ SLSA Supply Chain Security
         uses: ministryofjustice/devsecops-actions/sca/slsa@805c9da24fe7083e24b8435a626463b25951d278 # v1.4.0
-      
-      - name: Print working directory
-        run: |
-          pwd
-          ls 
 
       - name: Install dependencies
         working-directory: ./bichard7-next-reporting
         run: npm ci --ignore-scripts
-      
-      - name: Print working directory
-        run: |
-          pwd
-          ls 
 
       - name: Run build
         working-directory: ./bichard7-next-reporting
         run: npm run build
-      
-      - name: Print working directory
-        run: |
-          pwd
-          ls 
 
       - name: Install core dependencies
         working-directory: ./bichard7-next-core
         run: npm ci --ignore-scripts
-
-      - name: Print working directory
-        run: |
-          pwd
-          ls 
 
       - name: Run Postgres and LocalStack
         working-directory: ./bichard7-next-core
@@ -78,14 +53,6 @@ jobs:
           npm run postgres
           npm run localstack
 
-      - name: Print working directory
-        run: |
-          pwd
-          ls 
-
       - name: Run test
         working-directory: ./bichard7-next-reporting
-        run: |
-          pwd
-          ls
-          npm run test
+        run: npm run test
