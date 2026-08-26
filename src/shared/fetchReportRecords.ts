@@ -19,22 +19,23 @@ const fetchReportRecordsPage = (
   const url = `${
     config.apiUrl
   }/messages?eventsFilter=${report}&start=${start.toISOString()}&end=${end.toISOString()}&limit=${pageLimit}${lastMessageIdQuery}`
-  return fetch
-    (url, {
-      headers: { "X-API-Key": config.apiKey }
-    })
+  return fetch(url, {
+    headers: { "X-API-Key": config.apiKey }
+  })
     .then((result) => {
       if (!result.ok) {
-        throw { status: result.status, message: `HTTP Error: ${result.status}` }
+        const message =
+          result.status === 504
+            ? `Request timed out. Duration: ${(new Date().getTime() - startTime) / 1000}`
+            : `HTTP Error: ${result.status}`
+        throw new Error(message)
       }
+
       return result.json() as Promise<AuditLog[]>
     })
-    .catch((e: any) => {
+    .catch((e: Error) => {
       if (attempts > 0) {
-        const message = e.status === 504
-            ? `Request timed out. Duration: ${(new Date().getTime() - startTime) / 1000}`
-            : e.message
-        console.error(message, "attempts remaining: ", attempts - 1, url)
+        console.error(e.message, "attempts remaining: ", attempts - 1, url)
 
         return fetchReportRecordsPage(report, { start, end }, config, lastMessageId, attempts - 1)
       }
