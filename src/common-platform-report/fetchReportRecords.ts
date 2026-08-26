@@ -1,5 +1,4 @@
 /* eslint-disable require-await */
-import axios from "axios"
 import type { AuditLog } from "src/shared/types"
 import config from "./config"
 
@@ -9,10 +8,10 @@ export default async (lastMessageId?: string): Promise<AuditLog[]> => {
     lastMessageIdQuery = `&lastMessageId=${lastMessageId}`
   }
 
-  return axios
-    .get<AuditLog>(`${config.apiUrl}/messages?status=Error${lastMessageIdQuery}`, {
+  return fetch
+    (`${config.apiUrl}/messages?status=Error${lastMessageIdQuery}`, {
       headers: { "X-API-Key": config.apiKey }
     })
-    .then((result) => result.data)
+    .then((result) => result.json() as Promise<AuditLog>)
     .catch((e) => e)
 }
