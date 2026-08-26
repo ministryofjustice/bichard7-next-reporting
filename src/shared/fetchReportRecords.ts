@@ -24,10 +24,12 @@ const fetchReportRecordsPage = (
       headers: { "X-API-Key": config.apiKey }
     })
     .then((result) => {
-      // console.log("Page succeeded: ", url)
+      if (!result.ok) {
+        throw { status: result.status, message: `HTTP Error: ${result.status}` }
+      }
       return result.json() as Promise<AuditLog[]>
     })
-    .catch((e: Error) => {
+    .catch((e: any) => {
       if (attempts > 0) {
         const message = e.status === 504
             ? `Request timed out. Duration: ${(new Date().getTime() - startTime) / 1000}`
