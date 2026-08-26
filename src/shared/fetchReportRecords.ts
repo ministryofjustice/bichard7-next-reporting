@@ -1,5 +1,3 @@
-import type { AxiosError } from "axios"
-import axios from "axios"
 import type { ApiConfig, AuditLog, Interval, PromiseResult } from "src/shared/types"
 import { isError } from "src/shared/types"
 import { generateDayIntervals } from "."
@@ -21,18 +19,17 @@ const fetchReportRecordsPage = (
   const url = `${
     config.apiUrl
   }/messages?eventsFilter=${report}&start=${start.toISOString()}&end=${end.toISOString()}&limit=${pageLimit}${lastMessageIdQuery}`
-  return axios
-    .get<AuditLog[]>(url, {
+  return fetch
+    (url, {
       headers: { "X-API-Key": config.apiKey }
     })
     .then((result) => {
       // console.log("Page succeeded: ", url)
-      return result.data
+      return result.json() as Promise<AuditLog[]>
     })
-    .catch((e: AxiosError) => {
+    .catch((e: Error) => {
       if (attempts > 0) {
-        const message =
-          e.response?.status === 504
+        const message = e.status === 504
             ? `Request timed out. Duration: ${(new Date().getTime() - startTime) / 1000}`
             : e.message
         console.error(message, "attempts remaining: ", attempts - 1, url)
