@@ -1,19 +1,20 @@
 import { PostgresGateway } from "src/shared/postgres-gateway"
 import { isError } from "src/shared/types"
 import getCourtErrors from "./getCourtErrors"
-import config from "./lib/config"
+import getConfig from "./lib/config"
 
 describe("GenerateReport", () => {
   let gateway: PostgresGateway
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    const config = await getConfig()
     gateway = new PostgresGateway(config.database)
   })
 
   beforeEach(async () => {
     await gateway.execute("TRUNCATE TABLE br7own.error_list CASCADE")
     await gateway.execute(`INSERT INTO br7own.error_list 
-        VALUES(default, 'msgid1', 0, 1, 1, 0, 0, 0, 'System', null, 42, '1101ZD0100000448754K', 'B01EF01', '', 'UPD-MSG', '', current_timestamp, 'error-reason', 'trg-reason', 0, 0, current_date, 'ptiurn', 'court-name', null, current_timestamp, 'err-resolved-by', 'trg-resolved-by', null, null, 'defendant', '01ZD', null, 'court-ref', null, null, null, default, default)`)
+        VALUES(default, 'msgid2', 0, 1, 1, 0, 0, 0, 'System', null, 42, '1101ZD0100000448754K', 'B01EF01', '', 'UPD-MSG', '', current_timestamp, 'error-reason', 'trg-reason', 0, 0, current_date, 'ptiurn', 'court-name', null, current_timestamp, 'err-resolved-by', 'trg-resolved-by', null, null, 'defendant', '01ZD', null, 'court-ref', null, null, null, default, default)`)
   })
 
   afterAll(async () => {

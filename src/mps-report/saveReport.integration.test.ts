@@ -1,7 +1,7 @@
 import JSZip from "jszip"
 import { PostgresGateway } from "src/shared/postgres-gateway"
 import { isError } from "src/shared/types"
-import config from "./lib/config"
+import getConfig from "./lib/config"
 import saveReport from "./saveReport"
 
 type ReportRecord = {
@@ -13,7 +13,8 @@ type ReportRecord = {
 describe("GenerateReport", () => {
   let gateway: PostgresGateway
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    const config = await getConfig()
     gateway = new PostgresGateway(config.database)
   })
 
