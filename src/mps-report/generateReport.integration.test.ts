@@ -2,12 +2,13 @@ import { readFileSync } from "fs"
 import { PostgresGateway } from "src/shared/postgres-gateway"
 import { isError } from "src/shared/types"
 import generateReport from "./generateReport"
-import config from "./lib/config"
+import getConfig from "./lib/config"
 
 describe("GenerateReport", () => {
   let gateway: PostgresGateway
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    const config = await getConfig()
     gateway = new PostgresGateway(config.database)
   })
 
