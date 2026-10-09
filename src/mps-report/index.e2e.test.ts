@@ -4,12 +4,14 @@ import type pg from "pg-promise/typescript/pg-subset"
 import { isError } from "src/shared/types"
 
 import { handler } from "./index"
-import config from "./lib/config"
+import getConfig from "./lib/config"
 
 describe("End to end testing the mps report", () => {
   let connection: IDatabase<unknown, pg.IClient>
 
   beforeAll(async () => {
+    const config = await getConfig()
+
     connection = pgPromise({})({
       host: config.database.host,
       port: config.database.port,
@@ -28,7 +30,7 @@ describe("End to end testing the mps report", () => {
   it("should put the correct report in Postgres", async () => {
     const result = await handler()
     expect(result).toEqual({
-      report: "Saved successfuly"
+      report: "Saved successfully"
     })
 
     const sqlQuery = `

@@ -2,7 +2,7 @@ import { PostgresGateway } from "src/shared/postgres-gateway"
 import { isError } from "src/shared/types"
 import checkConnection from "./checkConnection"
 import generateReport from "./generateReport"
-import config from "./lib/config"
+import getConfig from "./lib/config"
 import saveReport from "./saveReport"
 
 interface MpsReportResult {
@@ -12,6 +12,8 @@ interface MpsReportResult {
 
 export const handler = async (): Promise<MpsReportResult> => {
   console.log(" -!- Starting function ...")
+  let config = await getConfig()
+
   const gateway = new PostgresGateway(config.database)
 
   console.log(" -!- Checking connection ...")
@@ -40,7 +42,7 @@ export const handler = async (): Promise<MpsReportResult> => {
     }
   }
 
-  return Promise.resolve({
-    report: "Saved successfuly"
-  })
+  return {
+    report: "Saved successfully"
+  }
 }

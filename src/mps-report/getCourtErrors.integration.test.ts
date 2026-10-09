@@ -1,12 +1,13 @@
 import { PostgresGateway } from "src/shared/postgres-gateway"
 import { isError } from "src/shared/types"
 import getCourtErrors from "./getCourtErrors"
-import config from "./lib/config"
+import getConfig from "./lib/config"
 
 describe("GenerateReport", () => {
   let gateway: PostgresGateway
 
-  beforeAll(() => {
+  beforeAll(async () => {
+    const config = await getConfig()
     gateway = new PostgresGateway(config.database)
   })
 
