@@ -1,11 +1,8 @@
 import { isError } from "src/shared/types"
-import config from "./config"
 import getEmailer from "./getEmailer"
 import SendReportUseCase from "./SendReportUseCase"
 import shouldSendReport from "./shouldSendReport"
-
-const emailer = getEmailer(config.smtp)
-const sendReportUseCase = new SendReportUseCase(emailer)
+import getConfig from "./config"
 
 const hoursToSend = [5, 17]
 
@@ -15,9 +12,13 @@ interface MpsReportResult {
 }
 
 export const handler = async (event: unknown): Promise<MpsReportResult> => {
+  const config = await getConfig()
+  const emailer = getEmailer(config.smtp)
+  const sendReportUseCase = new SendReportUseCase(emailer)
+
   let now = new Date()
   if (event !== undefined && event instanceof Date) {
-    // Enable us to override the date for end to end testing
+    // Enable us to override the date for end-to-end testing
     now = event
   }
   if (shouldSendReport(now, hoursToSend)) {
