@@ -1,10 +1,10 @@
 import type { PromiseResult } from "src/shared/types"
 import { isError } from "src/shared/types"
-import config from "./config"
 import generateDates from "./generateDates"
 import getReportData from "./getReportData"
 import sendEmail from "./sendEmail"
 import type Emailer from "./types/Emailer"
+import getConfig from "./config"
 
 export default class SendReportUseCase {
   protected readonly emailer: Emailer
@@ -14,6 +14,7 @@ export default class SendReportUseCase {
   }
 
   async execute(now: Date): PromiseResult<boolean> {
+    const config = await getConfig()
     const timeRange = generateDates(now, config.timePeriodHours)
 
     const records = await getReportData(timeRange)
