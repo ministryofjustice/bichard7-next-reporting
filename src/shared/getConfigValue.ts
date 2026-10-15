@@ -1,8 +1,7 @@
-import { GetParameterCommand, SSMClient } from "@aws-sdk/client-ssm"
+import type { SSMClient } from "@aws-sdk/client-ssm"
+import { GetParameterCommand } from "@aws-sdk/client-ssm"
 
-export default async function getConfigValue(rawValue: string | undefined, defaultValue: string) {
-  let ssm = new SSMClient({ region: process.env.AWS_REGION })
-
+export default async function getConfigValue(ssm: SSMClient, rawValue: string | undefined, defaultValue: string) {
   if (!rawValue) {
     console.log("No value specified, using default")
     return defaultValue
