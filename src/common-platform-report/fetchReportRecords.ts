@@ -1,12 +1,13 @@
-/* eslint-disable require-await */
 import type { AuditLog } from "src/shared/types"
-import config from "./config"
+import getConfig from "./config"
 
 export default async (lastMessageId?: string): Promise<AuditLog[]> => {
   let lastMessageIdQuery = ""
   if (lastMessageId) {
     lastMessageIdQuery = `&lastMessageId=${lastMessageId}`
   }
+
+  const config = await getConfig()
 
   return fetch(`${config.apiUrl}/messages?status=Error${lastMessageIdQuery}`, {
     headers: { "X-API-Key": config.apiKey }
