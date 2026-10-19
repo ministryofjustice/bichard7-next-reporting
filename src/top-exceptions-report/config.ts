@@ -9,20 +9,7 @@ export type TopExceptionsReportConfig = {
   reportName: string
 }
 
-type S3Credentials = {
-  accessKeyId?: string
-  secretAccessKey?: string
-}
-
 export default async function getConfig(ssm: SSMClient): Promise<TopExceptionsReportConfig> {
-  const s3Credentials: S3Credentials = {}
-  if (process.env.S3_AWS_ACCESS_KEY_ID) {
-    s3Credentials.accessKeyId = await getConfigValue(ssm, process.env.S3_AWS_ACCESS_KEY_ID, "")
-  }
-  if (process.env.S3_AWS_ACCESS_KEY_ID) {
-    s3Credentials.secretAccessKey = await getConfigValue(ssm, process.env.S3_AWS_ACCESS_KEY_ID, "")
-  }
-
   return {
     api: {
       apiUrl: process.env.API_URL ?? "http://localhost:20001",
@@ -31,8 +18,7 @@ export default async function getConfig(ssm: SSMClient): Promise<TopExceptionsRe
     s3: {
       endpoint: process.env.S3_ENDPOINT ?? "https://s3.eu-west-2.amazonaws.com",
       region: process.env.S3_REGION ?? "eu-west-2",
-      s3ForcePathStyle: true,
-      ...s3Credentials
+      s3ForcePathStyle: true
     },
     reportsBucket: process.env.REPORTS_BUCKET ?? "bichard-7-testing-reporting-files",
     reportName: process.env.REPORT_NAME ?? "reports/TopExceptions.xlsx"
