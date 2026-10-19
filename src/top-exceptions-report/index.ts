@@ -1,16 +1,20 @@
 import * as AWS from "aws-sdk"
 import { fetchReportRecordsParallel } from "src/shared"
 import { isError } from "src/shared/types"
-import config from "./config"
 import generateReport from "./generateReport"
 import getLastMonthDates from "./getLastMonthDates"
+import getConfig from "./config"
+import { SSMClient } from "@aws-sdk/client-ssm"
 
 interface TopExceptionsReportResult {
   report?: string
   error?: string
 }
 
+const ssm = new SSMClient()
+
 export const handler = async (): Promise<TopExceptionsReportResult> => {
+  const config = await getConfig(ssm)
   const dates = getLastMonthDates(new Date())
 
   console.log("Getting messages ...")
