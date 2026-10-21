@@ -1,9 +1,10 @@
 import * as AWS from "aws-sdk"
 import { fetchReportRecordsParallel } from "src/shared"
 import { isError } from "src/shared/types"
-import config from "./config"
 import generateReport from "./generateReport"
 import getLastMonthDates from "./getLastMonthDates"
+import getConfig from "./config"
+import { SSMClient } from "@aws-sdk/client-ssm"
 import fs from "node:fs"
 
 interface AutomationReportResult {
@@ -11,9 +12,10 @@ interface AutomationReportResult {
   error?: string
 }
 
-const s3 = new AWS.S3(config.s3)
+const ssm = new SSMClient()
 
 export const handler = async (): Promise<AutomationReportResult> => {
+  const config = await getConfig(ssm)
   let date = new Date()
   if (process.env.DATE) {
     date = new Date(process.env.DATE)
@@ -50,6 +52,7 @@ export const handler = async (): Promise<AutomationReportResult> => {
   }
 
   console.log("Uploading to S3 ...")
+  const s3 = new AWS.S3(config.s3)
   const params = {
     Bucket: config.reportsBucket,
     Key: config.reportName,
