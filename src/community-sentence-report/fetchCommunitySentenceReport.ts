@@ -6,7 +6,7 @@ import type { ApiConfig } from "./config"
 const fetchCommunitySentenceReport = (
   { start, end }: Interval,
   config: ApiConfig
-): PromiseResult<CommunitySentenceReport> => {
+): PromiseResult<CommunitySentenceReport[]> => {
   const startTime = new Date().getTime()
   const params = new URLSearchParams({
     fromDate: start.toISOString().split("T")[0],
@@ -28,7 +28,7 @@ const fetchCommunitySentenceReport = (
         throw new Error(message)
       }
 
-      return result.json() as Promise<CommunitySentenceReport>
+      return result.json() as Promise<CommunitySentenceReport[]>
     })
     .catch((e: Error) => {
       console.error("Fetching community sentence report failed: ", url)
