@@ -4,6 +4,7 @@ import getConfig from "./config"
 import { isError } from "src/shared/types"
 import { convertRecordsToXlsx } from "src/shared/csv-to-xlsx"
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
+import { toIsoDate } from "src/shared/toIsoDate"
 
 interface SentencingActReportResult {
   report?: string
@@ -11,8 +12,6 @@ interface SentencingActReportResult {
 }
 
 const XLSX_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-
-const toIsoDate = (date: Date): string => date.toISOString().split("T")[0]
 
 const getReferenceDate = (override = process.env.DATE): Date => {
   if (!override) {

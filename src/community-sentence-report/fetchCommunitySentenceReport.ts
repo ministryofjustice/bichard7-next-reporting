@@ -2,6 +2,7 @@ import { createJwt } from "src/shared/createJwt"
 import type { Interval, PromiseResult } from "src/shared/types"
 import type CommunitySentenceReport from "src/shared/types/CommunitySentenceReport"
 import type { ApiConfig } from "./config"
+import { toIsoDate } from "src/shared/toIsoDate"
 
 const fetchCommunitySentenceReport = (
   { start, end }: Interval,
@@ -9,8 +10,8 @@ const fetchCommunitySentenceReport = (
 ): PromiseResult<CommunitySentenceReport[]> => {
   const startTime = new Date().getTime()
   const params = new URLSearchParams({
-    fromDate: start.toISOString().split("T")[0],
-    toDate: end.toISOString().split("T")[0],
+    fromDate: toIsoDate(start),
+    toDate: toIsoDate(end),
     exceptions: "true",
     triggers: "true"
   })
