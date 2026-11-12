@@ -1,17 +1,13 @@
 import getLastMonthDates from "src/shared/getLastMonthDates"
-import fetchCommunitySentenceReport from "./fetchCommunitySentenceReport"
 import getConfig from "./config"
-import { isError } from "src/shared/types"
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
+import { S3Client } from "@aws-sdk/client-s3"
 import { toIsoDate } from "src/shared/toIsoDate"
-import { generateReport } from "./generateReport"
+import generateAndUploadReport from "./generateAndUploadReport"
 
 interface SentencingActReportResult {
   report?: string
   error?: string
 }
-
-const XLSX_CONTENT_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
 const getReferenceDate = (override = process.env.DATE): Date => {
   if (!override) {
@@ -23,34 +19,19 @@ const getReferenceDate = (override = process.env.DATE): Date => {
   return new Date(Date.UTC(requestedDate.getUTCFullYear(), requestedDate.getUTCMonth() + 1, 1))
 }
 
+// TO BE REMOVED
+const pfaCodes = ["001122", "001133", "001144"]
+
 export const handler = async (): Promise<SentencingActReportResult> => {
   const config = getConfig()
   const period = getLastMonthDates(getReferenceDate())
   const startDate = toIsoDate(period.start)
   const endDate = toIsoDate(period.end)
-
-  console.log(`Generating report for the period ${startDate} to ${endDate}`)
-  const sentences = await fetchCommunitySentenceReport(period, config.api)
-
-  if (isError(sentences)) {
-    throw sentences
-  }
-
-  console.log(`Fetched ${sentences.length} records`)
-  console.log("Generating report ...")
-  const report = generateReport(sentences, period)
-
-  console.log(`Uploading to s3://${config.reportsBucket}/${config.reportName}`)
   const s3 = new S3Client(config.s3)
 
-  await s3.send(
-    new PutObjectCommand({
-      Bucket: config.reportsBucket,
-      Key: config.reportName,
-      Body: report,
-      ContentType: XLSX_CONTENT_TYPE
-    })
-  )
+  console.log(`Generating report for the period ${startDate} to ${endDate}`)
+
+  await Promise.all(pfaCodes.map((pfaCode) => generateAndUploadReport(pfaCode, period, config, s3)))
 
   return { report: "Upload succeeded" }
 }

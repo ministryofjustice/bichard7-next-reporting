@@ -5,6 +5,7 @@ import type { ApiConfig } from "./config"
 import { toIsoDate } from "src/shared/toIsoDate"
 
 const fetchCommunitySentenceReport = (
+  pfaCode: string,
   { start, end }: Interval,
   config: ApiConfig
 ): PromiseResult<CommunitySentenceReport[]> => {
@@ -13,7 +14,8 @@ const fetchCommunitySentenceReport = (
     fromDate: toIsoDate(start),
     toDate: toIsoDate(end),
     exceptions: "true",
-    triggers: "true"
+    triggers: "true",
+    pfaCode
   })
   const url = `${config.apiUrl}?${params}`
 
